@@ -1,0 +1,49 @@
+<h2>User Profile</h2>
+<hr>
+
+<form [formGroup]="userForm" (ngSubmit)="uploadUser()">
+    <input type="text" formControlName="firstName" placeholder="Name" required>
+    <input type="email" formControlName="email" placeholder="Email" required>
+    <input type="file" (change)="onFileSelected($event)" required>
+    <button type="submit">Upload</button>
+</form>
+
+<hr>
+
+<div class="container-fluid">
+
+    <p>Foto - <img src="{{user?.photo}}"></p>
+
+    <p>{{user?.firstName}}</p>
+    <p>{{user?.lastName}}</p>
+    <p>{{user?.email}}</p>
+    <p>{{user?.password}}</p>
+    <p>{{user?.phone}}</p>
+
+
+    <p>Groups {{user?.groups?.length}}</p>
+    <hr>
+    <ul>@for (group of user?.groups; track group.id) {
+            <li>{{group?.title}} - {{group?.description}}</li>
+        } @empty {
+            <li>No tiene grupos</li>
+        }
+    </ul>
+
+    <p>Hobbies {{user?.hobbies?.length}}</p>
+    <hr>
+    <ul>@for (hobby of user?.hobbies; track hobby.id) {
+        <li>{{hobby?.name}} - {{hobby?.description}}</li>
+    } @empty {
+        <li>No tiene hobbies</li>
+    }
+    </ul>
+
+    <p>Posts {{user?.posts?.length}}</p>
+    <ul>@for (post of user?.posts; track post.id) {
+        <li>{{post?.title}} - {{post?.post}}</li>
+    } @empty {
+        <li>No tiene posts</li>
+    }
+    </ul>
+</div>

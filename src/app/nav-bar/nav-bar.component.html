@@ -1,0 +1,87 @@
+<!-- <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a routerLink="/home">
+      <img
+        src="/assets/img/log sm.png"
+        alt="Logo Senior Meet"
+        style="max-width: 40px"
+      />
+    </a>
+    <a routerLink="/user-profile">
+      <img
+        src="/assets/img/old-woman-5893415_640.jpg"
+        alt="perfil"
+        style="max-width: 70px"
+      />
+    </a>
+    <a routerLink="/saved">
+      <i class="bi bi-bookmark-heart"></i>
+    </a>
+    <form class="d-flex input-group w-auto">
+      <input
+        type="search"
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <span class="input-group-text border-0" id="search-addon">
+        <i class="fas fa-search"></i>
+      </span>
+    </form>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-md navbar-light bg-body-tertiary">
+  <div class="container-fluid">
+    <a routerLink="/home">
+      <img src="/assets/img/log sm.png" alt="Logo Senior Meet" style="max-width: 40px" />
+    </a>
+    <!-- <a routerLink="/user-profile">
+      <img src="/assets/img/old-woman-5893415_640.jpg" alt="perfil" style="max-width: 70px" />
+    </a>
+    <a routerLink="/saved">
+      <i class="bi bi-bookmark-heart"></i>
+    </a> -->
+
+    <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed"
+      aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button">
+            <i class="bi bi-arrow-down"></i> Entidades
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+            <a ngbDropdownItem routerLink="/users" (click)="$event.preventDefault()">
+              <i class="bi bi-card-checklist me-1"></i> Users</a>
+            <a ngbDropdownItem routerLink="/groups" (click)="$event.preventDefault()">
+              <i class="bi bi-file-earmark-plus me-1"></i> Groups</a>
+            <a ngbDropdownItem routerLink="/hobbies" (click)="$event.preventDefault()">
+              <i class="bi bi-card-checklist me-1"></i> Hobbies</a>
+            <a ngbDropdownItem routerLink="/posts" (click)="$event.preventDefault()">
+              <i class="bi bi-file-earmark-plus me-1"></i> Posts</a>
+            <a ngbDropdownItem routerLink="/interactions" (click)="$event.preventDefault()">
+              <i class="bi bi-card-checklist me-1"></i> Interactions</a>
+          </div>
+        </li>
+
+        <!-- <li class="nav-item" ngbDropdown>
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button">
+            <i class="bi bi-wrench-adjustable-circle me-1"></i> Fabricantes
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-end">
+            <a ngbDropdownItem routerLink="/manufacturers" (click)="$event.preventDefault()">
+              <i class="bi bi-wrench-adjustable me-1"></i> Listado marcas</a>
+            <a ngbDropdownItem routerLink="/manufacturers/create" (click)="$event.preventDefault()">
+              <i class="bi bi-plus-circle me-1"></i> Crear marca</a>
+          </div>
+        </li> -->
+
+      </ul>
+    </div>
+  </div>
+</nav>
