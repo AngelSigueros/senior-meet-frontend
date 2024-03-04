@@ -11,6 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SavedComponent } from './saved/saved.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { GroupListComponent } from './group-list/group-list.component';
 import { HobbyListComponent } from './hobby-list/hobby-list.component';
 
 export const routes: Routes = [
