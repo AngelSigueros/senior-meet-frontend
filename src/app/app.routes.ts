@@ -4,6 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { DeleteProfileComponent } from './delete-profile/delete-profile.component';
 import { EditeProfileComponent } from './edite-profile/edite-profile.component';
+import { GroupComponent } from './group/group.component';
 import { HobbiesComponent } from './hobbies/hobbies.component';
 import { LoginComponent } from './login/login.component';
 import { PostComponent } from './post/post.component';
@@ -12,7 +13,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SavedComponent } from './saved/saved.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { GroupListComponent } from './group-list/group-list.component';
 
 export const routes: Routes = [
   {
@@ -41,8 +41,8 @@ export const routes: Routes = [
     component: EditeProfileComponent
   },
   {
-    path: 'group-list',
-    component: GroupListComponent
+    path: 'groups',
+    component: GroupComponent
   },
   {
     path: 'hobbies',
