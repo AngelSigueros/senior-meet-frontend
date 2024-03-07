@@ -13,6 +13,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { HobbyListComponent } from './hobby-list/hobby-list.component';
+import { BlogComponent } from './blog/blog.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeWallComponent
+  },
+  {
+    path: 'blog',
+    component: BlogComponent
   },
   {
     path: 'admin',

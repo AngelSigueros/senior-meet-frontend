@@ -9,8 +9,25 @@ export interface User {
     email: string;
     password: string;
     phone: string;
+    codigoPostal: string;
+    ciudad: string;
+    sexo: Sexo;
+    fechaNacimiento: Date;
     photo: File | null;
+    available: boolean;
+    userRole: UserRole;
     groups: Group[];
     hobbies: Hobby[];
     posts: Post[]
+}
+
+export enum Sexo {
+    Otro = 'Otro',
+    Femenino = 'Femenino',
+    Masculino = 'Masculino'
+}
+
+export enum UserRole {
+    admin = 'ADMIN',
+    user = 'USER'
 }
