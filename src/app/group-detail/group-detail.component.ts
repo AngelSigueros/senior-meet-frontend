@@ -20,7 +20,7 @@ export class GroupDetailComponent implements OnInit{
    console.log('GroupDetailComponenet');
 
    this.activatedRoute.params.subscribe(params=> {
-    this.http.get<Group>("http://localhost:8080/grops/" + params['id']).subscribe(g=>{
+    this.http.get<Group>("http://localhost:8080/groups/" + params['id']).subscribe(g=>{
       this.group=g;
       console.log(this.group);
     })
