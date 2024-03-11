@@ -62,14 +62,6 @@ export const routes: Routes = [
     component: GroupDetailComponent
   },
   {
-    path: 'groups/create',
-    component: GroupFormComponent
-  },
-  {
-    path: 'groups/:id/detail',
-    component: GroupDetailComponent
-  },
-  {
     path: 'hobbies',
     component: HobbyListComponent
   },
