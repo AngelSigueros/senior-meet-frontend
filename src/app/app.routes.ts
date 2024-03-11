@@ -14,6 +14,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { HobbyListComponent } from './hobby-list/hobby-list.component';
 import { BlogComponent } from './blog/blog.component';
+import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { GroupFormComponent } from './group-form/group-form.component';
 
 export const routes: Routes = [
   {
@@ -46,8 +48,16 @@ export const routes: Routes = [
     component: EditeProfileComponent
   },
   {
-    path: 'group-list',
+    path: 'groups',
     component: GroupListComponent
+  },
+  {
+    path: 'groups/create',
+    component: GroupFormComponent
+  },
+  {
+    path: 'groups/:id/detail',
+    component: GroupDetailComponent
   },
   {
     path: 'hobby-list',
