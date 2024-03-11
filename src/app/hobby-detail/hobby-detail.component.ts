@@ -22,7 +22,7 @@ export class HobbyDetailComponent implements OnInit{
    console.log('HobbyDetailComponenet');
 
    this.activatedRoute.params.subscribe(params=> {
-    this.http.get<Hobby>("http://localhost:8080/groups/" + params['id']).subscribe(g=>{
+    this.http.get<Hobby>("http://localhost:8080/hobbies/" + params['id']).subscribe(g=>{
       this.hobby=g;
       console.log(this.hobby);
     })
