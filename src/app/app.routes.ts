@@ -15,6 +15,7 @@ import { GroupListComponent } from './group-list/group-list.component';
 import { HobbyListComponent } from './hobby-list/hobby-list.component';
 import { HobbyDetailComponent } from './hobby-detail/hobby-detail.component';
 import { HobbyFormComponent } from './hobby-form/hobby-form.component';
+import { BlogComponent } from './blog/blog.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeWallComponent
+  },
+  {
+    path: 'blog',
+    component: BlogComponent
   },
   {
     path: 'admin',

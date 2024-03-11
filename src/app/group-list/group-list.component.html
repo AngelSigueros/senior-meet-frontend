@@ -1,1 +1,22 @@
 <p>group-list works!</p>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @for (group of groups; track group.id) {
+    <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title">{{group.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{group.description}}</h6>
+                <p class="card-text">{{group.photoUrl}} Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <a href="/groups/{{group.id}}/detail" class="card-link">Detalle de usuario</a>
+                <!-- <a href="#" class="card-link">Another link</a> -->
+            </div>
+        </div>
+    </div>
+    } @empty {
+        <p class="card-text">No hay usuarios!!</p>
+    }
+</div>
+
+<hr>
