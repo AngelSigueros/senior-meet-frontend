@@ -17,6 +17,7 @@ export class HobbyFormComponent {
     id: [0],
     name: [''],
     description: [''],
+    photoUrl: ['']
   });
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {}
@@ -28,13 +29,15 @@ export class HobbyFormComponent {
     const id = this.hobbyForm.get('id')?.value ?? 0;
     const name= this.hobbyForm.get('name')?.value ?? 'Hobby';
     const description = this.hobbyForm.get('description')?.value ?? 'Descripción Hobby';
-
+    const photoUrl = this.hobbyForm.get('photoUrl')?.value ?? '';
     // Crear un objeto utilizando los valores extraídos
 
     const hobbyToSave: Hobby = {
       id: id,
       name: name,
-      description: description
+      description: description,
+      photoUrl: photoUrl
+
     }
     console.log(hobbyToSave);
 
