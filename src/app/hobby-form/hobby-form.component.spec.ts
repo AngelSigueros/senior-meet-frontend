@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupComponent } from './group.component';
+import { HobbyFormComponent } from './hobby-form.component';
 
-describe('GroupComponent', () => {
-  let component: GroupComponent;
-  let fixture: ComponentFixture<GroupComponent>;
+describe('HobbyFormComponent', () => {
+  let component: HobbyFormComponent;
+  let fixture: ComponentFixture<HobbyFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroupComponent]
+      imports: [HobbyFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GroupComponent);
+    fixture = TestBed.createComponent(HobbyFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
