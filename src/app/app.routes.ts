@@ -13,6 +13,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { HobbyListComponent } from './hobby-list/hobby-list.component';
+import { HobbyDetailComponent } from './hobby-detail/hobby-detail.component';
+import { HobbyFormComponent } from './hobby-form/hobby-form.component';
 import { BlogComponent } from './blog/blog.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { GroupFormComponent } from './group-form/group-form.component';
@@ -60,8 +62,24 @@ export const routes: Routes = [
     component: GroupDetailComponent
   },
   {
-    path: 'hobby-list',
+    path: 'groups/create',
+    component: GroupFormComponent
+  },
+  {
+    path: 'groups/:id/detail',
+    component: GroupDetailComponent
+  },
+  {
+    path: 'hobbies',
     component: HobbyListComponent
+  },
+  {
+    path: 'hobbies/:id/detail',
+    component:HobbyDetailComponent
+  },
+  {
+    path: 'hobbies/create',
+    component:HobbyFormComponent
   },
   {
     path: 'login',
