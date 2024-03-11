@@ -1,0 +1,42 @@
+
+
+<form [formGroup]="hobbyForm" (ngSubmit)="save()">
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="name"
+      placeholder="Indica tu hobby" formControlName="name">
+      <label for="name">Titulo del hobby</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="descripcion"
+        placeholder="Describe tu hobby" formControlName="descripcion">
+        <label for="descripcion">Descripción del hobby</label>
+      </div>
+    
+
+    <!-- Selector simple -->
+    <select class="form-select form-select-lg mb-3" formControlName="category">
+      <option selected>Open this select menu</option>
+      <option value="category1">category1</option>
+      <option value="category2">category2</option>
+      <option value="category3">category2</option>
+    </select>
+
+
+    <!-- Selector múltiple -->
+    <select class="form-select form-select-lg mb-3" formControlName="topics" multiple>
+      <option selected>Open this select menu</option>
+      <option value="topic1">topic1</option>
+      <option value="topic2">topic2</option>
+      <option value="topic3">topic3</option>
+      <option value="topic4">topic4</option>
+      <option value="topic5">topic5</option>
+    </select>
+
+
+      <button class="btn btn-success" type="submit">Enviar</button>
+
+  </form>
+
+
