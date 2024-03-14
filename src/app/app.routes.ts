@@ -18,6 +18,7 @@ import { HobbyFormComponent } from './hobby-form/hobby-form.component';
 import { BlogComponent } from './blog/blog.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { GroupFormComponent } from './group-form/group-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 export const routes: Routes = [
   {
@@ -96,6 +97,14 @@ export const routes: Routes = [
   {
     path: 'users/:id/detail',
     component: UserDetailComponent
+  },
+  {
+    path: 'users/create',
+    component: UserFormComponent
+  },
+  {
+    path: 'users/:id/update',
+    component: UserFormComponent
   },
   {
     path: '**', 

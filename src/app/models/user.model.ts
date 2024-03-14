@@ -1,6 +1,6 @@
 import { Group } from "./group.model";
 import { Hobby } from "./hobby.model";
-import { Post } from "./post.model";
+//import { Post } from "./post.model";
 
 export interface User {
     id: number;
@@ -18,13 +18,13 @@ export interface User {
     userRole: UserRole;
     groups: Group[];
     hobbies: Hobby[];
-    posts: Post[]
+    //posts: Post[]
 }
 
 export enum Sexo {
-    Otro = 'Otro',
-    Femenino = 'Femenino',
-    Masculino = 'Masculino'
+    NO_BINARIO = 'No Binario',
+    FEMENINO = 'Femenino',
+    MASCULINO = 'Masculino'
 }
 
 export enum UserRole {

@@ -13,15 +13,20 @@ import { RouterLink } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   users: User[]=[];
+  
 
   constructor (private http: HttpClient) {}
 
   ngOnInit(): void {
-    console.log('UserListComponent');
-
-    this.http.get<User[]>("http://localhost:8080/user").subscribe(u=>this.users=u);
+    console.log('UserListComponent - OnInit');
+    this.loadUsers();
   }
 
+  private loadUsers() {
+    console.log('UserListComponent - loadsUsers');
+    const url = 'http://localhost:8080/user';
+    this.http.get<User[]>(url).subscribe(u=>this.users=u);
+  }
 
 
 }
