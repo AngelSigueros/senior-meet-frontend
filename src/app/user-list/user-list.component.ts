@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
 
   private loadUsers() {
     console.log('UserListComponent - loadsUsers');
-    const url = 'http://localhost:8080/user';
+    const url = 'https://seniormeet.onrender.com/user';
     this.http.get<User[]>(url).subscribe(u=>this.users=u);
   }
 
