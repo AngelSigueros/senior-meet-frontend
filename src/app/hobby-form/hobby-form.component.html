@@ -2,18 +2,24 @@
 
 <form [formGroup]="hobbyForm" (ngSubmit)="save()">
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="name"
-      placeholder="Indica tu hobby" formControlName="name">
-      <label for="name">Titulo del hobby</label>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="name"
+    placeholder="Indica tu hobby" formControlName="name">
+    <label for="name">Titulo del hobby</label>
+  </div>
+
+  <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="description"
+      placeholder="Describe tu hobby" formControlName="description">
+      <label for="description">Descripción del hobby</label>
     </div>
 
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="description"
-        placeholder="Describe tu hobby" formControlName="description">
-        <label for="description">Descripción del hobby</label>
-      </div>
-    
+      <input type="text" class="form-control" id="photoUrl"
+      placeholder="Fotografía del hobby" formControlName="photoUrl">
+      <label for="photoUrl">Fotografía del hobby</label>
+    </div>
+  
 
     <!--
     <select class="form-select form-select-lg mb-3" formControlName="category">
