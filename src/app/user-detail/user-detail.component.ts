@@ -20,7 +20,7 @@ export class UserDetailComponent implements OnInit {
     console.log('UserDetailComponent');
 
     this.activatedRoute.params.subscribe(params=> {
-      this.http.get<User>("https://seniormeet.onrender.com/user/"+params['id']).subscribe(u=>{
+      this.http.get<User>("http://localhost:8080/user/"+params['id']).subscribe(u=>{
         this.user=u;
         console.log(this.user);
     });
