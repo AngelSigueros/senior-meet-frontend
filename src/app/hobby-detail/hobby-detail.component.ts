@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HobbyDetailComponent implements OnInit{
 
   group: Hobby|undefined
-  hobby!: Hobby;
+  hobby: Hobby | undefined;
  
 
   constructor (private http: HttpClient, private activatedRoute: ActivatedRoute){}

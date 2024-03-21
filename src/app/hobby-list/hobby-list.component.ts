@@ -18,6 +18,6 @@ export class HobbyListComponent implements OnInit{
   ngOnInit(): void {
     console.log('HobbyListComponent');
 
-    this.http.get<Hobby[]>("http://localhost:8000/hobby").subscribe(h=>this.hobbies=h);
+    this.http.get<Hobby[]>("http://localhost:8080/hobbies").subscribe(h=>this.hobbies=h);
   }
 }
