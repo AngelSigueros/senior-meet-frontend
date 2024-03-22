@@ -1,5 +1,6 @@
 <p>hobby-detail works!</p>
 
+
 @if (hobby) {
 <section style="background-color: #eee">
   <div class="container">
@@ -21,9 +22,9 @@
   <div class="row">
     <div class="col-lg-4">
       <div class="card mb-4">
-        <div class="card-body text-center">
+          <div class="card-body text-center">
           <img
-            src="/assets/img/mayores_calle.jpg"
+            src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg"
             alt="avatar"
             class="rounded-circle img-fluid"
             style="width: 150px"
@@ -36,14 +37,21 @@
       </div>
     </div>
     <div class="col">
+      
       <div class="card">
-        <h5 class="card-header text-center"c>{{ hobby.name }}</h5>
+        <h5 class="card-header text-center">{{ hobby.name }}</h5>
         <div class="card-body">
           <h5 class="card-title"></h5>
           <p class="card-text">
             {{ hobby.description }}
           </p>
-          <a href="#" class="btn btn-primary">Ir al grupo</a>
+
+          <div style="text-align: center; margin-top: 50px;">
+            <button class="btn btn-primary" [routerLink]="['/groups']">Ir al Grupo</button>
+          </div>
+          
+          
+           
         </div>
       </div>
     </div>

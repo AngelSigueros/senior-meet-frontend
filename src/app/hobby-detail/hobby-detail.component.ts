@@ -1,12 +1,12 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Hobby } from '../models/hobby.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hobby-detail',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, RouterLink],
   templateUrl: './hobby-detail.component.html',
   styleUrl: './hobby-detail.component.css'
 })
