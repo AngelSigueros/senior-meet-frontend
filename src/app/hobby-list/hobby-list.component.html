@@ -1,3 +1,34 @@
+
+<div class="container">
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    @for (hobby of hobbies; track hobby.id) {
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/assets/img/{{hobby.photoUrl}}" class="bd-placeholder-img card-img-top"  width="100%" height="225">
+          <div class="card-body">
+            <p class="card-text text-center">{{hobby.name}}</p>
+          
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies', hobby.id, 'detail']">Ver +</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies/create']">Editar</button>
+              </div>
+              <small class="text-body-secondary"></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+ 
+  </div>
+</div>
+
+
+
+
 <!-- <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a routerLink="/home">
@@ -32,7 +63,7 @@
   </div>
 </nav> -->
 
-
+<!-- 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
         <div class="card" style="">
@@ -120,3 +151,4 @@
   </div>
   
   <hr>
+-->
