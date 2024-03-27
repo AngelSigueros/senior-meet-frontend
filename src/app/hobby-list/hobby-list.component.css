@@ -4,6 +4,8 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
     justify-content: center;
+    
+    
   }
   
   /* Estilo para cada tarjeta */
@@ -15,6 +17,7 @@
     border-radius: 8px;
     overflow: hidden;
     height: 300px; /* Altura ajustada a 300px */
+    text-font-family: Atkinson Hyperlegible Font;
   }
   
   /* Ajustes para la imagen dentro de la tarjeta para que se mantenga la proporción */

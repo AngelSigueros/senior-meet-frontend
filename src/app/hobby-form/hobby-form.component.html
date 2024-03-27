@@ -4,19 +4,43 @@
   <div class="row">
     <div class="col-lg-8">
 
-      <h1 class="my-5">Introducir nombre del Hobby</h1>
+      <h1 class="my-5">Introducir datos del nuevo Hobby</h1>
 
       <form [formGroup]="hobbyForm" (ngSubmit)="save()">
 
+        <input type="hidden" formControlName="id">
+
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
-          id="name" formControlName="Name">
-          <label for="Name">Hobby</label>
+          id="fullName" formControlName="fullName">
+          <label for="fullName">Hobby</label>
         </div>
 
-        <div class="input-group">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+          id="country" formControlName="country">
+          <label for="country">Título del Hobby</label>
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="active" formControlName="active">
+          <label class="form-check-label" for="active" style="cursor:pointer;">
+            Activo sí o no
+          </label>
+        </div>
+
+        <input type="hidden" formControlName="photoUrl">
+
+        <div class="input-group mb-3">
           <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
           <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control"
+            placeholder="Leave a comment here" id="bio" formControlName="bio" style="min-height: 120px;">
+          </textarea>
+          <label for="bio">Descripción</label>
         </div>
 
         <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Guardar</button>
