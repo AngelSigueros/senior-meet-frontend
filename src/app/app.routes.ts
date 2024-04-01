@@ -18,6 +18,9 @@ import { HobbyFormComponent } from './hobby-form/hobby-form.component';
 import { BlogComponent } from './blog/blog.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { GroupFormComponent } from './group-form/group-form.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
+import { PostFormComponent } from './post-form/post-form.component';
 
 export const routes: Routes = [
   {
@@ -79,7 +82,15 @@ export const routes: Routes = [
   },
   {
     path: 'posts',
-    component: PostComponent
+    component: PostListComponent
+  },
+  {
+    path: 'posts/:id/detail',
+    component: PostDetailComponent
+  },
+  {
+    path: 'posts/create',
+    component: PostFormComponent
   },
   {
     path: 'user-profile/:id/detail',
