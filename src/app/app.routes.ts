@@ -5,7 +5,6 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
 import { DeleteProfileComponent } from './delete-profile/delete-profile.component';
 import { EditeProfileComponent } from './edite-profile/edite-profile.component';
 import { LoginComponent } from './login/login.component';
-import { PostComponent } from './post/post.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SavedComponent } from './saved/saved.component';
