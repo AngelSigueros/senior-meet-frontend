@@ -15,7 +15,7 @@ export class PostFormComponent {
   postForm = this.fb.group({
     id: [0],
     title: [''],
-    post: ['', Validators.required],
+    content: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient){}
@@ -26,19 +26,19 @@ export class PostFormComponent {
     // Extraer los valores de cada input escritos por el usuario
     const id = this.postForm.get('id')?.value ?? 0;
     const title= this.postForm.get('title')?.value ?? 'Title';
-    const post = this.postForm.get('post')?.value ?? 'Contenido Post';
+    const content = this.postForm.get('content')?.value ?? 'Contenido Post';
 
     // Crear un objeto utilizando los valores extraídos
 
     const postToSave: Post = {
       id: id,
       title: title,
-      post: post
+      content: content
     }
     console.log(postToSave);
 
     // enviar el objeto a backend utilizando HttpClient
-    // const url = 'http://localhost:8080/posts;
+    // const url = 'http://localhost:8080/post;
     // this.httpClient.post<Post>(url, postToSave).subscribe(post => console.log(post));
   }
 }

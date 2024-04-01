@@ -20,7 +20,7 @@ export class PostDetailComponent implements OnInit{
   ngOnInit(): void {
     console.log('PostDetailComponent');
     this.activatedRoute.params.subscribe(params => {
-      this.http.get<Post>("http://localhost:8080/posts/" +
+      this.http.get<Post>("http://localhost:8080/post/" +
       params['id']).subscribe(p => {this.post=p;
         console.log(this.post);
     });
