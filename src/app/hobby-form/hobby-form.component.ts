@@ -14,8 +14,13 @@ import { Hobby} from '../models/hobby.model';
 export class HobbyFormComponent implements OnInit {
 
   hobbyForm = new FormGroup({
-    fullName: new FormControl('')
+    id: new FormControl(0),
+    fullName: new FormControl(''),
+    photoUrl: new FormControl(''),
+    active: new FormControl(false),
+    description: new FormControl(''),
   });
+
   photoFile: File | undefined;
   photoPreview: string | undefined;
   hobby: Hobby | undefined;

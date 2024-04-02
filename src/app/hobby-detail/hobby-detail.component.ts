@@ -34,3 +34,5 @@ export class HobbyDetailComponent implements OnInit{
  {
 
 }
+
+
