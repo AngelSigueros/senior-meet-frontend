@@ -41,7 +41,7 @@
 
     <p>Posts {{user?.posts?.length}}</p>
     <ul>@for (post of user?.posts; track post.id) {
-        <li>{{post?.title}} - {{post?.content}}</li>
+        <li>{{post?.id}} - {{post?.content}}</li>
     } @empty {
         <li>No tiene posts</li>
     }

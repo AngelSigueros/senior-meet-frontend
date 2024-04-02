@@ -1,7 +1,11 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Post } from '../models/post.model';
+import { Group} from '../models/group.model';
+import { User } from '../models/user.model';
+import { Interaction } from '../models/interaction.model';
+
 
 @Component({
   selector: 'app-post-form',
@@ -14,8 +18,12 @@ export class PostFormComponent {
 
   postForm = this.fb.group({
     id: [0],
-    title: [''],
     content: ['', Validators.required],
+    photoUrl:[''],
+    videoUrl: [''],
+    group: new FormControl(),
+    user: new FormControl(),
+    interactions: [[]]
   });
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient){}
@@ -25,15 +33,23 @@ export class PostFormComponent {
 
     // Extraer los valores de cada input escritos por el usuario
     const id = this.postForm.get('id')?.value ?? 0;
-    const title= this.postForm.get('title')?.value ?? 'Title';
     const content = this.postForm.get('content')?.value ?? 'Contenido Post';
+    const photoUrl = this.postForm.get('photoUrl')?.value ?? 'Photo url';
+    const videoUrl = this.postForm.get('videoUrl')?.value ?? 'Video url';
+    const group = this.postForm.get('group')?.value  ;
+    const user = this.postForm.get('user')?.value ;
+    const interactions = this.postForm.get('interactions')?.value ?? [];
 
     // Crear un objeto utilizando los valores extraídos
 
     const postToSave: Post = {
       id: id,
-      title: title,
-      content: content
+      content: content,
+      photoUrl: photoUrl,
+      videoUrl: videoUrl,
+      group: group,
+      user: user,
+      interactions: interactions
     }
     console.log(postToSave);
 

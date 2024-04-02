@@ -5,7 +5,6 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
 import { DeleteProfileComponent } from './delete-profile/delete-profile.component';
 import { EditeProfileComponent } from './edite-profile/edite-profile.component';
 import { LoginComponent } from './login/login.component';
-import { PostComponent } from './post/post.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SavedComponent } from './saved/saved.component';
@@ -18,6 +17,9 @@ import { HobbyFormComponent } from './hobby-form/hobby-form.component';
 import { BlogComponent } from './blog/blog.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { GroupFormComponent } from './group-form/group-form.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
+import { PostFormComponent } from './post-form/post-form.component';
 
 export const routes: Routes = [
   {
@@ -79,7 +81,15 @@ export const routes: Routes = [
   },
   {
     path: 'posts',
-    component: PostComponent
+    component: PostListComponent
+  },
+  {
+    path: 'posts/:id/detail',
+    component: PostDetailComponent
+  },
+  {
+    path: 'posts/create',
+    component: PostFormComponent
   },
   {
     path: 'user-profile/:id/detail',
