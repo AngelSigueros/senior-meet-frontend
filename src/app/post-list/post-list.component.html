@@ -1,0 +1,35 @@
+<p>post-list works!</p>
+
+<main>
+    <button [routerLink]="['/posts/create']" class="card-link">Crear un post</button>
+
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @for ( post of posts; track post.id) {
+        <div class="col">
+          <div class="card shadow-sm">
+            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+           <img src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg" alt="Bailar">
+            <div class="card-body">
+              <p class="card-text">{{post.id}} - {{post.content}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button [routerLink]="['/post', post.id, 'detail']" class="btn btn-sm btn-outline-secondary">Detalle</button>
+                  <button [routerLink]="['/post/create']" class="btn btn-sm btn-outline-secondary">Editar</button>
+                </div>
+                <small class="text-body-secondary"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+} @empty {
+    <p class="card-text">No hay posts!!</p>
+}
+      </div>
+    </div>
+  </div>
+
+</main>

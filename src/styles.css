@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'MiFuente';
+    src: url('../src/assets/fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2'),
+         url('../src/assets/fonts/Atkinson-Hyperlegible-Bold-102a.woff2') format('woff2'),
+         url('../src/assets/fonts/Atkinson-Hyperlegible-Bold-102.woff') format('woff'),
+         url('../src/assets/fonts/Atkinson-Hyperlegible-Regular-102.woff') format('woff');
+    /* Añade otros formatos de fuente según sea necesario */
+  }
+  h1, h2, h5, h6, p {
+    font-family: 'MiFuente';
+  }
