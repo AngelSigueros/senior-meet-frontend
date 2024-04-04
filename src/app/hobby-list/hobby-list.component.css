@@ -1,0 +1,55 @@
+/* Estilos para el contenedor de la cuadrícula */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+
+
+  }
+  
+  /* Estilo para cada tarjeta */
+  .card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 300px; /* Altura ajustada a 300px */
+    
+  }
+  
+  /* Ajustes para la imagen dentro de la tarjeta para que se mantenga la proporción */
+  /* Estilos para las imágenes dentro de las tarjetas */
+.card img {
+    width: 100%; /* Asegura que la imagen siempre ocupe todo el ancho de la tarjeta */
+    height: 150px; /* Establece una altura fija para todas las imágenes */
+    object-fit: cover; /* Hace que la imagen cubra el área asignada sin perder su proporción */
+  }
+  
+  
+  /* Estilos para el contenido de la tarjeta */
+  .card-body {
+    padding: 1rem; /* Ajusta el relleno según sea necesario */
+    flex-grow: 1; /* Hace que el contenido crezca para ocupar espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacia el contenido y los botones de la tarjeta */
+  }
+  
+  /* Asegura que el título de la tarjeta esté centrado */
+  .card-title {
+    text-align: center;
+    margin: 0.5rem 0; /* Reduce el margen alrededor del título */
+  }
+  
+ /* Estilo para los botones dentro de la tarjeta */
+.card button {
+    margin: 6px; /* Margen en todos los lados */
+    margin-left: var(--btn-margin-left, 18px); /* Margen izquierdo variable, por defecto 12px */
+    align-self: flex-start; /* Alinea los botones al inicio del eje cruzado */
+    min-width: 65px; /* Ancho mínimo para los botones */
+  }
+  
+  

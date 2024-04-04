@@ -21,3 +21,6 @@ export class HobbyListComponent implements OnInit{
     this.http.get<Hobby[]>("http://localhost:8000/hobby").subscribe(h=>this.hobbies=h);
   }
 }
+
+
+

@@ -1,3 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Título Aquí</title>
+  <link rel="stylesheet" href="C:\Development\senior-meet-frontend\src\app\hobby-list\hobby-list.component.css"> <!-- Ajusta la ruta al archivo CSS -->
+</head>
+<body>
+  <!-- El resto de tu HTML aquí -->
+</body>
+</html>
+
+
+
+
+<div class="container">
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    @for (hobby of hobbies; track hobby.id) {
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/assets/img/{{hobby.photoUrl}}" class="bd-placeholder-img card-img-top"  width="100%" height="225">
+          <div class="card-body">
+            <p class="card-text text-center">{{hobby.name}}</p>
+          
+            <div class="d-flex justify-content-center mb-2"></div>
+              <div class="btn-hobby">
+                <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies', hobby.id, 'detail']">Ver más</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies/create']">Editar</button>
+              </div>
+              <small class="text-body-secondary"></small>
+            </div>
+          </div>
+        </div>
+      
+    }
+
+ 
+  </div>
+</div>
+
+
+
+
 <!-- <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a routerLink="/home">
