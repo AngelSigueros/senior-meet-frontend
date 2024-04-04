@@ -3,7 +3,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import "@fontsource/atkinson-hyperlegible";
+//import "@fontsource/atkinson-hyperlegible";
 import { AuthenticationService } from './user-authentication/authentication.service';
 
 @Component({
