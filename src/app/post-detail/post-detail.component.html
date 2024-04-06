@@ -23,7 +23,7 @@
                 <div class="card-body text-center">
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">{{post.id}}</h5>
+                  <h5 class="my-3">{{post.user.firstName}}</h5>
                   <h5 class="my-3">{{post.content}}</h5>
                   <div class="d-flex justify-content-center mb-2">
                     <button type="button" class="btn btn-primary">Me gusta</button>
@@ -37,7 +37,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Contenido>
+                      <p class="mb-0">Contenido</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">{{post.content}}</p>
@@ -48,5 +48,5 @@
               </div>
             </div>
           </div>     
-</section>
-            }
+    </section>
+}
