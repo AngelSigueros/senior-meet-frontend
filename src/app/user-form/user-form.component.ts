@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent { // implements OnInit {
 
   userForm = new FormGroup({
     id: new FormControl<number>(0),
@@ -24,53 +24,53 @@ export class UserFormComponent implements OnInit {
   });
 
   isUpdate: boolean = false; // por defecto estamos en CREAR no en ACTUALIZAR
-  authors: Author[] = []; // array de autores para asociar un autor al libro
-  editorials: Editorial[] = [];
+  //authors: Author[] = []; // array de autores para asociar un autor al libro
+  //editorials: Editorial[] = [];
 
-  constructor(
-      private fb: FormBuilder,
-      private httpClient: HttpClient,
-      private router: Router,
-      private activatedRoute: ActivatedRoute) {
-    }
+  // constructor(
+  //     private fb: FormBuilder,
+  //     private httpClient: HttpClient,
+  //     private router: Router,
+  //     private activatedRoute: ActivatedRoute) {
+  //   }
 
-    ngOnInit(): void {
-      // cargar autores de backend para el selector de autores en el formulario
-      this.httpClient.get<Author[]>('https://fullstack-byvu.onrender.com/api/authors')
-      .subscribe(authors => this.authors = authors);
+  //   ngOnInit(): void {
+  //     // cargar autores de backend para el selector de autores en el formulario
+  //     this.httpClient.get<Author[]>('https://fullstack-byvu.onrender.com/api/authors')
+  //     .subscribe(authors => this.authors = authors);
 
-      this.httpClient.get<Editorial[]>('https://fullstack-byvu.onrender.com/api/editorials')
-      .subscribe(editorials => this.editorials = editorials);
+  //     this.httpClient.get<Editorial[]>('https://fullstack-byvu.onrender.com/api/editorials')
+  //     .subscribe(editorials => this.editorials = editorials);
 
-      this.activatedRoute.params.subscribe(params => {
-        const id = params['id'];
-        if(!id) return;
+  //     this.activatedRoute.params.subscribe(params => {
+  //       const id = params['id'];
+  //       if(!id) return;
 
-        this.httpClient.get<Book>('https://fullstack-byvu.onrender.com/api/books/' + id).subscribe(bookFromBackend => {
-          // cargar el libro obtenido en el formulario bookForm
-          this.userForm.patchValue(bookFromBackend);
-          this.isUpdate = true;
-        });
-      });
-    }
+  //       this.httpClient.get<Book>('https://fullstack-byvu.onrender.com/api/books/' + id).subscribe(bookFromBackend => {
+  //         // cargar el libro obtenido en el formulario bookForm
+  //         this.userForm.patchValue(bookFromBackend);
+  //         this.isUpdate = true;
+  //       });
+  //     });
+  //   }
 
-    save () {
-      const book: Book = this.userForm.value as Book;
-      console.log(book);
+  //   save () {
+  //     const book: Book = this.userForm.value as Book;
+  //     console.log(book);
 
-      if (this.isUpdate) {
-        const url = 'https://fullstack-byvu.onrender.com/api/books/' + book.id;
-        this.httpClient.put<Book>(url, book).subscribe(bookFromBackend => {
-          this.router.navigate(['/books', bookFromBackend.id, 'detail']);
-        });
+  //     if (this.isUpdate) {
+  //       const url = 'https://fullstack-byvu.onrender.com/api/books/' + book.id;
+  //       this.httpClient.put<Book>(url, book).subscribe(bookFromBackend => {
+  //         this.router.navigate(['/books', bookFromBackend.id, 'detail']);
+  //       });
 
-      } else {
-        const url = 'https://fullstack-byvu.onrender.com/api/books';
-        this.httpClient.post<Book>(url, book).subscribe(bookFromBackend => {
-          this.router.navigate(['/books', bookFromBackend.id, 'detail']);
-        });
-      }
-    }
+  //     } else {
+  //       const url = 'https://fullstack-byvu.onrender.com/api/books';
+  //       this.httpClient.post<Book>(url, book).subscribe(bookFromBackend => {
+  //         this.router.navigate(['/books', bookFromBackend.id, 'detail']);
+  //       });
+  //     }
+  //   }
 
     compareObjects(o1: any, o2: any): boolean {
       if(o1 && o2) {
