@@ -14,10 +14,14 @@
                   <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
                   <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
                   <h5 class="my-3">GRUPO: {{post.group.title}}</h5>
-                  <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Me gusta</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button [routerLink]="['/post', post.id, 'add-like']" class="btn btn-sm btn-outline-secondary">Me gusta</button>
+                      <button [routerLink]="['/post', post.id, 'add-save']" class="btn btn-sm btn-outline-secondary">Guardar</button>
+                    </div>
+                    <small class="text-body-secondary"></small>
                   </div>
+
                 </div>
               </div>
 
