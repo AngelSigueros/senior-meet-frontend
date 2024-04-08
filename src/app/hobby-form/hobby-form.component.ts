@@ -55,7 +55,7 @@ export class HobbyFormComponent implements OnInit {
     }
 
     // Introducir los datos del author
-      formData.append('fullName', this.hobbyForm.get('fullName')?.value ?? '')
+      formData.append('descripcion', this.hobbyForm.get('descripcion')?.value ?? '')
 
     // http client post para enviar el formData a backend
     console.log(formData);
