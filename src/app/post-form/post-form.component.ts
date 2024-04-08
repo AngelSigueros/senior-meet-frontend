@@ -34,8 +34,8 @@ export class PostFormComponent implements OnInit{
   constructor(private fb: FormBuilder, private httpClient: HttpClient){}
 
   ngOnInit(): void {
-      this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
-  } 
+    this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
+  }
 
   save(){
     console.log("Guardando Post");
