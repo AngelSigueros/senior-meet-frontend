@@ -23,6 +23,7 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { SuggestionsFormComponent } from './suggestions-form/suggestions-form.component';
 
 export const routes: Routes = [
   {
@@ -121,6 +122,10 @@ export const routes: Routes = [
   {
     path: 'user-register',
     component: UserRegisterComponent
+  },
+  {
+    path: 'suggestions', 
+    component: SuggestionsFormComponent
   },
   {
     path: '**', 

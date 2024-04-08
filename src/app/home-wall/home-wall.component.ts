@@ -2,11 +2,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgbCarouselConfig, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { Group } from '../models/group.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-wall',
   standalone: true,
-  imports: [NgbCarouselModule, HttpClientModule],
+  imports: [NgbCarouselModule, HttpClientModule, RouterLink],
   templateUrl: './home-wall.component.html',
   styleUrl: './home-wall.component.css'
 })

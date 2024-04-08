@@ -1,0 +1,35 @@
+iv class="container">
+  <div class="row">
+    <div class="col-lg-8">
+
+      <h1 class="my-5">Cuéntanos lo que te gustaria que añadiesemos a Senior Meet</h1>
+
+      <form [formGroup]="suggestionsForm" (ngSubmit)="save()">
+
+        <input type="hidden" formControlName="id">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+          id="name" formControlName="name">
+          <label for="name">Cuéntanos lo que quieres que incluyamos en Senior Meet</label>
+        </div>
+        
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control"
+            placeholder="Leave a comment here" id="description" formControlName="description" style="min-height: 120px;">
+          </textarea>
+          <label for="description">Descripción</label>
+        </div>
+
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Guardar</button>
+
+      </form>
+
+    </div>
+    
+
+      
+
+  
+  </div>
