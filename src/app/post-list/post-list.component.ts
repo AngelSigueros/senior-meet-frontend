@@ -18,7 +18,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('PostListComponent');
-    this.http.get<Post[]>("http://localhost:8080/posts").subscribe(p=>this.posts=p);
+    this.http.get<Post[]>("http://localhost:8080/post").subscribe(p=>this.posts=p);
   }
 
 }
