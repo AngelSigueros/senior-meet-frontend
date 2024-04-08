@@ -35,7 +35,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-body-tertiary" >
   <div id="subtopnav" class="container-fluid">
     <a routerLink="/home">
-      <img src="/assets/img/log sm.png" alt="Logo Senior Meet" style="max-width: 40px" />
+      <img src="/assets/img/log sm.png" alt="Logo Senior Meet" style="max-width: 60px" />
     </a>
     <!-- <a routerLink="/user-profile">
       <img src="/assets/img/old-woman-5893415_640.jpg" alt="perfil" style="max-width: 70px" />
@@ -54,11 +54,11 @@
     <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" ngbDropdown>
-          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button">
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button" class="text-white">
             <i class="bi bi-arrow-down"></i> Entidades
           </a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
-            <a ngbDropdownItem routerLink="/users" (click)="$event.preventDefault()">
+            <a ngbDropdownItem routerLink="/users" (click)="$event.preventDefault()" >
               <i class="bi bi-card-checklist me-1"></i> Users</a>
             <a ngbDropdownItem routerLink="/groups" (click)="$event.preventDefault()">
               <i class="bi bi-file-earmark-plus me-1"></i> Groups</a>

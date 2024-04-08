@@ -3,8 +3,9 @@
     
     background-color: #282A35 !important;
     color: #f1f1f1 !important;
-    padding: 5;
-    
+    padding: 20 !important;
+    border: black;
+    margin: 5;
     font-size: 16;
     top: 56px;
     

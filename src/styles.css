@@ -1,5 +1,21 @@
 body {
         font-family: "Atkinson Hyperlegible", sans-serif;
-        font-weight: 400;
+        font-weight: 500;
         font-style: normal;
+        font-size: 20px;
+        background-color: rgb(235, 235, 235);
+}
+
+button {
+        font-family: "Atkinson Hyperlegible", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 20px;
+}
+
+h5 {
+        font-family: "Atkinson Hyperlegible", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 25px;  
 }
