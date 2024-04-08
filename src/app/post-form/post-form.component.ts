@@ -26,7 +26,8 @@ export class PostFormComponent implements OnInit{
     videoUrl: [''],
     group: new FormControl(),
     user: new FormControl(),
-    interactions: [[]]
+    interactions: [[]],
+    comments: [[]]
   });
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient){}
@@ -46,6 +47,7 @@ export class PostFormComponent implements OnInit{
     const group = this.postForm.get('group')?.value  ;
     const user = this.postForm.get('user')?.value ;
     const interactions = this.postForm.get('interactions')?.value ?? [];
+    const comments = this.postForm.get('comments')?.value ?? [];
 
     // Crear un objeto utilizando los valores extraídos
 
@@ -56,7 +58,8 @@ export class PostFormComponent implements OnInit{
       videoUrl: videoUrl,
       group: group,
       user: user,
-      interactions: interactions
+      interactions: interactions,
+      comments: comments
     }
     console.log(postToSave);
 
