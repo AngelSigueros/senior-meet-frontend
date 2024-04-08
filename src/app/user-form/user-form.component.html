@@ -9,7 +9,8 @@
         }
   
   
-        <form [formGroup]="userForm" (ngSubmit)="save()">
+        <!-- <form [formGroup]="userForm" (ngSubmit)="save()"> -->
+        <form [formGroup]="userForm">
   
           <input type="hidden" formControlName="id">
   
@@ -42,10 +43,10 @@
   
           <div class="form-floating mb-3">
             <select class="form-select" id="author" formControlName="author" [compareWith]="compareObjects">
-              <!-- iterar sobre el array de authors mostrando cada uno  -->
+              <!-- iterar sobre el array de authors mostrando cada uno 
               @for (author of authors; track author.id) {
               <option [ngValue]="author">{{author.name}}</option>
-              }
+              } -->
             </select>
             <label for="author">Autor/a del libro</label>
           </div>
@@ -53,10 +54,10 @@
   
           <div class="form-floating mb-3">
             <select class="form-select" id="editorial" formControlName="editorial" [compareWith]="compareObjects">
-              <!-- iterar sobre el array de authors mostrando cada uno -->
+              <!-- iterar sobre el array de authors mostrando cada uno 
               @for (editorial of editorials; track editorial.id) {
               <option [ngValue]="editorial">{{editorial.name}}</option>
-              }
+              }-->
             </select>
             <label for="editorial">Autor/a del libro</label>
           </div>

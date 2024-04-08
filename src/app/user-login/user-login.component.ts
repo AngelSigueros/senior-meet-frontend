@@ -7,7 +7,7 @@ import { Login } from '../models/login.dto';
 import { Token } from '../models/token.dto';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-user-login',
   standalone: true,
   imports: [ReactiveFormsModule, HttpClientModule],
   templateUrl: './user-login.component.html',
@@ -29,13 +29,13 @@ export class UserLoginComponent {
     }
     console.log(login);
 
-    const url = 'http://localhost:8080/api/users/login';
+    const url = 'http://localhost:8080/user/login';
     this.httpClient.post<Token>(url, login).subscribe(response => {
       console.log(response);
       console.log(response.token);
 
       this.authService.saveToken(response.token);
-      this.router.navigate(['/books']);
+      this.router.navigate(['/users']);
     });
 
 

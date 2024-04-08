@@ -1,22 +1,59 @@
-<p>user-list works!</p>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    @for (user of users; track user.id) {
-    <div class="col">
-        <div class="card" style="">
-            <div class="card-body">
-                <h5 class="card-title">{{user.firstName}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{user.lastName}}</h6>
-                <p class="card-text">{{user.email}} Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="/users/{{user.id}}/detail" class="card-link">Detalle de usuario</a>
-                <!-- <a href="#" class="card-link">Another link</a> -->
-            </div>
-        </div>
-    </div>
-    } @empty {
-        <p class="card-text">No hay usuarios!!</p>
-    }
-</div>
+@if (isAdmin) {
+    <button class="btn btn-secondary me-2" routerLink="/user/create">Crear book</button>
+    <button class="btn btn-secondary me-2" routerLink="/authors/create">Crear autor</button>
+    <button class="btn btn-secondary me-2" routerLink="/categories/create">Crear categoría</button>
+  }
+  
+  @if (userEmail) {
+    <button class="btn btn-outline-success me-2">
+      <i class="bi bi-person-circle me-1"></i>
+      {{userEmail}}
+    </button>
+  }
+  
+  @if (isLoggedIn) {
+    <button class="btn btn-warning me-2" (click)="logout()">
+      Logout
+      <i class="bi bi-box-arrow-right ms-1"></i>
+    </button>
+  } @else {
+    <button class="btn btn-primary me-2" routerLink="/login">
+      Login
+      <i class="bi bi-box-arrow-in-right ms-1"></i>
+    </button>
+    <button class="btn btn-secondary me-2" routerLink="/register">
+      Registro
+      <i class="bi bi-person-add ms-1"></i>
+    </button>
+  }
 
 <hr>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-between align-items-center mb-3">
+            <p>Listado de usuarios</p>
+            <button>Crear Usuario</button>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        @for (user of users; track user.id) {
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.firstName}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{user.lastName}}</h6>
+                    <p class="card-text">{{user.email}} {{user.phone}}</p>
+                    <a href="/users/{{user.id}}/detail" class="card-link">Detalle de usuario</a>
+                    <!-- <a href="#" class="card-link">Another link</a> -->
+                </div>
+            </div>
+        </div>
+        } @empty {
+        <div class="col">
+            <p class="card-text">No hay usuarios!!</p>
+        </div>
+        }
+    </div>
+</div>
