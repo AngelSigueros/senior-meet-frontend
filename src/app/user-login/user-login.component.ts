@@ -7,7 +7,7 @@ import { Login } from '../models/login.dto';
 import { Token } from '../models/token.dto';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-user-login',
   standalone: true,
   imports: [ReactiveFormsModule, HttpClientModule],
   templateUrl: './user-login.component.html',
