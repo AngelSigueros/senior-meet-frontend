@@ -1,22 +1,27 @@
-<p>user-list works!</p>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    @for (user of users; track user.id) {
-    <div class="col">
-        <div class="card" style="">
-            <div class="card-body">
-                <h5 class="card-title">{{user.firstName}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{user.lastName}}</h6>
-                <p class="card-text">{{user.email}} Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="/users/{{user.id}}/detail" class="card-link">Detalle de usuario</a>
-                <!-- <a href="#" class="card-link">Another link</a> -->
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-between align-items-center mb-3">
+            <p>Listado de usuarios</p>
+            <button>Crear Usuario</button>
         </div>
     </div>
-    } @empty {
-        <p class="card-text">No hay usuarios!!</p>
-    }
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        @for (user of users; track user.id) {
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.firstName}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{user.lastName}}</h6>
+                    <p class="card-text">{{user.email}} {{user.phone}}</p>
+                    <a href="/users/{{user.id}}/detail" class="card-link">Detalle de usuario</a>
+                    <!-- <a href="#" class="card-link">Another link</a> -->
+                </div>
+            </div>
+        </div>
+        } @empty {
+        <div class="col">
+            <p class="card-text">No hay usuarios!!</p>
+        </div>
+        }
+    </div>
 </div>
-
-<hr>
