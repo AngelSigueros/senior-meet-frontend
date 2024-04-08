@@ -24,16 +24,16 @@
     
     <div class="col-lg-4">
 
-      <!--
+     <!--
       @if (photoPreview) {
         <h2 class="my-5">Previsualización foto</h2>
         <img class="img-fluid" [src]="photoPreview">
       }
       @if (!photoPreview && group?.photoUrl) {
         <h2 class="my-5">Previsualización foto</h2>
-        <img class="img-fluid" [src]="'http://localhost:8080/files/' + Group?.photoUrl">
+        <img class="img-fluid" [src]="'http://localhost:8080/Groups/' + Group?.photoUrl">
       }
--->
+--> 
     </div>
 
     <div class="form-check mb-3">
@@ -43,10 +43,7 @@
       </label>
     </div>
 
-    <div class="form-floating mb-3">
-      <input type="datetime-local" class="form-control" id="publishDate" formControlName="publishDate">
-      <label for="publishDate">Fecha de creación del grupo</label>
-    </div>
+   
 
     <button class="btn btn-success" type="submit">Enviar</button>
 
