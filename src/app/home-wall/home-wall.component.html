@@ -1,6 +1,28 @@
 <p>Home Wall</p>
 
-<div class="row row-cols-1 row-cols-md-3 g-4 ">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- <img src="../../assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg"> -->
+      <ngb-carousel>
+        @for (group of groups; track group.id) {
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + group.photoUrl" alt="{{group.title}}" />
+          </div>
+          <div class="carousel-caption">
+            <h3>{{group.title}}</h3>
+            <p>{{group.title}}</p>
+          </div>
+        </ng-template>
+        }
+      </ngb-carousel>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card" style="">
                 <div class="card-body">
@@ -87,4 +109,4 @@
     </div>
   </div>
 
-  <hr>
+  <hr> -->

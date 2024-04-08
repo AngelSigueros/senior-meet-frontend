@@ -14,7 +14,7 @@
             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
            <img src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg" alt="Bailar">
             <div class="card-body">
-              <p class="card-text">{{post.id}} - {{post.content}}</p>
+              <p class="card-text">{{post.user.firstName}} - {{post.content}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button [routerLink]="['/post', post.id, 'detail']" class="btn btn-sm btn-outline-secondary">Detalle</button>

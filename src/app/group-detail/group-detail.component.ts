@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Group } from '../models/group.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-group-detail',
@@ -19,7 +19,7 @@ export class GroupDetailComponent implements OnInit{
   constructor (private http: HttpClient, private activatedRoute: ActivatedRoute){}
   
   ngOnInit(): void {
-   console.log('GroupDetailComponenet');
+   console.log('GroupDetailComponent');
 
    this.activatedRoute.params.subscribe(params=> {
     this.http.get<Group>("http://localhost:8080/groups/" + params['id']).subscribe(g=>{

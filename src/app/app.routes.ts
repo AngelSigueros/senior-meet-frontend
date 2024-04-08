@@ -20,6 +20,9 @@ import { GroupFormComponent } from './group-form/group-form.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 export const routes: Routes = [
   {
@@ -106,6 +109,18 @@ export const routes: Routes = [
   {
     path: 'users/:id/detail',
     component: UserDetailComponent
+  },
+  {
+    path: 'users/create',
+    component: UserFormComponent
+  },
+  {
+    path: 'user-login',
+    component: UserLoginComponent
+  },
+  {
+    path: 'user-register',
+    component: UserRegisterComponent
   },
   {
     path: '**', 
