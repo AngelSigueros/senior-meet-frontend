@@ -10,4 +10,5 @@ export interface Post {
     group: Group;
     user: User;
     interactions: Interaction[];
+    comments: Comment[];
 }
