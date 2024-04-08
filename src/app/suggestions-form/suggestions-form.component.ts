@@ -11,39 +11,41 @@ import { Suggestions } from '../models/suggestions.model';
   templateUrl: './suggestions-form.component.html',
   styleUrl: './suggestions-form.component.css'
 })
-export class SuggestionsFormComponent implements OnInit{
+export class SuggestionsFormComponent implements OnInit {
   suggestionsForm = new FormGroup({
-id: new FormControl(0),
-Name: new FormControl(''),
-description: new FormControl(''),
+    id: new FormControl(0),
+    name: new FormControl(''),
+    description: new FormControl(''),
 
-});
+  });
+
   suggestions: Suggestions | undefined;
-constructor(private httpClient: HttpClient) {}
 
-ngOnInit(): void {
-  
-}
+  constructor(private httpClient: HttpClient) { }
 
-save() {
+  ngOnInit(): void {
 
-  // Crear FormData
-  let formData = new FormData();
-  
+  }
 
-  // Introducir los datos del del cliente
-    formData.append('descripcion', this.suggestionsForm.get('descripcion')?.value ?? '')
+  save() {
+
+    // Crear FormData
+    let formData = new FormData();
+
+
+    // Introducir los datos del del cliente
+    formData.append('description', this.suggestionsForm.get('description')?.value ?? '')
     formData.append('name', this.suggestionsForm.get('name')?.value ?? '')
 
-  // http client post para enviar el formData a backend
-  console.log(formData);
+    // http client post para enviar el formData a backend
+    console.log(formData);
 
-  this.httpClient.post<Suggestions>('http://localhost:8080/suggestions', formData)
-  .subscribe(suggestions => {
-    //this.id = undefined;
-    //this.name = undefined;
-    console.log(suggestions);
-    this.suggestions = suggestions;
-  });
-}
+    this.httpClient.post<Suggestions>('http://localhost:8080/suggestions', formData)
+      .subscribe(suggestions => {
+        //this.id = undefined;
+        //this.name = undefined;
+        console.log(suggestions);
+        this.suggestions = suggestions;
+      });
+  }
 }
