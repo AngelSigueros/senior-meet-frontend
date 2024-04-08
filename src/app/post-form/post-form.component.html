@@ -23,9 +23,9 @@
     <!-- Selector simple -->
     <select class="form-select form-select-lg mb-3" formControlName="group">
       <option selected>Elija grupo:</option>
-      <option value="grupo1">grupo1</option>
-      <option value="grupo2">grupo2</option>
-      <option value="grupo3">grupo3</option>
+      %for (group of groups;track group.id){
+        <option value='{{group.id}}'> {{group.name}} </option>
+      }
     </select>
 
 
