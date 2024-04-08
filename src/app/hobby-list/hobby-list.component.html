@@ -1,4 +1,3 @@
-
 <div class="container">
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -13,14 +12,17 @@
             <div class="d-flex justify-content-center mb-2"></div>
               <div class="btn-hobby">
                 <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies', hobby.id, 'detail']">Ver más</button>
+                @if (isAdmin) {
                 <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies/create']">Añadir</button>
+                }
               </div>
+
               <small class="text-body-secondary"></small>
             </div>
           </div>
         </div>
-      
     }
+
 
  
   </div>
