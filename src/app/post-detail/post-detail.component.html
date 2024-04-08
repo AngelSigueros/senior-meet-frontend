@@ -2,20 +2,6 @@
 
 @if (post) {
     <section style="background-color: #eee;">
-        <div class="container py-5">
-          <div class="row">
-            <div class="col">
-              <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-                <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">User</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>   
-
       
           <div class="row">
             <div class="col-lg-4">
@@ -29,8 +15,15 @@
                   <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
                   <h5 class="my-3">GRUPO: {{post.group.title}}</h5>
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Me gusta</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button [routerLink]="['/post', post.id, 'add-interaction/megusta']" class="btn btn-sm btn-outline-secondary">Me gusta</button>
+                        <button [routerLink]="['/post', post.id, 'add-interaction/guardar']" class="btn btn-sm btn-outline-secondary">Guardar</button>
+                      </div>
+                      <small class="text-body-secondary"></small>
+                    </div>
+
+
                   </div>
                 </div>
               </div>
