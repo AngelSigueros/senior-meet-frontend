@@ -23,10 +23,14 @@
                 <div class="card-body text-center">
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">{{post.user.firstName}}</h5>
-                  <h5 class="my-3">{{post.content}}</h5>
+                  <h5 class="my-3">USUARIO: {{post.user.firstName}}</h5>
+                  <h5 class="my-3">CONTENIDO: {{post.content}}</h5>
+                  <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
+                  <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
+                  <h5 class="my-3">GRUPO: {{post.group.title}}</h5>
                   <div class="d-flex justify-content-center mb-2">
                     <button type="button" class="btn btn-primary">Me gusta</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
                   </div>
                 </div>
               </div>
