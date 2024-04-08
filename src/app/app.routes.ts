@@ -84,11 +84,11 @@ export const routes: Routes = [
     component: PostListComponent
   },
   {
-    path: 'posts/:id/detail',
+    path: 'post/:id/detail',
     component: PostDetailComponent
   },
   {
-    path: 'posts/create',
+    path: 'post/create',
     component: PostFormComponent
   },
   {
