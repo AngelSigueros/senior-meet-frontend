@@ -1,10 +1,12 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Post } from '../models/post.model';
 import { Group} from '../models/group.model';
 import { User } from '../models/user.model';
 import { Interaction } from '../models/interaction.model';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -14,7 +16,9 @@ import { Interaction } from '../models/interaction.model';
   templateUrl: './post-form.component.html',
   styleUrl: './post-form.component.css'
 })
-export class PostFormComponent {
+export class PostFormComponent implements OnInit{
+
+  groups: Group[] = []
 
   postForm = this.fb.group({
     id: [0],
@@ -23,10 +27,15 @@ export class PostFormComponent {
     videoUrl: [''],
     group: new FormControl(),
     user: new FormControl(),
-    interactions: [[]]
+    interactions: [[]],
+    comments: [[]]
   });
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient){}
+
+  ngOnInit(): void {
+    this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
+  }
 
   save(){
     console.log("Guardando Post");
@@ -39,6 +48,7 @@ export class PostFormComponent {
     const group = this.postForm.get('group')?.value  ;
     const user = this.postForm.get('user')?.value ;
     const interactions = this.postForm.get('interactions')?.value ?? [];
+    const comments = this.postForm.get('comments')?.value ?? [];
 
     // Crear un objeto utilizando los valores extraídos
 
@@ -49,7 +59,8 @@ export class PostFormComponent {
       videoUrl: videoUrl,
       group: group,
       user: user,
-      interactions: interactions
+      interactions: interactions,
+      comments: comments
     }
     console.log(postToSave);
 

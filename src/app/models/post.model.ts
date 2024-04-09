@@ -7,7 +7,8 @@ export interface Post {
     content: string;
     photoUrl: string;
     videoUrl: string;
-    group: Group;
+    group?: Group;
     user: User;
-    interactions: Interaction[];
+    interactions?: Interaction[];
+    comments?: Comment[];
 }
