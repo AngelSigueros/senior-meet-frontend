@@ -1,4 +1,3 @@
-<p>post-form works!</p>
 
 <form [formGroup]="postForm" (ngSubmit)="save()">
 
@@ -23,14 +22,13 @@
     <!-- Selector simple -->
     <select class="form-select form-select-lg mb-3" formControlName="group">
       <option selected>Elija grupo:</option>
-      @for (group of groups; track group.id) {
-        <option value="{{group.id}}">{{group.title}}</option>
-      } @empty {}
+      @for (group of groups;track group.id){
+        <option value='{{group.id}}'> {{group.title}} </option>
+      }
     </select>
 
 
-      <button class="btn btn-success" type="submit">Enviar</button>
+    <button class="btn btn-success" type="submit">Enviar</button>
 
-  </form>
-
+</form>
 

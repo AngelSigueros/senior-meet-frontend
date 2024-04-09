@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Register } from '../models/register.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class UserRegisterComponent {
   {validators: this.passwordConfirmValidator} // Validador personalizado que comprueba dos campos al mismo tiempo
   );
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private route: Router) {}
 
   passwordConfirmValidator(control: AbstractControl) {
 
@@ -45,10 +46,11 @@ export class UserRegisterComponent {
     console.log(register);
     
     // enviar registro a backend
-    this.httpClient.post('http://localhost:8080/api/users/register', register)
+    this.httpClient.post('http://localhost:8080/user/register', register)
     .subscribe(response => {
       //limpiar el formulario o redirigir a pantalla de login
       this.registerForm.reset();
+      this.route.navigate(['/users']);
     });
 
     

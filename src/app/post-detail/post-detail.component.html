@@ -1,5 +1,3 @@
-<p>post-detail works!</p>
-
 @if (post) {
     <section style="background-color: #eee;">
       
@@ -13,18 +11,15 @@
                   <h5 class="my-3">CONTENIDO: {{post.content}}</h5>
                   <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
                   <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
-                  <h5 class="my-3">GRUPO: {{post.group.title}}</h5>
-                  <div class="d-flex justify-content-center mb-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button [routerLink]="['/post', post.id, 'add-interaction/megusta']" class="btn btn-sm btn-outline-secondary">Me gusta</button>
-                        <button [routerLink]="['/post', post.id, 'add-interaction/guardar']" class="btn btn-sm btn-outline-secondary">Guardar</button>
-                      </div>
-                      <small class="text-body-secondary"></small>
+                  <h5 class="my-3">GRUPO: {{post.group?.title}}</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button [routerLink]="['/post', post.id, 'add-like']" class="btn btn-sm btn-outline-secondary">Me gusta</button>
+                      <button [routerLink]="['/post', post.id, 'add-save']" class="btn btn-sm btn-outline-secondary">Guardar</button>
                     </div>
-
-
+                    <small class="text-body-secondary"></small>
                   </div>
+
                 </div>
               </div>
 
