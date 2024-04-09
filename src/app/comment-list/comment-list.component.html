@@ -1,0 +1,37 @@
+<p>comment-list works!</p>
+
+<main>
+    <button [routerLink]="['/comment/create']" class="card-link">Crear un comentario</button>
+
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @for ( comment of comments; track comment.id) {
+        <div class="col">
+          <div class="card shadow-sm">
+            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+           <img src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg" alt="Bailar">
+            <div class="card-body">
+              <p class="card-text">{{comment.user.firstName}}</p>
+              <p class="card-text">{{comment.content}}</p>
+              <p class="card-text">{{comment.date}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button [routerLink]="['/comment', comment.id, 'detail']" class="btn btn-sm btn-outline-secondary">Detalle</button>
+                  <button [routerLink]="['/commentcreate']" class="btn btn-sm btn-outline-secondary">Editar</button>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+} @empty {
+    <p class="card-text">No hay comentarios!!</p>
+}
+      </div>
+    </div>
+  </div>
+
+</main>
