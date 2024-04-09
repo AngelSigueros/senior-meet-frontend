@@ -4,6 +4,15 @@
 
       <h1 class="my-5">Sugerencias</h1>
 
+      @if (showConfirmMessage) {
+        <ngb-alert [dismissible]="false" style="min-height:150px; background-color:rgb(67, 195, 76);" class="my-5">
+          Sugerencia recibida correctamente.
+
+          <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" routerLink="/">Volver a home</button>
+
+        </ngb-alert>
+      }
+
       <form [formGroup]="suggestionsForm" (ngSubmit)="save()">
 
         <input type="hidden" formControlName="id">
