@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Suggestions } from '../models/suggestions.model';
 
 @Component({
@@ -21,7 +21,8 @@ export class SuggestionsFormComponent implements OnInit {
 
   suggestions: Suggestions | undefined;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, 
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -30,22 +31,23 @@ export class SuggestionsFormComponent implements OnInit {
   save() {
 
     // Crear FormData
-    let formData = new FormData();
-
+    //let formData = new FormData();
+    const suggestion: Suggestions = this.suggestionsForm.value as Suggestions;
 
     // Introducir los datos del del cliente
-    formData.append('description', this.suggestionsForm.get('description')?.value ?? '')
-    formData.append('name', this.suggestionsForm.get('name')?.value ?? '')
+    // formData.append('description', this.suggestionsForm.get('description')?.value ?? '')
+    // formData.append('name', this.suggestionsForm.get('name')?.value ?? '')
 
     // http client post para enviar el formData a backend
-    console.log(formData);
+    console.log(suggestion);
 
-    this.httpClient.post<Suggestions>('http://localhost:8080/suggestions', formData)
+    this.httpClient.post<Suggestions>('http://localhost:8080/suggestions', suggestion)
       .subscribe(suggestions => {
         //this.id = undefined;
         //this.name = undefined;
         console.log(suggestions);
         this.suggestions = suggestions;
+        this.router.navigate(['/home']);
       });
   }
 }
