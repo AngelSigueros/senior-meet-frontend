@@ -20,7 +20,7 @@ export const userRoleGuard: CanActivateFn = (route, state) => {
   if (authService.getIsAdmin()) {
     return true;
   } else {
-    return router.navigate(['/login']);
+    return router.navigate(['/user-login']);
   }
 
 };
