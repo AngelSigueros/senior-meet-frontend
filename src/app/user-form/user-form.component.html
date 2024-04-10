@@ -22,6 +22,41 @@
             <input type="text" class="form-control" id="lastName" formControlName="lastName">
             <label for="lastName">Apellido</label>
           </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="email" formControlName="email">
+            <label for="email">Email</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="phone" formControlName="phone">
+            <label for="phone">Telefono</label>
+          </div>
+
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="codigoPostal" formControlName="codigoPostal">
+            <label for="codigoPostal">Codigo Postal</label>
+          </div>
+  
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="ciudad" formControlName="ciudad">
+            <label for="ciudad">Ciudad</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <select class="form-select" id="sexo" formControlName="sexo">
+              <option value="FEMENINO">Femenino</option>
+              <option value="MASCULINO">Masculino</option>
+              <option value="OTRO">Otro</option>
+             </select>
+            <label for="sexo">Sexo</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" min="0">
+            <label for="fechaNacimiento">fecha Nacimiento</label>
+          </div>
   
           <!-- <div class="form-floating mb-3">
             <input type="number" class="form-control" id="price" formControlName="price" min="0">
@@ -35,11 +70,6 @@
             </label>
           </div> -->
   
-          <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" min="0">
-            <label for="fechaNacimiento">fecha Nacimiento</label>
-          </div>
-
           <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="available" formControlName="available">
             <label class="form-check-label" for="available" style="cursor:pointer;">

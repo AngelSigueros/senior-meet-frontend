@@ -22,9 +22,9 @@ export interface User {
 }
 
 export enum Sexo {
-    Otro = 'Otro',
-    Femenino = 'Femenino',
-    Masculino = 'Masculino'
+    Femenino = 'FEMENINO',
+    Masculino = 'MASCULINO',
+    Otro = 'OTRO'
 }
 
 export enum UserRole {

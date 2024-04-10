@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Group } from '../models/group.model';
 import { ActivatedRoute} from '@angular/router';
@@ -6,7 +6,7 @@ import { ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-group-detail',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [],
   templateUrl: './group-detail.component.html',
   styleUrl: './group-detail.component.css'
 })

@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -8,7 +8,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-suggestions-form',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, ReactiveFormsModule, NgbAlertModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './suggestions-form.component.html',
   styleUrl: './suggestions-form.component.css'
 })

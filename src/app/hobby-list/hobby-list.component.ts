@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Hobby } from '../models/hobby.model';
 import { Router, RouterLink } from '@angular/router';
@@ -7,7 +7,7 @@ import { AuthenticationService } from '../user-authentication/authentication.ser
 @Component({
   selector: 'app-hobby-list',
   standalone: true,
-  imports: [RouterLink, HttpClientModule],
+  imports: [RouterLink],
   templateUrl: './hobby-list.component.html',
   styleUrl: './hobby-list.component.css'
 })
