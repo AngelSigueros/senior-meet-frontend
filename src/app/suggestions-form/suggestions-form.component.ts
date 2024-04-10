@@ -4,13 +4,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Suggestions } from '../models/suggestions.model';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-suggestions-form',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, NgbAlertModule],
-  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './suggestions-form.component.html',
   styleUrl: './suggestions-form.component.css'
 })
@@ -23,7 +22,6 @@ export class SuggestionsFormComponent implements OnInit {
   });
 
   suggestions: Suggestions | undefined;
-  showConfirmMessage = false;
   showConfirmMessage = false;
 
   constructor(private httpClient: HttpClient, 
