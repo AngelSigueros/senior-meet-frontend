@@ -62,8 +62,7 @@ export class PostFormComponent implements OnInit {
     }
     console.log(postToSave);
 
-    // enviar el objeto a backend utilizando HttpClient
-    // const url = 'http://localhost:8080/post;
-    // this.httpClient.post<Post>(url, postToSave).subscribe(post => console.log(post));
+    const url = 'http://localhost:8080/post';
+    this.httpClient.post<Post>(url, postToSave).subscribe(post => console.log(post));
   }
 }
