@@ -1,13 +1,14 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Suggestions } from '../models/suggestions.model';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-suggestions-form',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, NgbAlertModule],
   templateUrl: './suggestions-form.component.html',
   styleUrl: './suggestions-form.component.css'
 })
@@ -20,6 +21,7 @@ export class SuggestionsFormComponent implements OnInit {
   });
 
   suggestions: Suggestions | undefined;
+  showConfirmMessage = false;
 
   constructor(private httpClient: HttpClient, 
               private router: Router) { }
@@ -47,7 +49,8 @@ export class SuggestionsFormComponent implements OnInit {
         //this.name = undefined;
         console.log(suggestions);
         this.suggestions = suggestions;
-        this.router.navigate(['/home']);
+        this.showConfirmMessage = true;
+        //this.router.navigate(['/home']);
       });
   }
 }
