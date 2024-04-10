@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Suggestions } from '../models/suggestions.model';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-suggestions-form',
@@ -49,6 +50,8 @@ export class SuggestionsFormComponent implements OnInit {
         //this.name = undefined;
         console.log(suggestions);
         this.suggestions = suggestions;
+        this.showConfirmMessage = true;
+        //this.router.navigate(['/home']);
         this.showConfirmMessage = true;
         //this.router.navigate(['/home']);
       });
