@@ -4,7 +4,7 @@
         <div class="col d-flex justify-content-between align-items-center mb-3">
             <p>Listado de usuarios</p>
             @if (isAdmin) { 
-              <button class="btn btn-secondary me-2" routerLink="/user/create">Crear Usuario</button>
+              <button class="btn btn-secondary me-2" [routerLink]="['/users/create']">Crear Usuario</button>
             }
         </div>
     </div>
