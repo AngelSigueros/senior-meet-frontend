@@ -24,6 +24,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { SuggestionsFormComponent } from './suggestions-form/suggestions-form.component';
+import { userRoleGuard } from './user-authentication/user-role.guard';
 
 export const routes: Routes = [
   {
@@ -45,15 +46,18 @@ export const routes: Routes = [
   },
   {
     path: 'create-profile',
-    component: CreateProfileComponent
+    component: CreateProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'delete-profile',
-    component: DeleteProfileComponent
+    component: DeleteProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'edite-profile',
-    component: EditeProfileComponent
+    component: EditeProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'groups',
@@ -61,7 +65,8 @@ export const routes: Routes = [
   },
   {
     path: 'groups/create',
-    component: GroupFormComponent
+    component: GroupFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'groups/:id/detail',
@@ -77,7 +82,8 @@ export const routes: Routes = [
   },
   {
     path: 'hobbies/create',
-    component:HobbyFormComponent
+    component:HobbyFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'login',
@@ -93,7 +99,8 @@ export const routes: Routes = [
   },
   {
     path: 'post/create',
-    component: PostFormComponent
+    component: PostFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'user-profile/:id/detail',
@@ -113,11 +120,13 @@ export const routes: Routes = [
   },
   {
     path: 'users/create',
-    component: UserFormComponent
+    component: UserFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'users/:id/update',
-    component: UserFormComponent
+    component: UserFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'user-login',
