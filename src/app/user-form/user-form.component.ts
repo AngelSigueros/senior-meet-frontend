@@ -28,7 +28,7 @@ export class UserFormComponent implements OnInit {
     firstName: new FormControl<string>(''),
     lastName: new FormControl<string>(''),
     email: new FormControl<string>(''),
-    password: new FormControl<string>(''),
+    //password: new FormControl<string>(''),
     phone: new FormControl<string>(''),
     codigoPostal: new FormControl<string>(''),
     ciudad: new FormControl<string>(''),
@@ -89,7 +89,7 @@ export class UserFormComponent implements OnInit {
     formData.append('firstName', this.userForm.get('firstName')?.value ?? '');
     formData.append('lastName', this.userForm.get('lastName')?.value ?? '');
     formData.append('email', this.userForm.get('email')?.value ?? '');
-    formData.append('password', this.userForm.get('password')?.value ?? '');
+    //formData.append('password', this.userForm.get('password')?.value ?? '');
     formData.append('phone', this.userForm.get('phone')?.value ?? '');
     formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value ?? '');
     formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
@@ -97,7 +97,7 @@ export class UserFormComponent implements OnInit {
     formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '0');
     formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
     formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
-    formData.append('userRole', this.userForm.get('userRole')?.value ?? '');
+    formData.append('userRole', 'USER');
     formData.append('groups', this.userForm.get('groups')?.value ?? '');
     formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
     formData.append('posts', this.userForm.get('posts')?.value ?? '');
