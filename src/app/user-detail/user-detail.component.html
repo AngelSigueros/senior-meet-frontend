@@ -1,6 +1,13 @@
 <p>user-detail works!</p>
 
 @if (user) {
+
+  <button type="button" class="btn btn-primary btn-lg px-4 gap-3"
+  [routerLink]="['/users', user.id, 'update']">
+    Editar
+    <i class="bi bi-pencil ms-2"></i>
+  </button>
+
     <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">

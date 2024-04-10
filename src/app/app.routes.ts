@@ -116,6 +116,10 @@ export const routes: Routes = [
     component: UserFormComponent
   },
   {
+    path: 'users/:id/update',
+    component: UserFormComponent
+  },
+  {
     path: 'user-login',
     component: UserLoginComponent
   },
