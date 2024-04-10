@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -7,7 +7,7 @@ import { Suggestions } from '../models/suggestions.model';
 @Component({
   selector: 'app-suggestions-form',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './suggestions-form.component.html',
   styleUrl: './suggestions-form.component.css'
 })

@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Comment } from '../models/comment.model';
@@ -6,7 +6,7 @@ import { Comment } from '../models/comment.model';
 @Component({
   selector: 'app-comment-list',
   standalone: true,
-  imports: [HttpClientModule,RouterLink],
+  imports: [RouterLink],
   templateUrl: './comment-list.component.html',
   styleUrl: './comment-list.component.css'
 })
