@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-8">
 
-      <h1 class="my-5">Sugerencias</h1>
+      <h1 class="my-5">Importas tú</h1>
 
       <form [formGroup]="suggestionsForm" (ngSubmit)="save()">
 
@@ -11,7 +11,7 @@
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
           id="name" formControlName="name">
-          <label for="name">Cuéntanos lo que quieres que incluyamos en Senior Meet</label>
+          <label for="name">Que te gustaría ver en Senior Meet?.</label>
         </div>
         
 
@@ -19,10 +19,10 @@
           <textarea class="form-control"
             placeholder="Leave a comment here" id="description" formControlName="description" style="min-height: 120px;">
           </textarea>
-          <label for="description">Descripción</label>
+          <label for="description">Cuéntanoslo y nos ponemos !en marcha!.</label>
         </div>
 
-        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Guardar</button>
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Enviar</button>
 
       </form>
 
