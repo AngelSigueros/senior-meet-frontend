@@ -3,13 +3,14 @@
     <div class="col-lg-8">
       @if (showConfirmMessage) {
         <ngb-alert [dismissible]="false" style="min-height:150px; background-color:rgb(67, 195, 76);" class="my-5">
-          Sugerencia recibida correctamente.
+          Sugerencia recibida correctamente. Gracias
+
 
           <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" routerLink="/">Volver a home</button>
 
         </ngb-alert>
       }
-      <h1 class="my-5">Tú eres lo realmente importante</h1>
+      <h1 class="my-5">TU eres lo mas importante.</h1>
 
       <form [formGroup]="suggestionsForm" (ngSubmit)="save()">
 
@@ -18,7 +19,7 @@
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
           id="name" formControlName="name">
-          <label for="name">Cuéntanos lo que te gustaria ver en Senior Meet?.</label>
+          <label for="name">Que te gustaría ver en Senior Meet?</label>
         </div>
         
 
@@ -26,7 +27,7 @@
           <textarea class="form-control"
             placeholder="Leave a comment here" id="description" formControlName="description" style="min-height: 120px;">
           </textarea>
-          <label for="description">Describenoslo y !nos ponemos en marcha!.</label>
+          <label for="description">Cuentanoslo y ! Nos ponemos en marcha !</label>
         </div>
 
         <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Enviar</button>
