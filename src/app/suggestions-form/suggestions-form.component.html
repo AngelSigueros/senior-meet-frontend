@@ -1,8 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
+      @if (showConfirmMessage) {
+        <ngb-alert [dismissible]="false" style="min-height:150px; background-color:rgb(67, 195, 76);" class="my-5">
+          Sugerencia recibida correctamente.
 
-      <h1 class="my-5">Importas tú</h1>
+          <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" routerLink="/">Volver a home</button>
+
+        </ngb-alert>
+      }
+      <h1 class="my-5">Tú eres lo realmente importante</h1>
 
       @if (showConfirmMessage) {
         <ngb-alert [dismissible]="false" style="min-height:150px; background-color:rgb(67, 195, 76);" class="my-5">
@@ -20,7 +27,7 @@
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
           id="name" formControlName="name">
-          <label for="name">Que te gustaría ver en Senior Meet?.</label>
+          <label for="name">Cuéntanos lo que te gustaria ver en Senior Meet?.</label>
         </div>
         
 
@@ -28,17 +35,11 @@
           <textarea class="form-control"
             placeholder="Leave a comment here" id="description" formControlName="description" style="min-height: 120px;">
           </textarea>
-          <label for="description">Cuéntanoslo y nos ponemos !en marcha!.</label>
+          <label for="description">Describenoslo y !nos ponemos en marcha!.</label>
         </div>
 
-        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Guardar</button>
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Enviar</button>
 
       </form>
-
     </div>
-    
-
-      
-
-  
   </div>
