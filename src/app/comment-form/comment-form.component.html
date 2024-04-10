@@ -1,1 +1,13 @@
-<p>comment-form works!</p>
+<form [formGroup]="postForm" (ngSubmit)="save()">
+
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="content"
+        placeholder="Escribe tu comentario" formControlName="content">
+        <label for="content">Contenido del Comentario</label>
+    </div>
+    
+
+
+    <button class="btn btn-success" type="submit">Enviar</button>
+
+</form>
