@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Group } from '../models/group.model';
@@ -25,15 +25,15 @@ export class UserFormComponent implements OnInit {
 
   userForm = new FormGroup({
     id: new FormControl<number>(0),
-    firstName: new FormControl<string>(''),
+    firstName: new FormControl<string>('', Validators.required),
     lastName: new FormControl<string>(''),
-    email: new FormControl<string>(''),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
     //password: new FormControl<string>(''),
-    phone: new FormControl<string>(''),
-    codigoPostal: new FormControl<string>(''),
+    phone: new FormControl<string>('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
+    codigoPostal: new FormControl<string>('', Validators.pattern('^[0-9]{5}$')),
     ciudad: new FormControl<string>(''),
     sexo: new FormControl(),
-    fechaNacimiento: new FormControl<Date>(new Date()),
+    fechaNacimiento: new FormControl<Date>(new Date(), Validators.required),
     photoUrl: new FormControl(),
     available: new FormControl<boolean>(false),
     userRole: new FormControl(),
@@ -90,11 +90,11 @@ export class UserFormComponent implements OnInit {
     formData.append('lastName', this.userForm.get('lastName')?.value ?? '');
     formData.append('email', this.userForm.get('email')?.value ?? '');
     //formData.append('password', this.userForm.get('password')?.value ?? '');
-    formData.append('phone', this.userForm.get('phone')?.value ?? '');
-    formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value ?? '');
+    formData.append('phone', this.userForm.get('phone')?.value?.toString() ?? '0');
+    formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '0');
     formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
     formData.append('sexo', this.userForm.get('sexo')?.value ?? '');
-    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '0');
+    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toLocaleDateString() ?? '');
     formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
     formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
     formData.append('userRole', 'USER');

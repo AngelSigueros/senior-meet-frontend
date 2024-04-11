@@ -14,38 +14,74 @@
           <input type="hidden" formControlName="id">
   
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Nombre de usuario">
             <label for="firstName">Nombre de usuario</label>
+            @if (userForm.controls.firstName.touched && userForm.controls.firstName.errors) {
+              <div>
+                @if (userForm.controls.firstName.errors['required']) {
+                  <small class="text-danger">Nombre de usuario es obligatorio.</small>
+                }
+              </div>
+            }
           </div>
   
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Apellido">
             <label for="lastName">Apellido</label>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="email" formControlName="email">
+            <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
             <label for="email">Email</label>
+            @if (userForm.controls.email.touched && userForm.controls.email.errors) {
+              <div>
+                @if (userForm.controls.email.errors['required']) {
+                  <small class="text-danger">Email es obligatorio.</small>
+                }
+                @if (userForm.controls.email.errors['email']) {
+                  <small class="text-danger">El formato del email introducido es incorrecto.</small>
+                }
+              </div>
+            }
           </div>
 
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="phone" formControlName="phone">
-            <label for="phone">Telefono</label>
+            <input type="number" class="form-control" id="phone" placeholder="654987321" formControlName="phone">
+            <label for="phone">Teléfono móvil</label>
+            @if (userForm.controls.phone.touched && userForm.controls.phone.errors) {
+              <div>
+                @if (userForm.controls.phone.errors['required']) {
+                  <small class="text-danger">Teléfono es obligatorio.</small>
+                }
+                @if (userForm.controls.phone.errors['pattern']) {
+                  <small class="text-danger">Formato de teléfono incorrecto. Debe tener 9 dígitos.</small>
+                }
+              </div>
+            }
           </div>
 
-
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="codigoPostal" formControlName="codigoPostal">
+            <input type="number" class="form-control" id="codigoPostal" formControlName="codigoPostal" placeholder="Codigo Postal">
             <label for="codigoPostal">Codigo Postal</label>
+            @if (userForm.controls.codigoPostal.touched && userForm.controls.codigoPostal.errors) {
+              <div>
+                @if (userForm.controls.codigoPostal.errors['required']) {
+                  <small class="text-danger">Codigo Postal es obligatorio.</small>
+                }
+                @if (userForm.controls.codigoPostal.errors['pattern']) {
+                  <small class="text-danger">Formato de Codigo Postal incorrecto. Debe tener 5 dígitos.</small>
+                }
+              </div>
+            }
           </div>
   
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="ciudad" formControlName="ciudad">
+            <input type="text" class="form-control" id="ciudad" formControlName="ciudad" placeholder="Ciudad">
             <label for="ciudad">Ciudad</label>
           </div>
 
           <div class="form-floating mb-3">
-            <select class="form-select" id="sexo" formControlName="sexo">
+            <select class="form-select" id="sexo" formControlName="sexo" placeholder="Sexo">
               <option value="FEMENINO">Femenino</option>
               <option value="MASCULINO">Masculino</option>
               <option value="OTRO">Otro</option>
@@ -54,24 +90,20 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" min="0">
-            <label for="fechaNacimiento">fecha Nacimiento</label>
-          </div>
-  
-          <!-- <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="price" formControlName="price" min="0">
-            <label for="isbn">Precio del libreo</label>
+            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" 
+            placeholder="Fecha de Nacimiento" max="1960-12-31" value="1960-12-31">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            @if (userForm.controls.fechaNacimiento.touched && userForm.controls.fechaNacimiento.errors) {
+              <div>
+                @if (userForm.controls.fechaNacimiento.errors['required']) {
+                  <small class="text-danger">Fecha de Nacimiento es obligatorio.</small>
+                }
+              </div>
+            }
           </div>
   
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="available" formControlName="available">
-            <label class="form-check-label" for="available" style="cursor:pointer;">
-            Disponible para venta (sí o no)
-            </label>
-          </div> -->
-  
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="available" formControlName="available">
+            <input class="form-check-input" type="checkbox" id="available" formControlName="available" placeholder="nombre@email.com">
             <label class="form-check-label" for="available" style="cursor:pointer;">
               Activo sí o no
             </label>
@@ -80,12 +112,12 @@
           <input type="hidden" formControlName="photoUrl">
   
           <div class="input-group mb-3">
-            <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
+            <input type="file" class="form-control" id="photo" (change)="onFileChange($event)" placeholder="nombre@email.com">
             <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button>
           </div>
   
           <div class="form-floating mb-3">
-            <select class="form-select" id="groups" formControlName="groups" [compareWith]="compareObjects">
+            <select class="form-select" id="groups" formControlName="groups" [compareWith]="compareObjects" placeholder="nombre@email.com">
               <!-- iterar sobre el array de grupos mostrando cada uno -->
               @for (group of groups; track group.id) {
               <option [ngValue]="group">{{group.title}}</option>
@@ -96,7 +128,7 @@
   
   
           <div class="form-floating mb-3">
-            <select class="form-select" id="posts" formControlName="posts" [compareWith]="compareObjects">
+            <select class="form-select" id="posts" formControlName="posts" [compareWith]="compareObjects" placeholder="nombre@email.com">
               <!-- iterar sobre el array de posts mostrando cada uno -->
               @for (post of posts; track post.id) {
               <option [ngValue]="post">{{post.id}}</option>
@@ -116,11 +148,11 @@
       <div class="col-lg-4">
         @if (photoPreview) {
           <h2 class="my-5">Previsualización foto</h2>
-          <img class="img-fluid" [src]="photoPreview">
+          <img class="img-fluid" [src]="photoPreview" alt="photoPreview">
         }
         @if (!photoPreview && user?.photoUrl) {
           <h2 class="my-5">Previsualización foto</h2>
-          <img class="img-fluid" [src]="'http://localhost:8080/files/' + user?.photoUrl">
+          <img class="img-fluid" [src]="'http://localhost:8080/files/' + user?.photoUrl" alt="user?.photoUrl">
         }
       </div>
     </div>
