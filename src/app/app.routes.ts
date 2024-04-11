@@ -20,6 +20,9 @@ import { GroupFormComponent } from './group-form/group-form.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+import { CommentDetailComponent } from './comment-detail/comment-detail.component';
+import { CommentFormComponent } from './comment-form/comment-form.component';
 
 export const routes: Routes = [
   {
@@ -90,6 +93,18 @@ export const routes: Routes = [
   {
     path: 'post/create',
     component: PostFormComponent
+  },
+  {
+    path: 'comments',
+    component: CommentListComponent
+  },
+  {
+    path: 'comments/:id/detail',
+    component: CommentDetailComponent
+  },
+  {
+    path: 'comments/create',
+    component: CommentFormComponent
   },
   {
     path: 'user-profile/:id/detail',
