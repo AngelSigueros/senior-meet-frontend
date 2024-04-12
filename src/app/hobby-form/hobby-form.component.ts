@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -7,7 +7,7 @@ import { Hobby} from '../models/hobby.model';
 @Component({
   selector: 'app-hobby-form',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './hobby-form.component.html',
   styleUrl: './hobby-form.component.css'
 })
@@ -55,7 +55,7 @@ export class HobbyFormComponent implements OnInit {
     }
 
     // Introducir los datos del author
-      formData.append('fullName', this.hobbyForm.get('fullName')?.value ?? '')
+      formData.append('descripcion', this.hobbyForm.get('descripcion')?.value ?? '')
 
     // http client post para enviar el formData a backend
     console.log(formData);

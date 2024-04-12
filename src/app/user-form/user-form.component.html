@@ -3,9 +3,9 @@
       <div class="col">
   
         @if (isUpdate) {
-        <h1 class="mt-5 mb-5">Actualizar libro existente con id {{userForm.get('id')?.value}}</h1>
+        <h1 class="mt-5 mb-5">Actualizar usuario existente con id {{userForm.get('id')?.value}}</h1>
         } @else {
-        <h1 class="mt-5 mb-5">Crear nuevo libro</h1>
+        <h1 class="mt-5 mb-5">Crear nuevo usuario</h1>
         }
   
   
@@ -14,63 +14,146 @@
           <input type="hidden" formControlName="id">
   
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="isbn" formControlName="isbn">
-            <label for="isbn">ISBN del libro</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Nombre de usuario">
+            <label for="firstName">Nombre de usuario</label>
+            @if (userForm.controls.firstName.touched && userForm.controls.firstName.errors) {
+              <div>
+                @if (userForm.controls.firstName.errors['required']) {
+                  <small class="text-danger">Nombre de usuario es obligatorio.</small>
+                }
+              </div>
+            }
           </div>
   
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="title" formControlName="title">
-            <label for="title">Titulo del libro</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Apellido">
+            <label for="lastName">Apellido</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
+            <label for="email">Email</label>
+            @if (userForm.controls.email.touched && userForm.controls.email.errors) {
+              <div>
+                @if (userForm.controls.email.errors['required']) {
+                  <small class="text-danger">Email es obligatorio.</small>
+                }
+                @if (userForm.controls.email.errors['email']) {
+                  <small class="text-danger">El formato del email introducido es incorrecto.</small>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="phone" placeholder="654987321" formControlName="phone">
+            <label for="phone">Teléfono móvil</label>
+            @if (userForm.controls.phone.touched && userForm.controls.phone.errors) {
+              <div>
+                @if (userForm.controls.phone.errors['required']) {
+                  <small class="text-danger">Teléfono es obligatorio.</small>
+                }
+                @if (userForm.controls.phone.errors['pattern']) {
+                  <small class="text-danger">Formato de teléfono incorrecto. Debe tener 9 dígitos.</small>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="codigoPostal" formControlName="codigoPostal" placeholder="Codigo Postal">
+            <label for="codigoPostal">Codigo Postal</label>
+            @if (userForm.controls.codigoPostal.touched && userForm.controls.codigoPostal.errors) {
+              <div>
+                @if (userForm.controls.codigoPostal.errors['required']) {
+                  <small class="text-danger">Codigo Postal es obligatorio.</small>
+                }
+                @if (userForm.controls.codigoPostal.errors['pattern']) {
+                  <small class="text-danger">Formato de Codigo Postal incorrecto. Debe tener 5 dígitos.</small>
+                }
+              </div>
+            }
           </div>
   
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="price" formControlName="price" min="0">
-            <label for="isbn">Precio del libreo</label>
+            <input type="text" class="form-control" id="ciudad" formControlName="ciudad" placeholder="Ciudad">
+            <label for="ciudad">Ciudad</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <select class="form-select" id="sexo" formControlName="sexo" placeholder="Sexo">
+              <option value="FEMENINO">Femenino</option>
+              <option value="MASCULINO">Masculino</option>
+              <option value="OTRO">Otro</option>
+             </select>
+            <label for="sexo">Sexo</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" 
+            placeholder="Fecha de Nacimiento" max="1960-12-31" value="1960-12-31">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            @if (userForm.controls.fechaNacimiento.touched && userForm.controls.fechaNacimiento.errors) {
+              <div>
+                @if (userForm.controls.fechaNacimiento.errors['required']) {
+                  <small class="text-danger">Fecha de Nacimiento es obligatorio.</small>
+                }
+              </div>
+            }
           </div>
   
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="available" formControlName="available">
+            <input class="form-check-input" type="checkbox" id="available" formControlName="available" placeholder="nombre@email.com">
             <label class="form-check-label" for="available" style="cursor:pointer;">
-            Disponible para venta (sí o no)
+              Activo sí o no
             </label>
           </div>
   
-          <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="publishDate" formControlName="publishDate" min="0">
-            <label for="publishDate">Publish Date del libreo</label>
+          <input type="hidden" formControlName="photoUrl">
+  
+          <div class="input-group mb-3">
+            <input type="file" class="form-control" id="photo" (change)="onFileChange($event)" placeholder="nombre@email.com">
+            <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button>
           </div>
   
           <div class="form-floating mb-3">
-            <select class="form-select" id="author" formControlName="author" [compareWith]="compareObjects">
-              <!-- iterar sobre el array de authors mostrando cada uno  -->
-              @for (author of authors; track author.id) {
-              <option [ngValue]="author">{{author.name}}</option>
+            <select class="form-select" id="groups" formControlName="groups" [compareWith]="compareObjects" placeholder="nombre@email.com">
+              <!-- iterar sobre el array de grupos mostrando cada uno -->
+              @for (group of groups; track group.id) {
+              <option [ngValue]="group">{{group.title}}</option>
+              } 
+            </select>
+            <label for="groups">Grupos</label>
+          </div>
+  
+  
+          <div class="form-floating mb-3">
+            <select class="form-select" id="posts" formControlName="posts" [compareWith]="compareObjects" placeholder="nombre@email.com">
+              <!-- iterar sobre el array de posts mostrando cada uno -->
+              @for (post of posts; track post.id) {
+              <option [ngValue]="post">{{post.id}}</option>
               }
             </select>
-            <label for="author">Autor/a del libro</label>
+            <label for="editorial">Posts</label>
           </div>
-  
-  
-          <div class="form-floating mb-3">
-            <select class="form-select" id="editorial" formControlName="editorial" [compareWith]="compareObjects">
-              <!-- iterar sobre el array de authors mostrando cada uno -->
-              @for (editorial of editorials; track editorial.id) {
-              <option [ngValue]="editorial">{{editorial.name}}</option>
-              }
-            </select>
-            <label for="editorial">Autor/a del libro</label>
-          </div>
-  
-  
+   
           @if (isUpdate) {
           <button class="btn btn-success" type="submit">Actualizar</button>
           } @else {
           <button class="btn btn-success" type="submit">Crear</button>
           }
+          </form>
+      </div>
   
-  
-        </form>
-  
+      <div class="col-lg-4">
+        @if (photoPreview) {
+          <h2 class="my-5">Previsualización foto</h2>
+          <img class="img-fluid" [src]="photoPreview" alt="photoPreview">
+        }
+        @if (!photoPreview && user?.photoUrl) {
+          <h2 class="my-5">Previsualización foto</h2>
+          <img class="img-fluid" [src]="'http://localhost:8080/files/' + user?.photoUrl" alt="user?.photoUrl">
+        }
       </div>
     </div>
   </div>

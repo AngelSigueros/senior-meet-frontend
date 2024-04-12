@@ -1,0 +1,25 @@
+<p>comment-detail works!</p>
+
+@if (comment) {
+    <section style="background-color: #eee;">
+              
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                    <p class="card-text">{{comment.user.firstName}}</p>
+                    <p class="card-text">{{comment.content}}</p>
+                    <p class="card-text">{{comment.date}}</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary">Me gusta</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+             
+            
+    </section>
+}

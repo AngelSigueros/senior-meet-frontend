@@ -1,6 +1,13 @@
 <p>user-detail works!</p>
 
 @if (user) {
+
+  <button type="button" class="btn btn-primary btn-lg px-4 gap-3"
+  [routerLink]="['/users', user.id, 'update']">
+    Editar
+    <i class="bi bi-pencil ms-2"></i>
+  </button>
+
     <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
@@ -269,15 +276,15 @@
               </button>
               <div class="d-flex justify-content-between text-center mx-5 mt-5 mb-2">
                 <div>
-                  <p class="mb-2 h5">{{user.posts.length}}</p>
+                  <p class="mb-2 h5">{{user.posts?.length}}</p>
                   <p class="text-muted mb-0">Post</p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5">{{user.groups.length}}</p>
+                  <p class="mb-2 h5">{{user.groups?.length}}</p>
                   <p class="text-muted mb-0">Groups</p>
                 </div>
                 <div>
-                  <p class="mb-2 h5">{{user.hobbies.length}}</p>
+                  <p class="mb-2 h5">{{user.hobbies?.length}}</p>
                   <p class="text-muted mb-0">Hobbies</p>
                 </div>
               </div>
@@ -291,4 +298,12 @@
 
   <hr>
 
+} @else {
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <p>El usuario no existe</p>
+      </div>
+    </div>
+  </div>
 }
