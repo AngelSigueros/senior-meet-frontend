@@ -74,7 +74,7 @@ isUpdate: boolean = false;
       this.httpClient.put<Group>('http://localhost:8080/groups/' + this.group?.id, formData)
     .subscribe(group => this.navigateToList());
     } else {
-    this.httpClient.post<Group>('http://localhost:8080/groups', formData)
+    this.httpClient.post<Group>('http://localhost:8080/groups/create', formData)
     .subscribe(group=> this.navigateToList());
      }
   }
