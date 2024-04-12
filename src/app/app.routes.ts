@@ -23,6 +23,11 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { CommentDetailComponent } from './comment-detail/comment-detail.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
+import { SuggestionsFormComponent } from './suggestions-form/suggestions-form.component';
+import { userRoleGuard } from './user-authentication/user-role.guard';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
 
 export const routes: Routes = [
   {
