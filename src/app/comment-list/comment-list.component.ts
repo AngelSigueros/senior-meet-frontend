@@ -19,7 +19,7 @@ export class CommentListComponent implements OnInit{
   ngOnInit(): void {
     console.log('CommentListComponent');
 
-    this.http.get<Comment[]>("http:/localhost:8080/comments").subscribe(c=>this.comments=c);
+    this.http.get<Comment[]>("http://localhost:8080/comment").subscribe(c=>this.comments=c);
   }
 
 }
