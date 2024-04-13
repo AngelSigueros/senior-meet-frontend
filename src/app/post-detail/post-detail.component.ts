@@ -47,7 +47,7 @@ export class PostDetailComponent implements OnInit{
   save(){
     const id = this.commentForm.get('id')?.value?? 0;
     const content = this.commentForm.get('content')?.value?? 'Contenido comentario';
-    const user = this.commentForm.get('user')?.value;
+    const user = this.commentForm.get('user')?.value?? this.post?.user;
     const date = this.commentForm.get('date')?.value?? new Date();
 
     const commentToSave: Comment = {
@@ -57,7 +57,13 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    const url = 'http://localhost:8080/comment';
-    this.http.post<Post>(url, commentToSave).subscribe(comment => console.log(comment));
+   const url1 = 'http://localhost:8080/comment';
+     
+    this.http.post<Comment>(url1, commentToSave).subscribe(comment => {
+      const url2 = 'http://localhost:8080/post/'+this.post?.id+"/add-comment/"+comment?.id;
+      this.http.post<Post>(url2,this.post ).subscribe(p=> console.log(p));
+    });
+
+    
   }
 }
