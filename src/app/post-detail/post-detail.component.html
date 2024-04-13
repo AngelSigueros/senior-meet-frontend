@@ -18,18 +18,21 @@
             }
            
             <h5 class="my-3">COMENTARIOS</h5>
-            @if(comments){
+            @if (comments) {
               @for(comment of comments; track comment){
                 <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
               }
-            }@else{
+              <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
+            } @else{
              <h5 class="my-3">No hay comentarios</h5>
             }
+
             <h5 class="my-3">INTERACCIONES</h5>
             @if(interactions){
               @for(interaction of interactions; track interaction){
                 <h5 class="my-3">{{interaction.user.firstName}} - {{interaction.type}}</h5>
               }
+              <h5 class="my-3">Total: {{interactions.length}} interacciones</h5>
             }@else{
               <h5 class="my-3">No hay interacciones</h5>
             }
@@ -38,8 +41,25 @@
               <div class="btn-group">
                 <button [routerLink]="['/post', post.id, 'add-like']" class="btn btn-sm btn-outline-secondary">Me gusta</button>
                 <button [routerLink]="['/post', post.id, 'add-save']" class="btn btn-sm btn-outline-secondary">Guardar</button>
+                <button [routerLink]="['/post', post.id, 'add-comment']" class="btn btn-sm btn-outline-secondary">Comentar</button>
               </div>
               <small class="text-body-secondary"></small>
+            </div>
+
+            <div>
+              <form [formGroup]="commentForm" (ngSubmit)="save()">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="content"
+                    placeholder="Escribe tu post" formControlName="content">
+                    <label for="content">Añade un comentario</label>
+                </div>
+                
+        
+                <button class="btn btn-success" type="submit">Añadir</button>
+            
+            </form>
+            
             </div>
 
           </div>
