@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Interaction } from '../models/interaction.model';
 import { Comment } from '../models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-post-detail',
@@ -19,6 +20,7 @@ export class PostDetailComponent implements OnInit{
   posts: any
   comments: Comment[]=[]
   interactions: Interaction[]= []
+  currentUser: User | undefined
 
   commentForm = this.fb.group({
     id: [0],
@@ -40,6 +42,8 @@ export class PostDetailComponent implements OnInit{
 
     this.http.get<Comment[]>("http://localhost:8080/post/"+params['id']+"/comments").subscribe(c=>this.comments=c);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions").subscribe(i=>this.interactions=i);
+    this.http.get<User>('http://localhost:8080/user/current-user').subscribe( u => {this.currentUser = u});
+
   });
 
   }
@@ -47,9 +51,10 @@ export class PostDetailComponent implements OnInit{
   save(){
     const id = this.commentForm.get('id')?.value?? 0;
     const content = this.commentForm.get('content')?.value?? 'Contenido comentario';
-    const user = this.commentForm.get('user')?.value?? this.post?.user;
+    const user = this.commentForm.get('user')?.value?? this.currentUser;
     const date = this.commentForm.get('date')?.value?? new Date();
 
+   
     const commentToSave: Comment = {
       id: id,
       content: content,

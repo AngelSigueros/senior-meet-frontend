@@ -19,6 +19,7 @@ import { RouterLink } from '@angular/router';
 export class PostFormComponent implements OnInit{
 
   groups: Group[] = []
+  currentUser: User|undefined
 
   postForm = this.fb.group({
     id: [0],
@@ -28,13 +29,15 @@ export class PostFormComponent implements OnInit{
     group: new FormControl(),
     user: new FormControl(),
     interactions: [[]],
-    comments: [[]]
+    comments: [[]],
+    date: new Date()
   });
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient){}
 
   ngOnInit(): void {
     this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
+    this.httpClient.get<User>('http://localhost:8080/user/current-user').subscribe( u => {this.currentUser = u});
   }
 
   save(){
@@ -46,10 +49,10 @@ export class PostFormComponent implements OnInit{
     const photoUrl = this.postForm.get('photoUrl')?.value ?? 'Photo url';
     const videoUrl = this.postForm.get('videoUrl')?.value ?? 'Video url';
     const group = this.postForm.get('group')?.value  ;
-    const user = this.postForm.get('user')?.value ;
+    const user = this.postForm.get('user')?.value?? this.currentUser ;
     const interactions = this.postForm.get('interactions')?.value ?? [];
     const comments = this.postForm.get('comments')?.value ?? [];
-
+    const date = this.postForm.get('date')?.value?? new Date();
     // Crear un objeto utilizando los valores extraídos
 
     const postToSave: Post = {
@@ -60,7 +63,8 @@ export class PostFormComponent implements OnInit{
       group: group,
       user: user,
       interactions: interactions,
-      comments: comments
+      comments: comments,
+      date: date
     }
     console.log(postToSave);
 
