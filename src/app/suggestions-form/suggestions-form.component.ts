@@ -52,7 +52,7 @@ export class SuggestionsFormComponent implements OnInit {
         this.suggestions = suggestions;
         this.showConfirmMessage = true;
         //this.router.navigate(['/home']);
-        this.showConfirmMessage = true;
+        //this.showConfirmMessage = true;
         //this.router.navigate(['/home']);
       });
   }
