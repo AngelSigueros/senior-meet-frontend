@@ -1,54 +1,56 @@
-<p>group-form works!</p>
 
-<form [formGroup]="groupForm" (ngSubmit)="save()">
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="title"
-      placeholder="Angular avanzado" formControlName="title">
-      <label for="title">Crear un grupo</label>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+
+      
+
+      <form [formGroup]="groupForm" (ngSubmit)="save()">
+
+        <input type="hidden" formControlName="id">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+          id="title" formControlName="title">
+          <label for="title">Titulo</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+          id="description" formControlName="description">
+          <label for="description">Descripción</label>
+        </div>
+
+
+        <input type="hidden" formControlName="photoUrl">
+
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control"
+            placeholder="Leave a comment here" id="rules" formControlName="rules" style="min-height: 120px;">
+          </textarea>
+          <label for="rules">Normas del grupo</label>
+        </div>
+
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Guardar</button>
+      </form>
+
     </div>
-
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="title" formControlName="title" >
-      <label for="description">Titulo</label>
-    </div>
-
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="description" formControlName="description" >
-      <label for="description">Descripción</label>
-    </div>
-
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="rules" formControlName="rules" >
-      <label for="rules">Normas del grupo</label>
-    </div>
-    
     <div class="col-lg-4">
 
-      <!--
       @if (photoPreview) {
         <h2 class="my-5">Previsualización foto</h2>
         <img class="img-fluid" [src]="photoPreview">
       }
       @if (!photoPreview && group?.photoUrl) {
         <h2 class="my-5">Previsualización foto</h2>
-        <img class="img-fluid" [src]="'http://localhost:8080/files/' + Group?.photoUrl">
+        <img class="img-fluid" [src]="'http://localhost:8080/files/' + group?.photoUrl">
       }
--->
+
     </div>
-
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" id="available" formControlName="available">
-      <label class="form-check-label" for="available" style="cursor:pointer;">
-        Activo (sí o no)
-      </label>
-    </div>
-
-    <div class="form-floating mb-3">
-      <input type="datetime-local" class="form-control" id="publishDate" formControlName="publishDate">
-      <label for="publishDate">Fecha de creación del grupo</label>
-    </div>
-
-    <button class="btn btn-success" type="submit">Enviar</button>
-
-  </form>
+  </div>
+</div>
