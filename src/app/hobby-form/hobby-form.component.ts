@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink , ActivatedRoute, Router} from '@angular/router';
 import { Hobby} from '../models/hobby.model';
 
 @Component({
@@ -15,60 +15,119 @@ export class HobbyFormComponent implements OnInit {
 
   hobbyForm = new FormGroup({
     id: new FormControl(0),
-    fullName: new FormControl(''),
+    name: new FormControl(''),
     photoUrl: new FormControl(''),
-    active: new FormControl(false),
     description: new FormControl(''),
   });
 
   photoFile: File | undefined;
   photoPreview: string | undefined;
   hobby: Hobby | undefined;
+  isUpdate: boolean = false;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+  private httpClient: HttpClient, 
+  private activatedRoute: ActivatedRoute,
+  private router: Router
+  ) {}
 
   ngOnInit(): void {
 
+    this.activatedRoute.params.subscribe(params => {
+
+      const id = params['id'];
+
+      if(!id) return;
+
+     
+
+ 
+
+      this.httpClient.get<Hobby>('http://localhost:8080/hobbies/' + id).subscribe(hobby => {
+
+        this.hobbyForm.reset(hobby);
+
+        this.isUpdate = true;
+
+        this.hobby = hobby;
+
+      });
+
+    });
+
   }
+
+ 
+
   onFileChange(event: Event) {
+
     let target = event.target as HTMLInputElement; // este target es el input de tipo file donde se carga el archivo
 
+ 
+
     if(target.files === null || target.files.length == 0){
+
       return; // no se procesa ningún archivo
+
     }
 
-    this.photoFile = target.files[0]; // guardar el archivo para enviarlo luego en el save()
+ 
 
-    // OPCIONAL: PREVISUALIZAR LA IMAGEN POR PANTALLA
-    let reader = new FileReader();
-    reader.onload = event => this.photoPreview = reader.result as string;
-    reader.readAsDataURL(this.photoFile);
+    this.photoFile = target.files[0];
+
   }
 
-  save() {
+ 
 
-    // Crear FormData
+  save(){
+
     let formData = new FormData();
-    // introducir el photoFile
-    if(this.photoFile){
+
+    formData.append('photoUrl', this.hobbyForm.get('photoUrl')?.value ?? '');
+
+    formData.append('id', this.hobbyForm.get('id')?.value?.toString() ?? '0');
+
+    formData.append('title', this.hobbyForm.get('title')?.value ?? '');
+
+    formData.append('description', this.hobbyForm.get('description')?.value ?? '');
+
+    formData.append('rules', this.hobbyForm.get('rules')?.value ?? '');
+
+ 
+
+    console.log(formData)
+
+    if(this.photoFile) {
+
       formData.append("photo", this.photoFile);
+
     }
 
-    // Introducir los datos del author
-      formData.append('descripcion', this.hobbyForm.get('descripcion')?.value ?? '')
+ 
 
-    // http client post para enviar el formData a backend
-    console.log(formData);
+    if (this.isUpdate) {
 
-    this.httpClient.post<Hobby>('http://localhost:8080/hobbies', formData)
-    .subscribe(hobby => {
-      this.photoFile = undefined;
-      this.photoPreview = undefined;
-      console.log(hobby);
-      this.hobby = hobby;
-    });
+      this.httpClient.put<Hobby>('http://localhost:8080/hobbies/' + this.hobby?.id, formData)
+
+    .subscribe(group => this.navigateToList());
+
+    } else {
+
+    this.httpClient.post<Hobby>('http://localhost:8080/hobbies/create', formData)
+
+    .subscribe(hobby=> this.navigateToList());
+
+     }
+
   }
+
+ 
+
+  private navigateToList() {
+
+    this.router.navigate(['/hobbies']);
+
+  }    
 
 }
-
 
