@@ -53,18 +53,22 @@ export class UserFormComponent implements OnInit {
     //this.httpClient.get<Author[]>('http://localhost:8080/user/posts/' + id)
     //.subscribe(authors => this.authors = authors);
 
-    this.activatedRoute.params.subscribe((params) => {
-      const id = params['id'];
-      if (!id) return;
+    //this.activatedRoute.params.subscribe((params) => {
+      //const id = params['id'];
+      //if (!id) return;
+
+      console.log(this.user)
 
       this.httpClient
-        .get<User>('http://localhost:8080/user/' + id)
-        .subscribe((user) => {
+        .get<User>('http://localhost:8080/user/account') // + id)
+        .subscribe(user => {
+          console.log(user)
           this.userForm.reset(user);
           this.isUpdate = true;
           this.user = user;
+          
         });
-    });
+    //});
   }
 
   onFileChange(event: Event) {
@@ -94,7 +98,7 @@ export class UserFormComponent implements OnInit {
     formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '0');
     formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
     formData.append('sexo', this.userForm.get('sexo')?.value ?? '');
-    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toLocaleDateString() ?? '');
+    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '0');
     formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
     formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
     formData.append('userRole', 'USER');
@@ -107,7 +111,7 @@ export class UserFormComponent implements OnInit {
     }
 
     if (this.isUpdate) {
-      const url = 'http://localhost:8080/user/photo/' + this.user?.id;
+      const url = 'http://localhost:8080/user/account'; // + this.user?.id;
       this.httpClient.put<User>(url, formData).subscribe((user) => {
         this.router.navigate(['/users', user.id, 'detail']);
       });

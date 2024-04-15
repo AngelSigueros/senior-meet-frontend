@@ -129,6 +129,11 @@ export const routes: Routes = [
     canActivate: [userRoleGuard]
   },
   {
+    path: 'users/account',
+    component: UserFormComponent //,
+    //canActivate: [userRoleGuard]
+  },
+  {
     path: 'user-login',
     component: UserLoginComponent
   },
