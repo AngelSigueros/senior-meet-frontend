@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from '../models/group.model';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-group-list',
   standalone: true,
-  imports: [HttpClientModule, RouterLink],
+  imports: [RouterLink],
   templateUrl: './group-list.component.html',
   styleUrl: './group-list.component.css'
 })

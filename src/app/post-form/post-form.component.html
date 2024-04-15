@@ -1,42 +1,34 @@
-<p>post-form works!</p>
 
 <form [formGroup]="postForm" (ngSubmit)="save()">
-
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="title"
-      placeholder="Titulo" formControlName="title">
-      <label for="Title">Titulo del post</label>
-    </div>
 
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="content"
         placeholder="Escribe tu post" formControlName="content">
         <label for="content">Contenido del Post</label>
-      </div>
+    </div>
     
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="photoUrl"
+      placeholder="Foto Url del  Post" formControlName="photoUrl">
+      <label for="content">Foto Url</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="photoUrl"
+      placeholder="Video Url del  Post" formControlName="videoUrl">
+      <label for="content">Video Url</label>
+    </div>
 
     <!-- Selector simple -->
-    <select class="form-select form-select-lg mb-3" formControlName="category">
-      <option selected>Open this select menu</option>
-      <option value="category1">category1</option>
-      <option value="category2">category2</option>
-      <option value="category3">category2</option>
+    <select class="form-select form-select-lg mb-3" formControlName="group">
+      <option selected>Elija grupo:</option>
+      @for (group of groups;track group.id){
+        <option [ngValue]="group"> {{group.title}} </option>
+      }
     </select>
 
 
-    <!-- Selector múltiple -->
-    <select class="form-select form-select-lg mb-3" formControlName="topics" multiple>
-      <option selected>Open this select menu</option>
-      <option value="topic1">topic1</option>
-      <option value="topic2">topic2</option>
-      <option value="topic3">topic3</option>
-      <option value="topic4">topic4</option>
-      <option value="topic5">topic5</option>
-    </select>
+    <button class="btn btn-success" type="submit">Enviar</button>
 
-
-      <button class="btn btn-success" type="submit">Enviar</button>
-
-  </form>
-
+</form>
 

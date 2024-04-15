@@ -1,11 +1,37 @@
-
-<div class="d-flex flex-column flex-sm-row justify-content-between mt-4">
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
   <h1>{{title}}</h1>
- 
+
   <ul class="list-unstyled d-flex mt-3">
-    <button class="btn btn-success" [routerLink]="['/login']">Login</button>
+  <!-- @if (isAdmin) {
+    <button class="btn btn-secondary me-2" [routerLink]="['/users/create']">Crear Usuario</button>
+  } -->
+  
+  @if (userEmail) {
+    <button class="btn btn-outline-success me-2" routerLink="/users/account">
+      <i class="bi bi-person-circle me-1"></i>
+      {{userEmail}}
+    </button>
+  }
+  
+  @if (isLoggedIn) {
+    <button class="btn btn-warning me-2" (click)="logout()">
+      Logout
+      <i class="bi bi-box-arrow-right ms-1"></i>
+    </button>
+  } @else {
+    <button class="btn btn-primary me-2" routerLink="/user-login">
+      Login
+      <i class="bi bi-box-arrow-in-right ms-1"></i>
+    </button>
+    <button class="btn btn-secondary me-2" routerLink="/user-register">
+      Registro
+      <i class="bi bi-person-add ms-1"></i>
+    </button>
+  }
+ 
   </ul>
 </div>
+
 <app-nav-bar></app-nav-bar>
 
 <main style="min-height:500px;">

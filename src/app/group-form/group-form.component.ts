@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Group } from '../models/group.model';
@@ -6,7 +6,7 @@ import { Group } from '../models/group.model';
 @Component({
   selector: 'app-group-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './group-form.component.html',
   styleUrl: './group-form.component.css'
 })

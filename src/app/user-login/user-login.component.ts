@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from '../user-authentication/authentication.service';
@@ -9,7 +9,7 @@ import { Token } from '../models/token.dto';
 @Component({
   selector: 'app-user-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.css'
 })

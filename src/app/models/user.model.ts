@@ -13,18 +13,18 @@ export interface User {
     ciudad: string;
     sexo: Sexo;
     fechaNacimiento: Date;
-    photo: File | null;
+    photoUrl: File | null;
     available: boolean;
     userRole: UserRole;
-    groups: Group[];
-    hobbies: Hobby[];
-    posts: Post[]
+    groups?: Group[];
+    hobbies?: Hobby[];
+    posts?: Post[]
 }
 
 export enum Sexo {
-    Otro = 'Otro',
-    Femenino = 'Femenino',
-    Masculino = 'Masculino'
+    Femenino = 'FEMENINO',
+    Masculino = 'MASCULINO',
+    Otro = 'OTRO'
 }
 
 export enum UserRole {

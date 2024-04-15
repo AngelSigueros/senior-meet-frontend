@@ -1,81 +1,132 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { Group } from '../models/group.model';
+import { Post } from '../models/post.model';
+import { Hobby } from '../models/hobby.model';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.css'
+  styleUrl: './user-form.component.css',
 })
-export class UserFormComponent { // implements OnInit {
+export class UserFormComponent implements OnInit {
+  user: User | undefined;
+  photoFile: File | undefined;
+  photoPreview: string | undefined;
+  isUpdate: boolean = false; // por defecto estamos en CREAR no en ACTUALIZAR
+  groups: Group[] = []; // array de grupos
+  hobbies: Hobby[] = [];
+  posts: Post[] = [];
 
   userForm = new FormGroup({
     id: new FormControl<number>(0),
-    title: new FormControl<string>(''),
-    isbn: new FormControl<string>(''),
-    price: new FormControl<number>(0.0),
-    publishDate: new FormControl<Date>(new Date()),
+    firstName: new FormControl<string>('', Validators.required),
+    lastName: new FormControl<string>(''),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    //password: new FormControl<string>(''),
+    phone: new FormControl<string>('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
+    codigoPostal: new FormControl<string>('', Validators.pattern('^[0-9]{5}$')),
+    ciudad: new FormControl<string>(''),
+    sexo: new FormControl(),
+    fechaNacimiento: new FormControl<Date>(new Date(), Validators.required),
+    photoUrl: new FormControl(),
     available: new FormControl<boolean>(false),
-    author: new FormControl(),
-    editorial: new FormControl()
+    userRole: new FormControl(),
+    groups: new FormControl(),
+    hobbies: new FormControl(),
+    posts: new FormControl(),
   });
 
-  isUpdate: boolean = false; // por defecto estamos en CREAR no en ACTUALIZAR
-  //authors: Author[] = []; // array de autores para asociar un autor al libro
-  //editorials: Editorial[] = [];
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  // constructor(
-  //     private fb: FormBuilder,
-  //     private httpClient: HttpClient,
-  //     private router: Router,
-  //     private activatedRoute: ActivatedRoute) {
-  //   }
+  ngOnInit(): void {
+    // cargar grupos, hobbies, posts de backend para los combos en el formulario
+    //this.httpClient.get<Author[]>('http://localhost:8080/user/posts/' + id)
+    //.subscribe(authors => this.authors = authors);
 
-  //   ngOnInit(): void {
-  //     // cargar autores de backend para el selector de autores en el formulario
-  //     this.httpClient.get<Author[]>('https://fullstack-byvu.onrender.com/api/authors')
-  //     .subscribe(authors => this.authors = authors);
+    //this.activatedRoute.params.subscribe((params) => {
+      //const id = params['id'];
+      //if (!id) return;
 
-  //     this.httpClient.get<Editorial[]>('https://fullstack-byvu.onrender.com/api/editorials')
-  //     .subscribe(editorials => this.editorials = editorials);
+      console.log(this.user)
 
-  //     this.activatedRoute.params.subscribe(params => {
-  //       const id = params['id'];
-  //       if(!id) return;
+      this.httpClient
+        .get<User>('http://localhost:8080/user/account') // + id)
+        .subscribe(user => {
+          console.log(user)
+          this.userForm.reset(user);
+          this.isUpdate = true;
+          this.user = user;
+          
+        });
+    //});
+  }
 
-  //       this.httpClient.get<Book>('https://fullstack-byvu.onrender.com/api/books/' + id).subscribe(bookFromBackend => {
-  //         // cargar el libro obtenido en el formulario bookForm
-  //         this.userForm.patchValue(bookFromBackend);
-  //         this.isUpdate = true;
-  //       });
-  //     });
-  //   }
+  onFileChange(event: Event) {
+    let target = event.target as HTMLInputElement; // este target es el input de tipo file donde se carga el archivo
 
-  //   save () {
-  //     const book: Book = this.userForm.value as Book;
-  //     console.log(book);
-
-  //     if (this.isUpdate) {
-  //       const url = 'https://fullstack-byvu.onrender.com/api/books/' + book.id;
-  //       this.httpClient.put<Book>(url, book).subscribe(bookFromBackend => {
-  //         this.router.navigate(['/books', bookFromBackend.id, 'detail']);
-  //       });
-
-  //     } else {
-  //       const url = 'https://fullstack-byvu.onrender.com/api/books';
-  //       this.httpClient.post<Book>(url, book).subscribe(bookFromBackend => {
-  //         this.router.navigate(['/books', bookFromBackend.id, 'detail']);
-  //       });
-  //     }
-  //   }
-
-    compareObjects(o1: any, o2: any): boolean {
-      if(o1 && o2) {
-        return o1.id === o2.id;
-      }
-      return o1 === o2;
+    if (target.files === null || target.files.length == 0) {
+      return; // no se procesa ningún archivo
     }
+
+    this.photoFile = target.files[0]; // guardar el archivo para enviarlo luego en el save()
+
+    // OPCIONAL: PREVISUALIZAR LA IMAGEN POR PANTALLA
+    let reader = new FileReader();
+    reader.onload = (event) => (this.photoPreview = reader.result as string);
+    reader.readAsDataURL(this.photoFile);
+  }
+
+  save() {
+
+    let formData = new FormData();
+    formData.append('id', this.userForm.get('id')?.value?.toString() ?? '0');
+    formData.append('firstName', this.userForm.get('firstName')?.value ?? '');
+    formData.append('lastName', this.userForm.get('lastName')?.value ?? '');
+    formData.append('email', this.userForm.get('email')?.value ?? '');
+    //formData.append('password', this.userForm.get('password')?.value ?? '');
+    formData.append('phone', this.userForm.get('phone')?.value?.toString() ?? '0');
+    formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '0');
+    formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
+    formData.append('sexo', this.userForm.get('sexo')?.value ?? '');
+    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '0');
+    formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
+    formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
+    formData.append('userRole', 'USER');
+    formData.append('groups', this.userForm.get('groups')?.value ?? '');
+    formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
+    formData.append('posts', this.userForm.get('posts')?.value ?? '');
+
+    if(this.photoFile) {
+      formData.append("photo", this.photoFile);
+    }
+
+    if (this.isUpdate) {
+      const url = 'http://localhost:8080/user/account'; // + this.user?.id;
+      this.httpClient.put<User>(url, formData).subscribe((user) => {
+        this.router.navigate(['/users', user.id, 'detail']);
+      });
+    } else {
+      const url = 'http://localhost:8080/user/photo';
+      this.httpClient.post<User>(url, formData).subscribe((user) => {
+        this.router.navigate(['/users', user.id, 'detail']);
+      });
+    }
+  }
+
+  compareObjects(o1: any, o2: any): boolean {
+    if (o1 && o2) {
+      return o1.id === o2.id;
+    }
+    return o1 === o2;
+  }
 }

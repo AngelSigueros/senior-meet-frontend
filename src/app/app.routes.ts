@@ -20,9 +20,14 @@ import { GroupFormComponent } from './group-form/group-form.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+import { CommentDetailComponent } from './comment-detail/comment-detail.component';
+import { CommentFormComponent } from './comment-form/comment-form.component';
+import { userRoleGuard } from './user-authentication/user-role.guard';
+import { SuggestionsFormComponent } from './suggestions-form/suggestions-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
-import { UserFormComponent } from './user-form/user-form.component';
 
 export const routes: Routes = [
   {
@@ -44,15 +49,18 @@ export const routes: Routes = [
   },
   {
     path: 'create-profile',
-    component: CreateProfileComponent
+    component: CreateProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'delete-profile',
-    component: DeleteProfileComponent
+    component: DeleteProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'edite-profile',
-    component: EditeProfileComponent
+    component: EditeProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'groups',
@@ -60,7 +68,8 @@ export const routes: Routes = [
   },
   {
     path: 'groups/create',
-    component: GroupFormComponent
+    component: GroupFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'groups/:id/detail',
@@ -76,7 +85,8 @@ export const routes: Routes = [
   },
   {
     path: 'hobbies/create',
-    component:HobbyFormComponent
+    component:HobbyFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'login',
@@ -91,8 +101,28 @@ export const routes: Routes = [
     component: PostDetailComponent
   },
   {
+    path: 'posts/:id/update',
+    component: PostFormComponent
+  },
+  {
     path: 'posts/create',
     component: PostFormComponent
+  },
+  {
+    path: 'comments',
+    component: CommentListComponent
+  },
+  {
+    path: 'comments/:id/detail',
+    component: CommentDetailComponent
+  },
+  {
+    path: 'comments/:id/update',
+    component: CommentFormComponent
+  },
+  {
+    path: 'comments/create',
+    component: CommentFormComponent
   },
   {
     path: 'user-profile/:id/detail',
@@ -112,7 +142,18 @@ export const routes: Routes = [
   },
   {
     path: 'users/create',
-    component: UserFormComponent
+    component: UserFormComponent,
+    canActivate: [userRoleGuard]
+  },
+  {
+    path: 'users/:id/update',
+    component: UserFormComponent,
+    canActivate: [userRoleGuard]
+  },
+  {
+    path: 'users/account',
+    component: UserFormComponent //,
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'user-login',
@@ -121,6 +162,10 @@ export const routes: Routes = [
   {
     path: 'user-register',
     component: UserRegisterComponent
+  },
+  {
+    path: 'suggestions', 
+    component: SuggestionsFormComponent
   },
   {
     path: '**', 

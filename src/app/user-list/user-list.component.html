@@ -1,40 +1,11 @@
 
-@if (isAdmin) {
-    <button class="btn btn-secondary me-2" routerLink="/user/create">Crear book</button>
-    <button class="btn btn-secondary me-2" routerLink="/authors/create">Crear autor</button>
-    <button class="btn btn-secondary me-2" routerLink="/categories/create">Crear categoría</button>
-  }
-  
-  @if (userEmail) {
-    <button class="btn btn-outline-success me-2">
-      <i class="bi bi-person-circle me-1"></i>
-      {{userEmail}}
-    </button>
-  }
-  
-  @if (isLoggedIn) {
-    <button class="btn btn-warning me-2" (click)="logout()">
-      Logout
-      <i class="bi bi-box-arrow-right ms-1"></i>
-    </button>
-  } @else {
-    <button class="btn btn-primary me-2" routerLink="/login">
-      Login
-      <i class="bi bi-box-arrow-in-right ms-1"></i>
-    </button>
-    <button class="btn btn-secondary me-2" routerLink="/register">
-      Registro
-      <i class="bi bi-person-add ms-1"></i>
-    </button>
-  }
-
-<hr>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-between align-items-center mb-3">
             <p>Listado de usuarios</p>
-            <button>Crear Usuario</button>
+            @if (isAdmin) { 
+              <button class="btn btn-secondary me-2" [routerLink]="['/users/create']">Crear Usuario</button>
+            }
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-3">

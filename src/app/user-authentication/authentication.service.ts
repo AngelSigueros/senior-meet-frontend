@@ -19,7 +19,7 @@ export class AuthenticationService {
     if (!token) return false;
     console.log(jwtDecode(token));
     const decodedToken = jwtDecode(token) as DecodedToken;
-    return decodedToken.role === 'admin';
+    return decodedToken.role === 'ADMIN';
   }
 
   getUserEmail(): string {
