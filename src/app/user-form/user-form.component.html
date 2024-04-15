@@ -115,27 +115,10 @@
             <input type="file" class="form-control" id="photo" (change)="onFileChange($event)" placeholder="nombre@email.com">
             <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button>
           </div>
-  
-          <div class="form-floating mb-3">
-            <select class="form-select" id="groups" formControlName="groups" [compareWith]="compareObjects" placeholder="nombre@email.com">
-              <!-- iterar sobre el array de grupos mostrando cada uno -->
-              @for (group of groups; track group.id) {
-              <option [ngValue]="group">{{group.title}}</option>
-              } 
-            </select>
-            <label for="groups">Grupos</label>
-          </div>
+
   
   
-          <div class="form-floating mb-3">
-            <select class="form-select" id="posts" formControlName="posts" [compareWith]="compareObjects" placeholder="nombre@email.com">
-              <!-- iterar sobre el array de posts mostrando cada uno -->
-              @for (post of posts; track post.id) {
-              <option [ngValue]="post">{{post.id}}</option>
-              }
-            </select>
-            <label for="editorial">Posts</label>
-          </div>
+
    
           @if (isUpdate) {
           <button class="btn btn-success" type="submit">Actualizar</button>
