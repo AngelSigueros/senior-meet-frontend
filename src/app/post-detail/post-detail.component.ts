@@ -42,7 +42,7 @@ export class PostDetailComponent implements OnInit{
 
     this.http.get<Comment[]>("http://localhost:8080/post/"+params['id']+"/comments").subscribe(c=>this.comments=c);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions").subscribe(i=>this.interactions=i);
-    this.http.get<User>('http://localhost:8080/user/current-user').subscribe( u => {this.currentUser = u});
+    this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
 
   });
 

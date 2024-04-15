@@ -37,7 +37,7 @@ export class PostFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
-    this.httpClient.get<User>('http://localhost:8080/user/current-user').subscribe( u => {this.currentUser = u});
+    this.httpClient.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
   }
 
   save(){
