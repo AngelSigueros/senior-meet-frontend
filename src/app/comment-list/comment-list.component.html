@@ -1,7 +1,7 @@
 <p>comment-list works!</p>
 
 <main>
-    <button [routerLink]="['/comment/create']" class="card-link">Crear un comentario</button>
+    <button [routerLink]="['/comments/create']" class="card-link">Crear un comentario</button>
 
 
   <div class="album py-5 bg-body-tertiary">
@@ -19,8 +19,8 @@
               <p class="card-text">{{comment.date}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button [routerLink]="['/comment', comment.id, 'detail']" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button [routerLink]="['/commentcreate']" class="btn btn-sm btn-outline-secondary">Editar</button>
+                  <button [routerLink]="['/comments', comment.id, 'detail']" class="btn btn-sm btn-outline-secondary">Detalle</button>
+                  <button [routerLink]="['/comments', comment.id, 'update']" class="btn btn-sm btn-outline-secondary">Editar</button>
                 </div>
                 <small class="text-body-secondary">9 mins</small>
               </div>

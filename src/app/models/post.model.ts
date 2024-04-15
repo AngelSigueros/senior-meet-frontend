@@ -11,4 +11,5 @@ export interface Post {
     user: User;
     interactions?: Interaction[];
     comments?: Comment[];
+    date: Date
 }
