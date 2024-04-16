@@ -36,5 +36,6 @@ export class HomeWallComponent {
     console.log('GroupListComponent');
   
     this.http.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
+    this.http.get<Hobby[]>("http://localhost:8080/hobbies").subscribe(hobbies=>this.hobbies=hobbies);
   }
 }
