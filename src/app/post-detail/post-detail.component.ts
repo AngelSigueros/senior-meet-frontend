@@ -20,6 +20,8 @@ export class PostDetailComponent implements OnInit{
   posts: any
   comments: Comment[]=[]
   interactions: Interaction[]= []
+  likes: Interaction[] = []
+  saves: Interaction[] = []
   currentUser: User | undefined
 
   commentForm = this.fb.group({
@@ -42,6 +44,8 @@ export class PostDetailComponent implements OnInit{
 
     this.http.get<Comment[]>("http://localhost:8080/post/"+params['id']+"/comments").subscribe(c=>this.comments=c);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions").subscribe(i=>this.interactions=i);
+    this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/likes").subscribe(i=>this.likes=i);
+    this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/saves").subscribe(i=>this.saves=i);
     this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
 
   });
