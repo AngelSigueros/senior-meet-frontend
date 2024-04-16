@@ -83,16 +83,16 @@ export class PostDetailComponent implements OnInit{
     const user: User  = this.currentUser;
     const date: Date = new Date();
 
-    const interactionToSave: Interaction = {
+    let interactionToSave: Interaction = {
       id: id,
       user: user,
       type: type,
       date: date
     }
 
-    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => console.log(i));
+    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
     const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-like/'+'this.currentUser?.id';
-    this.http.get<Boolean>(urlLike).subscribe(b => console.log(b));
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
   }
 
   addsave(){
@@ -102,15 +102,15 @@ export class PostDetailComponent implements OnInit{
     const user: User = this.currentUser;
     const date: Date = new Date();
 
-    const interactionToSave: Interaction = {
+    let interactionToSave: Interaction = {
       id: id,
       user: user,
       type: type,
-      date: date
+      date: 
     }
 
-    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => console.log(i));
+    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
     const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-save/'+'this.currentUser?.id';
-    this.http.get<Boolean>(urlLike).subscribe(b => console.log(b));
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
   }
 }
