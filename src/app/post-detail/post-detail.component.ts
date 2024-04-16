@@ -77,15 +77,17 @@ export class PostDetailComponent implements OnInit{
   }
 
   addlike(){
-    if (!this.currentUser) return;
+    if (!this.currentUser||!this.post) return;
     const id:number = 0;
     const type: string ='LIKE';
     const user: User  = this.currentUser;
+    const post: Post = this.post;
     const date: Date = new Date();
 
     let interactionToSave: Interaction = {
       id: id,
       user: user,
+      post: post,
       type: type,
       date: date
     }
@@ -96,17 +98,19 @@ export class PostDetailComponent implements OnInit{
   }
 
   addsave(){
-    if(!this.currentUser) return;
+    if(!this.currentUser!||!this.post) return;
     const id:number = 0;
     const type: string ='SAVE';
     const user: User = this.currentUser;
+    const post: Post = this.post;
     const date: Date = new Date();
 
     let interactionToSave: Interaction = {
       id: id,
       user: user,
+      post: post,
       type: type,
-      date: 
+      date: date
     }
 
     this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
