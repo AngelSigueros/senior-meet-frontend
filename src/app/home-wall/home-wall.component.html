@@ -81,10 +81,10 @@
                     @for (hobby of hobbies; track hobby.id) {
                     <ng-template ngbSlide>
                       <div class="picsum-img-wrapper">
-                        <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + hobby.photoUrl" alt="{{hobby.name}}" />
+                        <img class="img-fluid" [src]="'http://localhost:8080/files/' + hobby.photoUrl" alt="{{hobby.name}}" />
                       </div>
                       <div class="carousel-caption">
-                        <h6>{{hobby.name}}</h6>                       
+                        <h6 [routerLink]="['/hobbies', hobby.id, 'detail']" style="cursor:pointer;">{{hobby.name}}</h6>                                    
                       </div>
                     </ng-template>
                     }
