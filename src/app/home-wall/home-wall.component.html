@@ -7,7 +7,7 @@
     <div class="col-lg-8">
       
         <div class=" bg-body-tertiary rounded">
-          <h3 class="text-center"> Últimas publicaniones </h3>
+          <h3 class="text-center"> Últimas publicaciones </h3>
           
         </div>
 
@@ -47,33 +47,32 @@
         </div>
         
         <div>
-          <h4 class="fst-italic">Grupos</h4>
+          <h4 class="fst-italic">GRUPOS</h4>
           <ul class="list-unstyled">
             <li>
-              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
                 
                 <div class="col-lg-12">                  
                   <ngb-carousel>
                     @for (group of groups; track group.id) {
                     <ng-template ngbSlide>
                       <div class="picsum-img-wrapper">
-                        <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + group.photoUrl" alt="{{group.title}}" />
+                        <img class="img-fluid" [src]="'http://localhost:8080/files/' + group.photoUrl" alt="{{group.title}}" />
                       </div>
                       <div class="carousel-caption">
-                        <h6>{{group.title}}</h6>                       
+                        <h6 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;">{{group.title}}</h6>                       
                       </div>
                     </ng-template>
                     }
                   </ngb-carousel>
                 </div>
-              </a>
+           
             </li>
            </ul>
         </div>
 
         
         <div>
-          <h4 class="fst-italic">Aficciones</h4>
+          <h4 class="fst-italic">AFICIONES</h4>
           <ul class="list-unstyled">
             <li>
                 
@@ -103,7 +102,7 @@
                     @for (hobby of hobbies; track hobby.id) {
                     <ng-template ngbSlide>
                       <div class="picsum-img-wrapper">
-                        <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + hobby.photoUrl" alt="{{hobby.name}}" />
+                        <img class="img-fluid" [src]="'http://localhost:8080/files/' + hobby.photoUrl" alt="{{hobby.name}}" />
                       </div>
                       <div class="carousel-caption">
                         <h6>{{hobby.name}}</h6>                       
