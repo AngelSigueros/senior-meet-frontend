@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../models/post.model';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Interaction } from '../models/interaction.model';
 import { Comment } from '../models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -31,7 +31,7 @@ export class PostDetailComponent implements OnInit{
     date: new FormControl()
   });
 
-  constructor (private fb:FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute){}
+  constructor (private fb:FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute, private router:Router){}
 
   ngOnInit(): void {
     console.log('PostDetailComponent');
@@ -70,7 +70,9 @@ export class PostDetailComponent implements OnInit{
      
     this.http.post<Comment>(url1, commentToSave).subscribe(comment => {
       const url2 = 'http://localhost:8080/post/'+this.post?.id+"/add-comment/"+comment?.id;
-      this.http.post<Post>(url2,this.post ).subscribe(p=> console.log(p));
+      this.http.post<Post>(url2,this.post ).subscribe(p=> {
+        console.log(p);
+      this.router.navigate(['/posts/'+this.currentUser?.id+'/detail']);});
     });
 
     
@@ -92,7 +94,7 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
+    //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
     const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-like/'+'this.currentUser?.id';
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
   }
@@ -113,7 +115,7 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
+    //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
     const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-save/'+'this.currentUser?.id';
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
   }
