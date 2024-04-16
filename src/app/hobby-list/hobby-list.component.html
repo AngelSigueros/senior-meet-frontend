@@ -5,12 +5,12 @@
     @for (hobby of hobbies; track hobby.id) {
       <div class="col">
         <div class="card shadow-sm">
-          <img src="http://localhost:8080/files/{{hobby.photoUrl}}"> class="bd-placeholder-img card-img-top"  width="100%" height="225">
+          <img src="http://localhost:8080/files/{{hobby.photoUrl}}">
           <div class="card-body">
-            <p class="card-text text-center">{{hobby.name}}</p>
-          
+            <p class="card-text"><strong>{{hobby.name}}</strong></p>
             <div class="d-flex justify-content-center mb-2"></div>
-              <div class="btn-hobby">
+            <div class="btn-hobby">
+
                 <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies', hobby.id, 'detail']">Ver más</button>
                 @if (isAdmin) {
                 <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/hobbies/create']">Añadir</button>
