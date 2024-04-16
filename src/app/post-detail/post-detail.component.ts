@@ -75,4 +75,42 @@ export class PostDetailComponent implements OnInit{
 
     
   }
+
+  addlike(){
+    if (!this.currentUser) return;
+    const id:number = 0;
+    const type: string ='LIKE';
+    const user: User  = this.currentUser;
+    const date: Date = new Date();
+
+    const interactionToSave: Interaction = {
+      id: id,
+      user: user,
+      type: type,
+      date: date
+    }
+
+    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => console.log(i));
+    const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-like/'+'this.currentUser?.id';
+    this.http.get<Boolean>(urlLike).subscribe(b => console.log(b));
+  }
+
+  addsave(){
+    if(!this.currentUser) return;
+    const id:number = 0;
+    const type: string ='SAVE';
+    const user: User = this.currentUser;
+    const date: Date = new Date();
+
+    const interactionToSave: Interaction = {
+      id: id,
+      user: user,
+      type: type,
+      date: date
+    }
+
+    this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => console.log(i));
+    const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-save/'+'this.currentUser?.id';
+    this.http.get<Boolean>(urlLike).subscribe(b => console.log(b));
+  }
 }
