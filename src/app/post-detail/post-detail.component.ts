@@ -26,7 +26,7 @@ export class PostDetailComponent implements OnInit{
     id: [0],
     content: ['', Validators.required],
     user: new FormControl(),
-    date: new Date()
+    date: new FormControl()
   });
 
   constructor (private fb:FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute){}

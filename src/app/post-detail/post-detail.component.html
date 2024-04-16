@@ -39,9 +39,9 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <button [routerLink]="['/post', post.id, 'add-like']" class="btn btn-sm btn-outline-secondary">Me gusta</button>
-                <button [routerLink]="['/post', post.id, 'add-save']" class="btn btn-sm btn-outline-secondary">Guardar</button>
-                <button [routerLink]="['/post', post.id, 'add-comment']" class="btn btn-sm btn-outline-secondary">Comentar</button>
+                <button [routerLink]="['/post', post.id, 'add-like/',currentUser?.id]" class="btn btn-sm btn-outline-secondary">Me gusta</button>
+                <button [routerLink]="['/post', post.id, 'add-save/',currentUser?.id]" class="btn btn-sm btn-outline-secondary">Guardar</button>
+                
               </div>
               <small class="text-body-secondary"></small>
             </div>
