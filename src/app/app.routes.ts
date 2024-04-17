@@ -28,6 +28,7 @@ import { SuggestionsFormComponent } from './suggestions-form/suggestions-form.co
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
+import { AdvisorsComponent } from './advisors/advisors.component';
 
 export const routes: Routes = [
   {
@@ -162,6 +163,10 @@ export const routes: Routes = [
   {
     path: 'user-register',
     component: UserRegisterComponent
+  },
+  {
+    path: 'advisors', 
+    component: AdvisorsComponent
   },
   {
     path: 'suggestions', 

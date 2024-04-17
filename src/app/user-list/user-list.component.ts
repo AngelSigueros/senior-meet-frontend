@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../user-authentication/authentication.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -19,6 +19,7 @@ export class UserListComponent implements OnInit {
   isAdmin = false;
 
   constructor(private http: HttpClient,
+              private router: Router,
               private authService: AuthenticationService) { 
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
    }

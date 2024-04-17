@@ -1,46 +1,34 @@
-<p>group-list works!</p>
 
-
-
-
-<main>
   <ul class="list-unstyled d-flex mt-3">
     <button class="btn btn-success" [routerLink]="['/groups/create']">Crear un grupo</button>
   </ul>
-   
+
   <div class="album py-5 bg-body-tertiary">
     <div class="container-fluid">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        
+
         @for ( group of groups; track group.id) {
         <div class="col">
           <div class="card shadow-sm">
             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-           <img src="http://localhost:8080/files/{{group.photoUrl}}" alt="{{group.title}}">
+            <img src="http://localhost:8080/files/{{group.photoUrl}}" alt="{{group.title}}">
             <div class="card-body">
               <p class="card-text"><strong>{{group.title}}</strong></p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  
-                  <button [routerLink]="['/groups', group.id, 'detail']"class="btn btn-sm btn-outline-secondary">Unirse</button>
-                </div>
-                <small class="text-body-secondary"></small>
+              <div class="d-flex justify-content-between align-items-center"></div>
+              <div class="btn-group">
+
+                <button [routerLink]="['/groups', group.id, 'detail']" class="btn btn-primary">Unirse</button>
               </div>
+              <small class="text-body-secondary"></small>
             </div>
           </div>
         </div>
-} @empty {
-    <p class="card-text">No hay usuarios!!</p>
-}
-      </div>
+   
+      } @empty {
+      <p class="card-text">No hay usuarios!!</p>
+      }
     </div>
   </div>
-
-</main>
-	
-
-
-
-
+  </div>
 
