@@ -95,7 +95,7 @@ export class PostDetailComponent implements OnInit{
     }
 
     //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
-    const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-like/'+'this.currentUser?.id';
+    const urlLike = 'http://localhost:8080/post/'+this.post?.id+'/add-like/'+this.currentUser?.id;
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
   }
 
@@ -116,7 +116,7 @@ export class PostDetailComponent implements OnInit{
     }
 
     //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
-    const urlLike = 'http://localhost:8080/post'+this.post?.id+'add-save/'+'this.currentUser?.id';
+    const urlLike = 'http://localhost:8080/post/'+this.post?.id+'add-save/'+this.currentUser?.id;
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
   }
 }
