@@ -19,24 +19,24 @@ export class UserFormComponent implements OnInit {
   photoFile: File | undefined;
   photoPreview: string | undefined;
   isUpdate: boolean = false; // por defecto estamos en CREAR no en ACTUALIZAR
-  groups: Group[] = []; // array de grupos
-  hobbies: Hobby[] = [];
-  posts: Post[] = [];
+  //groups: Group[] = []; // array de grupos
+  //hobbies: Hobby[] = [];
+  //posts: Post[] = [];
 
   userForm = new FormGroup({
     id: new FormControl<number>(0),
     firstName: new FormControl<string>('', Validators.required),
     lastName: new FormControl<string>(''),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
-    //password: new FormControl<string>(''),
+    password: new FormControl<string>(''),
     phone: new FormControl<string>('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
     codigoPostal: new FormControl<string>('', Validators.pattern('^[0-9]{5}$')),
     ciudad: new FormControl<string>(''),
-    sexo: new FormControl(),
+    sexo: new FormControl<string>(''),
     fechaNacimiento: new FormControl<Date>(new Date(), Validators.required),
     photoUrl: new FormControl(),
     available: new FormControl<boolean>(false),
-    userRole: new FormControl(),
+    userRole: new FormControl<string>(''),
     groups: new FormControl(),
     hobbies: new FormControl(),
     posts: new FormControl(),
@@ -53,10 +53,11 @@ export class UserFormComponent implements OnInit {
     //this.httpClient.get<Author[]>('http://localhost:8080/user/posts/' + id)
     //.subscribe(authors => this.authors = authors);
 
-    //this.activatedRoute.params.subscribe((params) => {
-      //const id = params['id'];
-      //if (!id) return;
+    this.activatedRoute.params.subscribe((params) => {
+      const id = params['id'];
+      if (!id) return;
 
+      console.log(this.isUpdate)
       console.log(this.user)
 
       this.httpClient
@@ -65,10 +66,11 @@ export class UserFormComponent implements OnInit {
           console.log(user)
           this.userForm.reset(user);
           this.isUpdate = true;
+          console.log(this.isUpdate)
           this.user = user;
           
         });
-    //});
+    });
   }
 
   onFileChange(event: Event) {
@@ -93,7 +95,7 @@ export class UserFormComponent implements OnInit {
     formData.append('firstName', this.userForm.get('firstName')?.value ?? '');
     formData.append('lastName', this.userForm.get('lastName')?.value ?? '');
     formData.append('email', this.userForm.get('email')?.value ?? '');
-    //formData.append('password', this.userForm.get('password')?.value ?? '');
+    formData.append('password', this.userForm.get('password')?.value ?? '');
     formData.append('phone', this.userForm.get('phone')?.value?.toString() ?? '0');
     formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '0');
     formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
@@ -101,15 +103,16 @@ export class UserFormComponent implements OnInit {
     formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '0');
     formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
     formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
-    formData.append('userRole', 'USER');
-    formData.append('groups', this.userForm.get('groups')?.value ?? '');
-    formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
-    formData.append('posts', this.userForm.get('posts')?.value ?? '');
+    formData.append('userRole', this.userForm.get('userRole')?.value ?? '');
+    //formData.append('groups', this.userForm.get('groups')?.value ?? '');
+    //formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
+    //formData.append('posts', this.userForm.get('posts')?.value ?? '');
 
     if(this.photoFile) {
       formData.append("photo", this.photoFile);
     }
 
+    console.log(this.isUpdate)
     if (this.isUpdate) {
       const url = 'http://localhost:8080/user/account'; // + this.user?.id;
       this.httpClient.put<User>(url, formData).subscribe((user) => {
