@@ -26,7 +26,7 @@ export class HobbyFormComponent implements OnInit {
   isUpdate: boolean = false;
 
   constructor(
-  private httpClient: HttpClient, 
+  private httpClient: HttpClient,
   private activatedRoute: ActivatedRoute,
   private router: Router
   ) {}
@@ -39,9 +39,9 @@ export class HobbyFormComponent implements OnInit {
 
       if(!id) return;
 
-     
 
- 
+
+
 
       this.httpClient.get<Hobby>('http://localhost:8080/hobbies/' + id).subscribe(hobby => {
 
@@ -57,13 +57,13 @@ export class HobbyFormComponent implements OnInit {
 
   }
 
- 
+
 
   onFileChange(event: Event) {
 
     let target = event.target as HTMLInputElement; // este target es el input de tipo file donde se carga el archivo
 
- 
+
 
     if(target.files === null || target.files.length == 0){
 
@@ -71,13 +71,13 @@ export class HobbyFormComponent implements OnInit {
 
     }
 
- 
+
 
     this.photoFile = target.files[0];
 
   }
 
- 
+
 
   save(){
 
@@ -93,7 +93,7 @@ export class HobbyFormComponent implements OnInit {
 
     formData.append('rules', this.hobbyForm.get('rules')?.value ?? '');
 
- 
+
 
     console.log(formData)
 
@@ -103,7 +103,7 @@ export class HobbyFormComponent implements OnInit {
 
     }
 
- 
+
 
     if (this.isUpdate) {
 
@@ -113,7 +113,7 @@ export class HobbyFormComponent implements OnInit {
 
     } else {
 
-    this.httpClient.post<Hobby>('http://localhost:8080/hobbies/create', formData)
+    this.httpClient.post<Hobby>('http://localhost:8080/hobbies', formData)
 
     .subscribe(hobby=> this.navigateToList());
 
@@ -121,13 +121,13 @@ export class HobbyFormComponent implements OnInit {
 
   }
 
- 
+
 
   private navigateToList() {
 
     this.router.navigate(['/hobbies']);
 
-  }    
+  }
 
 }
 
