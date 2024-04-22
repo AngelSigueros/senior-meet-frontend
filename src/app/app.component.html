@@ -5,14 +5,14 @@
   <!-- @if (isAdmin) {
     <button class="btn btn-secondary me-2" [routerLink]="['/users/create']">Crear Usuario</button>
   } -->
-  
+
   @if (userEmail) {
     <button class="btn btn-outline-success me-2" routerLink="/users/account">
       <i class="bi bi-person-circle me-1"></i>
       {{userEmail}}
     </button>
   }
-  
+
   @if (isLoggedIn) {
     <button class="btn btn-warning me-2" (click)="logout()">
       Logout
@@ -28,7 +28,7 @@
       <i class="bi bi-person-add ms-1"></i>
     </button>
   }
- 
+
   </ul>
 </div>
 
