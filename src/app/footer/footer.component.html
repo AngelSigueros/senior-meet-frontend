@@ -2,37 +2,34 @@
  
 
   <!-- Copyright -->
-  <div id=subfoot class="container p-4" style="background-color: rgba(0, 0, 0, 0.2);">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-    © 2024 Copyright:
-    <a routerLink="/home">Senior Meet</a>
-    
-    <ul class="list-unstyled mb-0">
-      <li>
-        <p> Corazón de Maria, 67 - Madrid</p>
-      </li>  
-    </ul>
+  <div id=subfoot class="container" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="row mb-5">
+      <div class="left">
+    © 2024 Copyright: Senior Meet
+    <a class="mt-4 mb-3" routerLink="/home">
+      <img src="/assets/img/log sm.png" alt="Logo Senior Meet" style="max-width: 60px" />
+    </a>
+    <div class="mt-2"><p>Escreva para  <a href="mailto:seniormeetgmail.com">seniormeet</a></p>
+    </div>
     </div>
   </div>
-    
-  <div class="row text-center">  
-      <div class="col-lg-6">   
+   
+      <div class="right" style="top: 2rem;">   
            
         <ul class="list-unstyled mb-0">
-          <li>
-          <p>Email: <a href="mailto:seniormeetgmail.com">seniormeet</a></p>
-        </li>  
         <li>
           <a [routerLink]="['/about-us']">Sobre Nosotres</a>    
         </li>
         <li>
           <a [routerLink]="['/condiciones']">Términos de uso</a>
         </li>
+        <li>
+          <a [routerLink]="['/advisors']">Seguridad</a>
+        </li>
       </ul>
         </div>
       </div>
-    </div>
+   
      
  
 
