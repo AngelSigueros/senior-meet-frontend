@@ -24,22 +24,22 @@ export class UserFormComponent implements OnInit {
   posts: Post[] = [];
 
   userForm = new FormGroup({
-    id: new FormControl<number>(0),
+    id: new FormControl(0),
     firstName: new FormControl<string>('', Validators.required),
     lastName: new FormControl<string>(''),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
-    //password: new FormControl<string>(''),
+    password: new FormControl<string>(''),
     phone: new FormControl<string>('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
     codigoPostal: new FormControl<string>('', Validators.pattern('^[0-9]{5}$')),
     ciudad: new FormControl<string>(''),
-    sexo: new FormControl(),
+    sexo: new FormControl<string>(''),
     fechaNacimiento: new FormControl<Date>(new Date(), Validators.required),
-    photoUrl: new FormControl(),
     available: new FormControl<boolean>(false),
-    userRole: new FormControl(),
-    groups: new FormControl(),
-    hobbies: new FormControl(),
-    posts: new FormControl(),
+    photoUrl: new FormControl(''),
+    //userRole: new FormControl(),
+    //groups: new FormControl(),
+    //hobbies: new FormControl(),
+    //posts: new FormControl(),
   });
 
   constructor(
@@ -53,22 +53,21 @@ export class UserFormComponent implements OnInit {
     //this.httpClient.get<Author[]>('http://localhost:8080/user/posts/' + id)
     //.subscribe(authors => this.authors = authors);
 
-    //this.activatedRoute.params.subscribe((params) => {
-      //const id = params['id'];
-      //if (!id) return;
+    this.activatedRoute.params.subscribe(params => {
+      const id = params['id'];
+      if (!id) return;
 
-      console.log(this.user)
+      console.log(this.user);
 
-      this.httpClient
-        .get<User>('http://localhost:8080/user/account') // + id)
-        .subscribe(user => {
-          console.log(user)
-          this.userForm.reset(user);
+      this.httpClient.get<User>('http://localhost:8080/user/'+id).subscribe(user => {
+          console.log(user);
+          
           this.isUpdate = true;
           this.user = user;
+          this.userForm.reset(user);
           
         });
-    //});
+    });
   }
 
   onFileChange(event: Event) {
@@ -93,18 +92,18 @@ export class UserFormComponent implements OnInit {
     formData.append('firstName', this.userForm.get('firstName')?.value ?? '');
     formData.append('lastName', this.userForm.get('lastName')?.value ?? '');
     formData.append('email', this.userForm.get('email')?.value ?? '');
-    //formData.append('password', this.userForm.get('password')?.value ?? '');
-    formData.append('phone', this.userForm.get('phone')?.value?.toString() ?? '0');
-    formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '0');
+    formData.append('password', this.userForm.get('password')?.value ?? '');
+    formData.append('phone', this.userForm.get('phone')?.value?.toString() ?? '');
+    formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '');
     formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
     formData.append('sexo', this.userForm.get('sexo')?.value ?? '');
-    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '0');
+    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '');
     formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
     formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
     formData.append('userRole', 'USER');
-    formData.append('groups', this.userForm.get('groups')?.value ?? '');
-    formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
-    formData.append('posts', this.userForm.get('posts')?.value ?? '');
+    //formData.append('groups', this.userForm.get('groups')?.value ?? '');
+    //formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
+    //formData.append('posts', this.userForm.get('posts')?.value ?? '');
 
     if(this.photoFile) {
       formData.append("photo", this.photoFile);

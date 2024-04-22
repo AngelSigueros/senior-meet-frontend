@@ -46,7 +46,7 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="phone" placeholder="654987321" formControlName="phone">
+            <input type="text" class="form-control" id="phone" placeholder="654987321" formControlName="phone">
             <label for="phone">Teléfono móvil</label>
             @if (userForm.controls.phone.touched && userForm.controls.phone.errors) {
               <div>
@@ -61,7 +61,7 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="codigoPostal" formControlName="codigoPostal" placeholder="Codigo Postal">
+            <input type="text" class="form-control" id="codigoPostal" formControlName="codigoPostal" placeholder="Codigo Postal">
             <label for="codigoPostal">Codigo Postal</label>
             @if (userForm.controls.codigoPostal.touched && userForm.controls.codigoPostal.errors) {
               <div>
@@ -113,7 +113,7 @@
   
           <div class="input-group mb-3">
             <input type="file" class="form-control" id="photo" (change)="onFileChange($event)" placeholder="nombre@email.com">
-            <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button>
+            <!-- <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button> -->
           </div>
 
   
