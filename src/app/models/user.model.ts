@@ -13,7 +13,7 @@ export interface User {
     ciudad: string;
     sexo: Sexo;
     fechaNacimiento: Date;
-    photoUrl: File | null;
+    photoUrl: string;
     available: boolean;
     userRole: UserRole;
     groups?: Group[];
