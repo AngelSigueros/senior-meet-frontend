@@ -6,7 +6,7 @@ import { Post } from '../models/post.model';
 import { Group} from '../models/group.model';
 import { User } from '../models/user.model';
 import { Interaction } from '../models/interaction.model';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -33,13 +33,20 @@ export class PostFormComponent implements OnInit{
     date: new Date()
   });
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient){}
+  photoFile: File | undefined;
+  photoPreview: string | undefined;
+  post: Post | undefined;
+  isUpdate: boolean = false;
+
+
+  constructor(private fb: FormBuilder, private httpClient: HttpClient, private route: Router){}
 
   ngOnInit(): void {
-    //this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
+    this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
     this.httpClient.get<User>('http://localhost:8080/user/account').subscribe( u => {
       this.currentUser = u;
-      this.httpClient.get<Group[]>("http://localhost:8080/user/"+this.currentUser.id+"/groups").subscribe(g => this.groups=g);});
+      //this.httpClient.get<Group[]>("http://localhost:8080/user/"+this.currentUser.id+"/groups").subscribe(g => this.groups=g);
+    });
   }
 
   save(){
@@ -71,6 +78,10 @@ export class PostFormComponent implements OnInit{
     console.log(postToSave);
 
     const url = 'http://localhost:8080/post';
-    this.httpClient.post<Post>(url, postToSave).subscribe(post => console.log(post));
+    this.httpClient.post<Post>(url, postToSave).subscribe(post => 
+      {console.log(post);
+        this.postForm.reset();
+        this.route.navigate(['/posts']);
+      });
   }
 }
