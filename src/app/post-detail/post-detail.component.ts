@@ -36,6 +36,10 @@ export class PostDetailComponent implements OnInit{
   ngOnInit(): void {
     console.log('PostDetailComponent');
     
+    this.loadPost();
+
+  }
+  loadPost() {
     this.activatedRoute.params.subscribe(params => {
       this.http.get<Post>("http://localhost:8080/post/" +
       params['id']).subscribe(p => {this.post=p;
@@ -49,7 +53,6 @@ export class PostDetailComponent implements OnInit{
     this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
 
   });
-
   }
 
   save(){
@@ -96,7 +99,7 @@ export class PostDetailComponent implements OnInit{
 
     //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
     const urlLike = 'http://localhost:8080/post/'+this.post?.id+'/add-like/'+this.currentUser?.id;
-    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
   }
 
   addsave(){
@@ -116,7 +119,7 @@ export class PostDetailComponent implements OnInit{
     }
 
     //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
-    const urlLike = 'http://localhost:8080/post/'+this.post?.id+'add-save/'+this.currentUser?.id;
-    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
+    const urlLike = 'http://localhost:8080/post/'+this.post?.id +'/add-save/'+this.currentUser?.id;
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
   }
 }
