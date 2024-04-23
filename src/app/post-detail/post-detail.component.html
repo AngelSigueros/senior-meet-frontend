@@ -18,8 +18,8 @@
             }
             <h5 class="my-3">FECHA: {{post.date}}</h5>
             
-            @if (comments) {
-              <h5 class="my-3">{{comments.length}} <button class="btn-sm btn-outline-secondary" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
+            @if (comments.length >0) {
+              <h5 class="my-3">{{comments.length}} <button class="btn btn-sm btn-outline-secondary" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
               
               <div [style.display]="mostrarComments ? 'block' : 'none'">
                 @for(comment of comments; track comment){
@@ -33,16 +33,16 @@
             }
 
             
-            @if(likes){
-              <h5 class="my-3">{{likes.length}} <button class="btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
+            @if(likes.length > 0){
+              <h5 class="my-3">{{likes.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
             } @else {
-              <i class="bi bi-heart"></i>
+              <button class="btn btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart"></i></button>
             }
-            @if(saves){
-              <h5 class="my-3">{{saves.length}} <button class="btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button></h5>
+            @if(saves.length > 0){
+              <h5 class="my-3">{{saves.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button></h5>
               
             } @else {
-              <i class="bi bi-floppy"></i>
+              <button class="btn btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button>
             }   
 
             
