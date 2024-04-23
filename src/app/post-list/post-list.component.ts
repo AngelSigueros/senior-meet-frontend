@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Post } from '../models/post.model';
+import { AuthenticationService } from '../user-authentication/authentication.service';
 
 @Component({
   selector: 'app-post-list',
@@ -14,7 +15,11 @@ export class PostListComponent implements OnInit {
 
   posts: Post[] = []
 
-  constructor (private http: HttpClient){}
+  isAdmin: Boolean = false;
+
+  constructor (private authService: AuthenticationService, private http: HttpClient){
+    this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
+  }
 
   ngOnInit(): void {
     this.loadPosts();

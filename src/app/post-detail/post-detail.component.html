@@ -52,7 +52,11 @@
                   
                 </div>
               } @else{
-               <h5 class="my-3 d-inline-block"><i class="bi bi-chat-text"></i></h5>
+               <h5 class="my-3 d-inline-block me-2"><i class="bi bi-chat-text"></i></h5>
+              }
+
+              @if (isAdmin ||isPostfromUser()){
+                <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
               }
             </div>
             

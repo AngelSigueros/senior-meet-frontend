@@ -1,34 +1,41 @@
 <main>
-    <button [routerLink]="['/posts/create']" class="card-link">Crear un post</button>
-
+  <button [routerLink]="['/posts/create']" class="btn btn-lg btn-outline-secondary text strong mb-3"><i class="bi bi-pencil-square bi-lg"></i></button>
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        @for ( post of posts; track post.id) {
-        <div class="col">
-          <div class="card shadow-sm">
-            
-           <img src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg" alt="Bailar">
-            <div class="card-body">
-              <!-- <p class="card-text">{{post.user.firstName}} - {{post.content}}</p> -->
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary">Editar</button>
-                  <button class="btn btn-sm btn-outline-secondary" (click)="deletePost(post.id)">Borrar</button>
+        @if (posts && posts.length > 0) {
+          <!-- Iterar sobre los posts y mostrar las tarjetas -->
+          @for (post of posts; track post.id) {
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- Contenido de la tarjeta de cada post -->
+                <img src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg" alt="Bailar">
+                <div class="card-body">
+                  <!-- Botones de acción para cada post -->
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
+                      <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-pencil"></i></button>
+                      @if (isAdmin){
+                        <button class="btn btn-sm btn-outline-secondary me-2" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
+                      }
+                    </div>
+                  </div>
                 </div>
-                <small class="text-body-secondary"></small>
               </div>
             </div>
+          }
+        } @else {
+          <!-- Mostrar la alerta si no hay posts -->
+          <div class="col container-fluid card shadow-sm">
+            <div class="alert alert-primary" role="alert">
+              No hay posts!!
+            </div>
           </div>
-        </div>
-        } @empty {
-          <p class="card-text">No hay posts!!</p>
         }
       </div>
     </div>
   </div>
-
 </main>
