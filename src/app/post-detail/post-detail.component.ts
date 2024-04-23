@@ -19,7 +19,6 @@ export class PostDetailComponent implements OnInit{
   post: Post | undefined
   posts: any
   comments: Comment[]=[]
-  interactions: Interaction[]= []
   likes: Interaction[] = []
   saves: Interaction[] = []
   currentUser: User | undefined
@@ -77,8 +76,7 @@ export class PostDetailComponent implements OnInit{
       this.http.post<Post>(url2,this.post ).subscribe(p=> {
         console.log(p);
         this.commentForm.reset();
-      //this.router.navigate(['/posts/'+this.currentUser?.id+'/detail']);
-      this.loadPost();
+        this.loadPost();
     });
     });
 
@@ -105,7 +103,6 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
     const urlLike = 'http://localhost:8080/post/'+this.post?.id+'/add-like/'+this.currentUser?.id;
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
   }
@@ -126,7 +123,6 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
     const urlLike = 'http://localhost:8080/post/'+this.post?.id +'/add-save/'+this.currentUser?.id;
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
   }
