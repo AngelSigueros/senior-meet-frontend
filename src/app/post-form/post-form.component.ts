@@ -80,7 +80,7 @@ export class PostFormComponent implements OnInit{
     const url = 'http://localhost:8080/post';
     this.httpClient.post<Post>(url, postToSave).subscribe(post => 
       {console.log(post);
-        this.postForm.reset();
+        //this.postForm.reset();
         this.route.navigate(['/posts']);
       });
   }

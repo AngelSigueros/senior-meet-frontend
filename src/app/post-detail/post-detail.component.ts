@@ -28,7 +28,7 @@ export class PostDetailComponent implements OnInit{
     id: [0],
     content: ['', Validators.required],
     user: new FormControl(),
-    date: new FormControl()
+    date: new Date()
   });
 
   constructor (private fb:FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute, private router:Router){}
@@ -39,6 +39,7 @@ export class PostDetailComponent implements OnInit{
     this.loadPost();
 
   }
+
   loadPost() {
     this.activatedRoute.params.subscribe(params => {
       this.http.get<Post>("http://localhost:8080/post/" +
@@ -47,7 +48,6 @@ export class PostDetailComponent implements OnInit{
     });
 
     this.http.get<Comment[]>("http://localhost:8080/post/"+params['id']+"/comments").subscribe(c=>this.comments=c);
-   // this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions").subscribe(i=>this.interactions=i);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/likes").subscribe(i=>this.likes=i);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/saves").subscribe(i=>this.saves=i);
     this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
@@ -55,7 +55,7 @@ export class PostDetailComponent implements OnInit{
   });
   }
 
-  save(){
+  saveComments(){
     const id = this.commentForm.get('id')?.value?? 0;
     const content = this.commentForm.get('content')?.value?? 'Contenido comentario';
     const user = this.commentForm.get('user')?.value?? this.currentUser;
@@ -75,7 +75,9 @@ export class PostDetailComponent implements OnInit{
       const url2 = 'http://localhost:8080/post/'+this.post?.id+"/add-comment/"+comment?.id;
       this.http.post<Post>(url2,this.post ).subscribe(p=> {
         console.log(p);
-      this.router.navigate(['/posts/'+this.currentUser?.id+'/detail']);});
+      //this.router.navigate(['/posts/'+this.currentUser?.id+'/detail']);
+      this.loadPost();
+    });
     });
 
     

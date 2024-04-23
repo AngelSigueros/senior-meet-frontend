@@ -21,6 +21,7 @@
             @if (comments) {
               @for(comment of comments; track comment){
                 <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
+                <h5 class="my-3">{{comment.date}}</h5>
               }
               <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
             } @else{
@@ -52,7 +53,7 @@
             </div>
 
             <div>
-              <form [formGroup]="commentForm" (ngSubmit)="save()">
+              <form [formGroup]="commentForm" (ngSubmit)="saveComments()">
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="content"
