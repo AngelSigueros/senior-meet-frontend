@@ -1,10 +1,62 @@
-<footer class="bg-light text-center text-white">
- 
+<footer class="bg-primary text-white text-center text-lg-start">
+  <!-- Grid container -->
+  <div id="subfoot" class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h4 class="text-uppercase" routerLink="/home">Senior Meet</h4>
+
+        <p>
+          Corazón de Maria, 67  Madrid - España
+        </p>
+      </div>
+      <!--Grid column-->
+
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-7 mb-3 mb-md-0">
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a class="text-white" [routerLink]="['/about-us']">Equipo</a>    
+          </li>
+          <li>
+            <a class="text-white" [routerLink]="['/advisors']">Seguridad</a>
+          </li>
+          <li>
+            <a class="text-white" [routerLink]="['/condiciones']">Términos de uso</a>
+          </li>          
+        </ul>
+      </div>
+      <!--Grid column-->
+       <!--Grid column-->
+       <div class="col-lg-2 col-md-4 mb-3 mb-md-1">
+       
+        <ul class="list-unstyled">
+          <li>
+            <a class="text-white" href="mailto:seniormeetgmail.com">Contacto</a>
+          </li>
+          <br>
+          <li>
+            <a class="text-white" [routerLink]="['/suggestions']">Sugeréncias</a>
+          </li> 
+          <br>
+         
+          
+        </ul>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
 
   <!-- Copyright -->
-  <div id=subfoot class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2024 Copyright:
-    <a routerLink="/home">Senior Meet</a>
+  <div class="text-center p-3" style="background-color:rgba(0, 0, 0, 0.2);">
+    © 2024 Copyright: Senior Meet
+    <a class="mt-4 mb-3" routerLink="/home">
+      <img src="/assets/img/log sm.png" alt="Logo Senior Meet" style="max-width: 30px" />
+    </a>
   </div>
   <!-- Copyright -->
 </footer>
