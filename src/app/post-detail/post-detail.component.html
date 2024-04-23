@@ -19,11 +19,15 @@
             <h5 class="my-3">FECHA: {{post.date}}</h5>
             
             @if (comments) {
-              @for(comment of comments; track comment){
-                <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
-                <h5 class="my-3">{{comment.date}}</h5>
-              }
               <h5 class="my-3">{{comments.length}} <i class="bi bi-chat-text-fill"></i></h5>
+              <button class="btn btn-sm btn-outline-secondary" (click)="toggleComments()">Ver comentarios</button>
+              <div [style.display]="mostrarComments ? 'block' : 'none'">
+                @for(comment of comments; track comment){
+                  <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
+                  <h5 class="my-3">{{comment.date}}</h5>
+                }
+                
+              </div>
             } @else{
              <h5 class="my-3"><i class="bi bi-chat-text"></i></h5>
             }

@@ -23,6 +23,7 @@ export class PostDetailComponent implements OnInit{
   likes: Interaction[] = []
   saves: Interaction[] = []
   currentUser: User | undefined
+  mostrarComments: Boolean = false
 
   commentForm = this.fb.group({
     id: [0],
@@ -75,12 +76,17 @@ export class PostDetailComponent implements OnInit{
       const url2 = 'http://localhost:8080/post/'+this.post?.id+"/add-comment/"+comment?.id;
       this.http.post<Post>(url2,this.post ).subscribe(p=> {
         console.log(p);
+        this.commentForm.reset();
       //this.router.navigate(['/posts/'+this.currentUser?.id+'/detail']);
       this.loadPost();
     });
     });
 
     
+  }
+
+  toggleComments(){
+    this.mostrarComments= !this.mostrarComments;
   }
 
   addlike(){
