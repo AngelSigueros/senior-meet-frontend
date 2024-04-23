@@ -17,8 +17,19 @@ export class PostListComponent implements OnInit {
   constructor (private http: HttpClient){}
 
   ngOnInit(): void {
-    console.log('PostListComponent');
+    this.loadPosts();
+    
+  }
+
+  loadPosts(){
     this.http.get<Post[]>("http://localhost:8080/post").subscribe(p=>this.posts=p);
+  }
+
+  deletePost(postId: number){
+    const url = "http://localhost:8080/post/"+postId;
+    this.http.delete<Boolean>(url).subscribe(b => {
+      this.loadPosts();
+    });
   }
 
 }
