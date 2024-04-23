@@ -17,42 +17,37 @@
               <h5 class="my-3">GRUPO: No hay grupo</h5>
             }
             <h5 class="my-3">FECHA: {{post.date}}</h5>
-            <h5 class="my-3">COMENTARIOS</h5>
+            
             @if (comments) {
-              @for(comment of comments; track comment){
-                <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
-              }
-              <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
-            } @else{
-             <h5 class="my-3">No hay comentarios</h5>
-            }
-
-            <h5 class="my-3">INTERACCIONES</h5>
-            @if(interactions){
-              @for(interaction of interactions; track interaction){
-                <h5 class="my-3">{{interaction.user.firstName}} - {{interaction.type}}</h5>
-              }
-              <h5 class="my-3">Total: {{interactions.length}} interacciones</h5>
-              @if(likes){
-                <h5 class="my-3">{{likes.length}} Likes</h5>
-              }
-              @if(saves){
-                <h5 class="my-3">{{saves.length}} saves</h5>
-              }    
-            }@else{
-              <h5 class="my-3">No hay interacciones</h5>
-            }
-
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button class="btn btn-sm btn-outline-secondary" (click)="addlike()">Me gusta</button>
-                <button class="btn btn-sm btn-outline-secondary" (click)="addsave()">Guardar</button>
+              <h5 class="my-3">{{comments.length}} <button class="btn-sm btn-outline-secondary" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
+              
+              <div [style.display]="mostrarComments ? 'block' : 'none'">
+                @for(comment of comments; track comment){
+                  <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
+                  <h5 class="my-3">{{comment.date}}</h5>
+                }
+                
               </div>
-              <small class="text-body-secondary"></small>
-            </div>
+            } @else{
+             <h5 class="my-3"><i class="bi bi-chat-text"></i></h5>
+            }
 
+            
+            @if(likes){
+              <h5 class="my-3">{{likes.length}} <button class="btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
+            } @else {
+              <i class="bi bi-heart"></i>
+            }
+            @if(saves){
+              <h5 class="my-3">{{saves.length}} <button class="btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button></h5>
+              
+            } @else {
+              <i class="bi bi-floppy"></i>
+            }   
+
+            
             <div>
-              <form [formGroup]="commentForm" (ngSubmit)="save()">
+              <form [formGroup]="commentForm" (ngSubmit)="saveComments()">
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="content"
