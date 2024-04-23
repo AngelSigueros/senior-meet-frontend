@@ -8,9 +8,63 @@
     <div class="col-lg-8">
       <!-- <img src="../../assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg"> -->
 
-      <h3 class="text-center"> Últimas publicaciones </h3>
+     
+      <div class="col-md-10">
+        <h3 class="text-center mt-4 pb-4 mb-4 border-bottom"><strong>
+          Últimas publicaciones
+        </strong></h3>
+  
+        <article class="blog-post">
+          <div class="card-body shadow-rounded">
+          @for (post of posts; track post.id) {
+            
+            <h2 class="link-body-emphasis mb-1">{{post.user.photoUrl}}</h2>
+          <div class="picsum-img-wrapper">
+            <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + post.photoUrl" alt="{{post.id}}" />
+          </div>
+          <h3>{{post.content}}</h3>
 
+          @if (comments) {
+            @for(comment of comments; track comment){
+              <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
+            }
+            <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
+          } @else{
+           <h5 class="my-3">No hay comentarios</h5>
+          }
+        
+        }
+      </div>
+          <!--
+            @for (post of posts; track post.id) {
+        <div class="col">
+          <div class="card shadow-sm">
+           
+            <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="{{post.content}}">
 
+            
+              <div class="btn-group">
+                <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-primary">Detalle</button>
+              </div>
+              <small class="text-body-secondary"></small>
+            </div>
+            
+          </div>
+        </div>
+   
+      } @empty {
+      <p class="card-text">No hay Posts!</p>
+      }
+          -->
+        </article>
+  
+        <nav class="blog-pagination" aria-label="Pagination">
+          <a class="btn btn-outline-primary rounded-pill" routerLink="/posts">Ver más</a>
+          
+        </nav>
+  
+      </div>
+      <!--
       <ngb-carousel>
         @for (post of posts; track post.id) {
         <ng-template ngbSlide>
@@ -35,6 +89,7 @@
 
         }
       </ngb-carousel>
+      -->
     </div>
     <div class="col-lg-4" style="background-color:#69dd78;">
       <div class="text-center mb-2">
