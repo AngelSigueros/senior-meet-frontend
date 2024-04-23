@@ -35,7 +35,7 @@ export class UserLoginComponent {
       console.log(response.token);
 
       this.authService.saveToken(response.token);
-      this.router.navigate(['/users']);
+      this.router.navigate(['/home']);
     });
 
 

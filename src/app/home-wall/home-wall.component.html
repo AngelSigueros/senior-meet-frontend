@@ -85,7 +85,7 @@
                     @for (hobby of hobbies; track hobby.id) {
                     <ng-template ngbSlide>
                       <div class="picsum-img-wrapper">
-                        <img class="img-fluid" [src]="'http://localhost:8080/files/' + hobby.photoUrl" alt="{{hobby.name}}" />
+                        <img class="" [src]="'http://localhost:8080/files/' + hobby.photoUrl" alt="{{hobby.name}}" />
                       </div>
                       <div class="carousel-caption">
                         <h6 [routerLink]="['/hobbies', hobby.id, 'detail']" style="cursor:pointer;">{{hobby.name}}</h6>
@@ -142,21 +142,16 @@
 
         </div>
 
-        <button class="btn btn-primary btn-lg w-100" type="button"  routerLink="/advisors">
+        <button class="btn btn-primary btn-lg w-100 mb-2" type="button"  routerLink="/advisors">
           <span class="spinner-grow spinner-grow-sm me-2" style="color:chartreuse;" role="status" aria-hidden="true"></span>
           <span>Alerta seguridad</span>
         </button>
 
-<<<<<<< HEAD
-        
-          
-=======
        <!-- <div class="position-sticky" style="top: 2rem;">
           <div class="p-4 mb-3 text-center bg-body-tertiary rounded">
             <h4 class="fst-italic">Deje aquí su sugerencia</h4>
             <button class="btn btn-primary" justify conter [routerLink]="['/suggestions']">Sugerencias</button>
           </div>
->>>>>>> 39d3d79f9e86cef8f72571dff4f583f25ed3a0d9
       </div>
       -->
     </div>
