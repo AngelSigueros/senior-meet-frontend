@@ -1,6 +1,8 @@
 
 <form class="card-body shadow rounded mt-3" [formGroup]="postForm" (ngSubmit)="save()">
 
+  <input type="hidden" formControlName="id">
+
   <div class="form-floating mb-3">
     <textarea class="form-control custom-textarea" id="content" placeholder="Escribe tu post"
               formControlName="content" maxlength="512" style="height: 200px; overflow-y: scroll;"></textarea>
@@ -27,7 +29,6 @@
         <option [ngValue]="group"> {{group.title}} </option>
       }
     </select>
-
 
     
     <div class="text-end">
