@@ -11,7 +11,18 @@
             <div class="col">
               <div class="card shadow-sm">
                 <!-- Contenido de la tarjeta de cada post -->
-                <img src="/assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg" alt="Bailar">
+                <div class="d-flex flex-column align-items-center">
+                  <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                      class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
+                  @if (post.group) {
+                    <h5 class="my-3 fw-bold">en {{post.group.title}}</h5>
+                  }
+                  <h5 class="my-3 text muted small">{{post.date}}</h5>
+                  <div class="card-body shadow rounded">
+                    <h5 class="my-3">{{ post.content.length > 80 ? post.content.slice(0, 80) + '...' : post.content }}</h5>
+                  </div>
+              </div>
                 <div class="card-body">
                   <!-- Botones de acción para cada post -->
                   <div class="d-flex justify-content-between align-items-center">
