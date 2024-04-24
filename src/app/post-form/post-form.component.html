@@ -1,5 +1,5 @@
 
-<form [formGroup]="postForm" (ngSubmit)="save()">
+<form class="card-body shadow rounded mt-3" [formGroup]="postForm" (ngSubmit)="save()">
 
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="content"
@@ -21,14 +21,18 @@
 
     <!-- Selector simple -->
     <select class="form-select form-select-lg mb-3" formControlName="group">
-      <option selected>Elija grupo:</option>
+      <option value="" selected disabled hidden>Grupo</option>
+      <option value="" selected>Elija grupo:</option>
       @for (group of groups;track group.id){
         <option [ngValue]="group"> {{group.title}} </option>
       }
     </select>
 
 
-    <button class="btn btn-success" type="submit">Enviar</button>
+    
+    <div class="text-end">
+      <button class="btn btn-lg btn-outline-secondary ml-auto" type="submit"><i class="bi bi-floppy-fill text-primary"></i></button>
+    </div>
 
 </form>
 

@@ -6,6 +6,7 @@ import { Interaction } from '../models/interaction.model';
 import { Comment } from '../models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../models/user.model';
+import { AuthenticationService } from '../user-authentication/authentication.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -19,23 +20,41 @@ export class PostDetailComponent implements OnInit{
   post: Post | undefined
   posts: any
   comments: Comment[]=[]
-  interactions: Interaction[]= []
   likes: Interaction[] = []
   saves: Interaction[] = []
   currentUser: User | undefined
+  mostrarComments: Boolean = false
+  userPosts : Post[] = []
+  isAdmin: Boolean = false;
 
   commentForm = this.fb.group({
     id: [0],
     content: ['', Validators.required],
     user: new FormControl(),
-    date: new FormControl()
+    date: new Date()
   });
 
-  constructor (private fb:FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute, private router:Router){}
+  constructor (private authService: AuthenticationService, 
+    private fb:FormBuilder, 
+    private http: HttpClient, 
+    private activatedRoute: ActivatedRoute, 
+    private router:Router){
+    this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
+  }
 
   ngOnInit(): void {
     console.log('PostDetailComponent');
     
+    this.loadPost();
+
+  }
+
+  isPostfromUser():boolean {
+    
+    return this.post !== undefined && this.userPosts.includes(this.post);
+  }
+
+  loadPost() {
     this.activatedRoute.params.subscribe(params => {
       this.http.get<Post>("http://localhost:8080/post/" +
       params['id']).subscribe(p => {this.post=p;
@@ -43,16 +62,27 @@ export class PostDetailComponent implements OnInit{
     });
 
     this.http.get<Comment[]>("http://localhost:8080/post/"+params['id']+"/comments").subscribe(c=>this.comments=c);
-   // this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions").subscribe(i=>this.interactions=i);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/likes").subscribe(i=>this.likes=i);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/saves").subscribe(i=>this.saves=i);
-    this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
+    this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u;
+    this.http.get<Post[]>("http://localhost:8080/post/user/"+this.currentUser.id).subscribe(ps => {
+      this.userPosts=ps;
+    });
+    
+    })
 
   });
-
   }
 
-  save(){
+  deletePost(postId: number){
+    const url = "http://localhost:8080/post/"+postId;
+    this.http.delete<Boolean>(url).subscribe(b => {
+      console.log(b);
+      this.router.navigate(['/posts']);
+    });
+  }
+
+  saveComments(){
     const id = this.commentForm.get('id')?.value?? 0;
     const content = this.commentForm.get('content')?.value?? 'Contenido comentario';
     const user = this.commentForm.get('user')?.value?? this.currentUser;
@@ -72,10 +102,16 @@ export class PostDetailComponent implements OnInit{
       const url2 = 'http://localhost:8080/post/'+this.post?.id+"/add-comment/"+comment?.id;
       this.http.post<Post>(url2,this.post ).subscribe(p=> {
         console.log(p);
-      this.router.navigate(['/posts/'+this.currentUser?.id+'/detail']);});
+        this.commentForm.reset();
+        this.loadPost();
+    });
     });
 
     
+  }
+
+  toggleComments(){
+    this.mostrarComments= !this.mostrarComments;
   }
 
   addlike(){
@@ -94,9 +130,8 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i;});
     const urlLike = 'http://localhost:8080/post/'+this.post?.id+'/add-like/'+this.currentUser?.id;
-    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
   }
 
   addsave(){
@@ -115,8 +150,7 @@ export class PostDetailComponent implements OnInit{
       date: date
     }
 
-    //this.http.post<Interaction>('http://localhost/interaction/create',interactionToSave).subscribe(i => {interactionToSave=i});
-    const urlLike = 'http://localhost:8080/post/'+this.post?.id+'add-save/'+this.currentUser?.id;
-    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => console.log(b));
+    const urlLike = 'http://localhost:8080/post/'+this.post?.id +'/add-save/'+this.currentUser?.id;
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
   }
 }

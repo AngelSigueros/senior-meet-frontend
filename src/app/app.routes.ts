@@ -29,6 +29,8 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { AdvisorsComponent } from './advisors/advisors.component';
+import { CondionesDeUsoComponent } from './condiones-de-uso/condiones-de-uso.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 export const routes: Routes = [
   {
@@ -171,6 +173,14 @@ export const routes: Routes = [
   {
     path: 'suggestions', 
     component: SuggestionsFormComponent
+  },
+  {
+    path: 'condiciones', 
+    component: CondionesDeUsoComponent
+  },
+  {
+    path: 'about-us', 
+    component: AboutUsComponent
   },
   {
     path: '**', 

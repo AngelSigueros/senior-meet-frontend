@@ -22,14 +22,15 @@ export class HomeWallComponent {
   posts: Post[]=[];
   comments: Comment[]=[];
   users: User[]=[];
+
   
 
 	constructor(config: NgbCarouselConfig, private http: HttpClient) {
 		// customize default values of carousels used by this component tree
-		config.interval = 10000;
+/* 		config.interval = 10000;
 		config.wrap = false;
 		config.keyboard = false;
-		config.pauseOnHover = false;
+		config.pauseOnHover = false; */
 	}
 
   ngOnInit(): void {
@@ -37,5 +38,6 @@ export class HomeWallComponent {
   
     this.http.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
     this.http.get<Hobby[]>("http://localhost:8080/hobbies").subscribe(hobbies=>this.hobbies=hobbies);
+    this.http.get<Post[]>("http://localhost:8080/post").subscribe(posts=>this.posts=posts);
   }
 }

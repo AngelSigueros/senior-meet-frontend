@@ -3,14 +3,33 @@
     
     background-color: #282A35 !important;
     color: #f1f1f1 !important;
+    text-shadow: #f1f1f1 !important;
     padding: 20 !important;
     border: black;
-    margin: 5;
-    font-size: 16;
+    margin: 3;
+    font-size: 10;
     top: 56px;
     
     width: 100%;
     
-   
+       
         
 }
+/* CSS del componente (por ejemplo, archivo .css o .scss) */
+.container {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos al principio y al final del contenedor */
+  }
+  
+  .left {
+    /* Estilos para los elementos a la izquierda */
+  }
+  
+  .right {
+    /* Estilos para los elementos a la derecha */
+  }
+  
+
+       
+
+    

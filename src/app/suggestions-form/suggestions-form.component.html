@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       @if (showConfirmMessage) {
         <ngb-alert [dismissible]="false" style="min-height:150px; background-color:rgb(67, 195, 76);" class="my-5">
           Sugerencia recibida correctamente. Gracias
@@ -21,7 +21,7 @@
           id="name" formControlName="name">
           <label for="name">Que te gustaría ver en Senior Meet?</label>
         </div>
-        
+
 
         <div class="form-floating mb-3">
           <textarea class="form-control"
@@ -34,6 +34,6 @@
 
       </form>
       }
-      
+
     </div>
   </div>

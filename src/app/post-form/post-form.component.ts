@@ -42,10 +42,10 @@ export class PostFormComponent implements OnInit{
   constructor(private fb: FormBuilder, private httpClient: HttpClient, private route: Router){}
 
   ngOnInit(): void {
-    this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
+    //this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
     this.httpClient.get<User>('http://localhost:8080/user/account').subscribe( u => {
       this.currentUser = u;
-      //this.httpClient.get<Group[]>("http://localhost:8080/user/"+this.currentUser.id+"/groups").subscribe(g => this.groups=g);
+      this.httpClient.get<Group[]>("http://localhost:8080/user/"+this.currentUser.id+"/groups").subscribe(g => this.groups=g);
     });
   }
 
@@ -80,7 +80,7 @@ export class PostFormComponent implements OnInit{
     const url = 'http://localhost:8080/post';
     this.httpClient.post<Post>(url, postToSave).subscribe(post => 
       {console.log(post);
-        this.postForm.reset();
+        //this.postForm.reset();
         this.route.navigate(['/posts']);
       });
   }
