@@ -1,11 +1,11 @@
 
 <form class="card-body shadow rounded mt-3" [formGroup]="postForm" (ngSubmit)="save()">
 
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="content"
-        placeholder="Escribe tu post" formControlName="content">
-        <label for="content">Contenido del Post</label>
-    </div>
+  <div class="form-floating mb-3">
+    <textarea class="form-control custom-textarea" id="content" placeholder="Escribe tu post"
+              formControlName="content" maxlength="512" style="height: 200px; overflow-y: scroll;"></textarea>
+    <label for="content">Contenido del Post</label>
+  </div>
     
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="photoUrl"
