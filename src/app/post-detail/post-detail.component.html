@@ -5,21 +5,40 @@
       <div class="col-lg-12 ">
         <div class="card mb-4">
           <div class="card-body">
-            <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-           
-            <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
+
+
+
+
+
+            <div class="container">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="d-flex flex-column align-items-center">
+                          <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+                          <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="d-flex flex-column align-items-center">
+                          @if(post.group){
+                            <img src="http://localhost:8080/files/{{post.group.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3 fw-bold">{{post.group.title}}</h5>
+                          }
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+                    
             <div class="card-body shadow rounded">
               <h5 class="my-3">{{post.content}}</h5>
             </div>
             
             <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
             <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
-            @if(post.group){
-              <h5 class="my-3">GRUPO: {{post.group.title}}</h5>
-            }@else {
-              <h5 class="my-3">GRUPO: No hay grupo</h5>
-            }
+            
             <h5 class="my-3 text muted small">{{post.date}}</h5>
             
             
