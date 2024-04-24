@@ -15,7 +15,7 @@ export interface User {
     fechaNacimiento: Date;
     photoUrl: string;
     available: boolean;
-    userRole: UserRole;
+    role: UserRole;
     groups?: Group[];
     hobbies?: Hobby[];
     posts?: Post[]
@@ -24,7 +24,7 @@ export interface User {
 export enum Sexo {
     Femenino = 'FEMENINO',
     Masculino = 'MASCULINO',
-    Otro = 'OTRO'
+    Otro = 'NO_BINARIO'
 }
 
 export enum UserRole {

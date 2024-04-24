@@ -89,10 +89,10 @@ export const routes: Routes = [
     component:HobbyFormComponent,
     canActivate: [userRoleGuard]
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // },
   {
     path: 'posts',
     component: PostListComponent
@@ -152,7 +152,7 @@ export const routes: Routes = [
     canActivate: [userRoleGuard]
   },
   {
-    path: 'users/account',
+    path: 'users/account/:id',
     component: UserFormComponent //,
     //canActivate: [userRoleGuard]
   },
