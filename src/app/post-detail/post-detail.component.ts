@@ -6,6 +6,7 @@ import { Interaction } from '../models/interaction.model';
 import { Comment } from '../models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../models/user.model';
+import { AuthenticationService } from '../user-authentication/authentication.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -23,6 +24,8 @@ export class PostDetailComponent implements OnInit{
   saves: Interaction[] = []
   currentUser: User | undefined
   mostrarComments: Boolean = false
+  userPosts : Post[] = []
+  isAdmin: Boolean = false;
 
   commentForm = this.fb.group({
     id: [0],
@@ -31,13 +34,24 @@ export class PostDetailComponent implements OnInit{
     date: new Date()
   });
 
-  constructor (private fb:FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute, private router:Router){}
+  constructor (private authService: AuthenticationService, 
+    private fb:FormBuilder, 
+    private http: HttpClient, 
+    private activatedRoute: ActivatedRoute, 
+    private router:Router){
+    this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
+  }
 
   ngOnInit(): void {
     console.log('PostDetailComponent');
     
     this.loadPost();
 
+  }
+
+  isPostfromUser():boolean {
+    
+    return this.post !== undefined && this.userPosts.includes(this.post);
   }
 
   loadPost() {
@@ -50,9 +64,22 @@ export class PostDetailComponent implements OnInit{
     this.http.get<Comment[]>("http://localhost:8080/post/"+params['id']+"/comments").subscribe(c=>this.comments=c);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/likes").subscribe(i=>this.likes=i);
     this.http.get<Interaction[]>("http://localhost:8080/post/"+params['id']+"/interactions/saves").subscribe(i=>this.saves=i);
-    this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u});
+    this.http.get<User>('http://localhost:8080/user/account').subscribe( u => {this.currentUser = u;
+    this.http.get<Post[]>("http://localhost:8080/post/user/"+this.currentUser.id).subscribe(ps => {
+      this.userPosts=ps;
+    });
+    
+    })
 
   });
+  }
+
+  deletePost(postId: number){
+    const url = "http://localhost:8080/post/"+postId;
+    this.http.delete<Boolean>(url).subscribe(b => {
+      console.log(b);
+      this.router.navigate(['/posts']);
+    });
   }
 
   saveComments(){

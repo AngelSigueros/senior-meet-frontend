@@ -5,17 +5,40 @@
       <div class="col-lg-12 ">
         <div class="card mb-4">
           <div class="card-body">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-            class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3">USUARIO: {{post.user.firstName}}</h5>
-            <h5 class="my-3">CONTENIDO: {{post.content}}</h5>
+
+
+
+
+
+            <div class="container">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="d-flex flex-column align-items-center">
+                          <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+                          <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="d-flex flex-column align-items-center">
+                          @if(post.group){
+                            <img src="http://localhost:8080/files/{{post.group.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3 fw-bold">{{post.group.title}}</h5>
+                          }
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+                    
+            <div class="card-body shadow rounded">
+              <h5 class="my-3">{{post.content}}</h5>
+            </div>
+            
             <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
             <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
-            @if(post.group){
-              <h5 class="my-3">GRUPO: {{post.group.title}}</h5>
-            }@else {
-              <h5 class="my-3">GRUPO: No hay grupo</h5>
-            }
+            
             <h5 class="my-3 text muted small">{{post.date}}</h5>
             
             
@@ -23,19 +46,19 @@
             
             <div class="d-inline-block">
               @if(likes.length > 0) {
-                <h5 class="my-3 d-inline-block">{{likes.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
+                <h5 class="my-3 d-inline-block me-2">{{likes.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
               } @else {
-                <button class="btn btn-sm btn-outline-secondary d-inline-block" (click)="addlike()"><i class="bi bi-heart-fill text-danger"></i></button>
+                <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addlike()"><i class="bi bi-heart-fill text-danger"></i></button>
               }
-          
+              
               @if(saves.length > 0) {
-                <h5 class="my-3 d-inline-block">{{saves.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button></h5>
+                <h5 class="my-3 d-inline-block me-2">{{saves.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button></h5>
               } @else {
-                <button class="btn btn-sm btn-outline-secondary d-inline-block" (click)="addsave()"><i class="bi bi-floppy-fill text-primary"></i></button>
+                <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addsave()"><i class="bi bi-floppy-fill text-primary"></i></button>
               }
-
+            
               @if (comments.length >0) {
-                <h5 class="my-3 d-inline-block">{{comments.length}} <button class="btn btn-sm btn-outline-secondary text-success" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
+                <h5 class="my-3 d-inline-block me-2">{{comments.length}} <button class="btn btn-sm btn-outline-secondary text-success" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
                 
                 <div [style.display]="mostrarComments ? 'block' : 'none'" class="mb-3">
                   @for(comment of comments; track comment){
@@ -48,9 +71,14 @@
                   
                 </div>
               } @else{
-               <h5 class="my-3"><i class="bi bi-chat-text"></i></h5>
+               <h5 class="my-3 d-inline-block me-2"><i class="bi bi-chat-text"></i></h5>
               }
-            </div>  
+
+              @if (isAdmin ||isPostfromUser()){
+                <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
+              }
+            </div>
+            
 
             
             <div>
