@@ -1,8 +1,6 @@
 <main class="form-signin w-100 m-auto">
   <form [formGroup]="loginForm" (ngSubmit)="save()">
-    <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
     <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
-
     <div class="form-floating mb-3">
       <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
       <label for="email">Email address</label>
@@ -38,6 +36,5 @@
       <small class="text-danger">{{errorMessage}}</small>
     }
 
-    <!-- <p class="mt-5 mb-3 text-body-secondary text-center">©2024 - Senior Meet</p> -->
   </form>
 </main>

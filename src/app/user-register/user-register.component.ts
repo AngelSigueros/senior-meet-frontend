@@ -61,8 +61,8 @@ export class UserRegisterComponent {
         next: (response) => {
           //limpiar el formulario o redirigir a pantalla de login
           this.registerForm.reset();
-          //this.successMessage = true;
-          this.router.navigate(['/users']);
+          this.successMessage = true;
+          //this.router.navigate(['/user-login']);
         },
         error: (response) => {
           console.log(response);

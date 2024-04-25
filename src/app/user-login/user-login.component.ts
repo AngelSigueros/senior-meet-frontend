@@ -43,7 +43,7 @@ export class UserLoginComponent {
     this.httpClient.post<Token>(url, login).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
-        this.router.navigate(['/users']);
+        this.router.navigate(['/home']);
       },
       error: (response) => {
         console.log(response);

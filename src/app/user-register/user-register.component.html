@@ -2,7 +2,7 @@
   <form [formGroup]="registerForm" (ngSubmit)="save()">
     <h1 class="h3 mb-3 fw-normal">Crear nueva cuenta</h1>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
       <label for="email">Email address</label>
       @if (registerForm.controls.email.touched && registerForm.controls.email.errors) {
@@ -17,12 +17,12 @@
       }
     </div>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password" min="8" max="12">
       <label for="password">Password</label>
     </div>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input type="password" class="form-control" id="passwordConfirm" placeholder="Password" formControlName="passwordConfirm" min="8" max="12">
       <label for="passwordConfirm">Confirmación password</label>
 
@@ -41,14 +41,19 @@
     </div>
 
     <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="registerForm.invalid">Registrarse</button>
-    @if (registerForm.invalid){
+    @if (registerForm.invalid && !successMessage){
       <small class="text-danger">Debes completar de forma correcta los campos para poder guardar.</small>
     }
     @if (errorMessage && errorMessage.length > 0) {
       <small class="text-danger">{{errorMessage}}</small>
     }
-    <!-- @if (successMessage) {
-      <small class="text-danger">{{successMessage}}</small>
-    } -->
+    @if (successMessage) {
+      <small class="text-success">
+        Registro completado con éxito.
+      </small>
+      <small class="text-success">
+        Inicia sesión <a routerLink="/user-login">aquí</a>.
+      </small>
+    }
   </form>
 </main>
