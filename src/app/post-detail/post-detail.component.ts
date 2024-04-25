@@ -159,4 +159,20 @@ export class PostDetailComponent implements OnInit{
   goBack(): void {
     this.location.back();
   }
+
+  formatDateTime (date: string): string {
+    const formattedDate = new Date(date);
+  // Sumar dos horas a la hora registrada
+    formattedDate.setHours(formattedDate.getHours() + 2);
+    // Obtener los componentes de la fecha
+    
+    const day = formattedDate.getDate().toString().padStart(2, '0');
+    const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = formattedDate.getFullYear();
+    const hours = formattedDate.getHours().toString().padStart(2, '0');
+    const minutes = formattedDate.getMinutes().toString().padStart(2, '0');
+  
+    // Combinar los componentes en el formato deseado
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+  }
 }
