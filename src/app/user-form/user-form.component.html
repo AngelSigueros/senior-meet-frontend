@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-8 mt-3">
   
         @if (isUpdate) {
-        <h1 class="mt-5 mb-5">Actualizar usuario existente con id {{userForm.get('id')?.value}}</h1>
+        <h1 class="h3 mb-3 fw-normal w-100 m-auto">Actualizar usuario</h1> <!-- existente con id {{userForm.get('id')?.value}}</h1> -->
         } @else {
-        <h1 class="mt-5 mb-5">Crear nuevo usuario</h1>
+        <h1 class="h3 mb-3 fw-normal w-100 m-auto">Crear nuevo usuario</h1>
         }
         <!-- <h1 class="mt-5 mb-5">Actualizar perfil</h1>   -->
   
@@ -173,13 +173,13 @@
       </div>
   
 
-      <div class="col-lg-4">
+      <div class="col-lg-4 mt-3">
         @if (photoPreview) {
-          <h2 class="my-5">Previsualización foto</h2>
+          <h2 class="h3 mb-3 fw-normal">Avatar</h2>
           <img class="img-fluid" [src]="photoPreview" alt="photoPreview">
         }
         @if (!photoPreview && user?.photoUrl) {
-          <h2 class="my-5">Previsualización foto</h2>
+          <h2 class="h3 mb-3 fw-normal">Avatar</h2>
           <img class="img-fluid" [src]="'http://localhost:8080/files/' + user?.photoUrl" alt="user?.photoUrl">
         }
       </div>
