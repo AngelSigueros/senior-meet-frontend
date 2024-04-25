@@ -7,6 +7,7 @@ import { Comment } from '../models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../user-authentication/authentication.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-post-detail',
@@ -38,7 +39,8 @@ export class PostDetailComponent implements OnInit{
     private fb:FormBuilder, 
     private http: HttpClient, 
     private activatedRoute: ActivatedRoute, 
-    private router:Router){
+    private router:Router,
+    private location:Location){
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
   }
 
@@ -152,5 +154,9 @@ export class PostDetailComponent implements OnInit{
 
     const urlLike = 'http://localhost:8080/post/'+this.post?.id +'/add-save/'+this.currentUser?.id;
     this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPost());
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
