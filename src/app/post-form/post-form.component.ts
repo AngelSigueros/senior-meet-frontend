@@ -93,7 +93,7 @@ export class PostFormComponent implements OnInit{
     const url = 'http://localhost:8080/post';
 
     if(this.isUpdate){
-      this.httpClient.put<Post>(url+this.post?.id, postToSave).subscribe(post => 
+      this.httpClient.put<Post>(url+"/"+this.post?.id, postToSave).subscribe(post => 
         {console.log(post);
           //this.postForm.reset();
           this.route.navigate(['/posts']);
