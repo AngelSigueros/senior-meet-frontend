@@ -6,13 +6,13 @@ import { Post } from '../models/post.model';
 import { Group} from '../models/group.model';
 import { User } from '../models/user.model';
 import { Interaction } from '../models/interaction.model';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-post-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './post-form.component.html',
   styleUrl: './post-form.component.css'
 })
@@ -22,14 +22,14 @@ export class PostFormComponent implements OnInit{
   currentUser: User|undefined
 
   postForm = this.fb.group({
-    id: [0],
+    id: new FormControl(0),
     content: ['', Validators.required],
     photoUrl:[''],
     videoUrl: [''],
     group: new FormControl(),
     user: new FormControl(),
-    interactions: [[]],
-    comments: [[]],
+    interactions: new FormControl(),
+    comments: new FormControl(),
     date: new Date()
   });
 
@@ -39,13 +39,26 @@ export class PostFormComponent implements OnInit{
   isUpdate: boolean = false;
 
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient, private route: Router){}
+  constructor(private fb: FormBuilder, 
+    private httpClient: HttpClient, 
+    private route: Router,
+    private activatedRoute: ActivatedRoute,){}
 
   ngOnInit(): void {
     //this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
     this.httpClient.get<User>('http://localhost:8080/user/account').subscribe( u => {
       this.currentUser = u;
       this.httpClient.get<Group[]>("http://localhost:8080/user/"+this.currentUser.id+"/groups").subscribe(g => this.groups=g);
+    });
+    this.activatedRoute.params.subscribe(params => {
+      const id = params['id'];
+      if (!id) return;
+      this.httpClient.get<Post>('http://localhost:8080/post/' + id).subscribe(post => {
+        this.postForm.reset(post);
+        this.isUpdate = true;
+        this.post = post;
+
+      });
     });
   }
 
@@ -78,10 +91,21 @@ export class PostFormComponent implements OnInit{
     console.log(postToSave);
 
     const url = 'http://localhost:8080/post';
-    this.httpClient.post<Post>(url, postToSave).subscribe(post => 
-      {console.log(post);
-        //this.postForm.reset();
-        this.route.navigate(['/posts']);
-      });
+
+    if(this.isUpdate){
+      this.httpClient.put<Post>(url+this.post?.id, postToSave).subscribe(post => 
+        {console.log(post);
+          //this.postForm.reset();
+          this.route.navigate(['/posts']);
+        });
+    }else{
+      this.httpClient.post<Post>(url, postToSave).subscribe(post => 
+        {console.log(post);
+          //this.postForm.reset();
+          this.route.navigate(['/posts']);
+        });
+    }
+
+    
   }
 }

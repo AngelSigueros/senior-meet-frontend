@@ -1,11 +1,13 @@
 
 <form class="card-body shadow rounded mt-3" [formGroup]="postForm" (ngSubmit)="save()">
 
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="content"
-        placeholder="Escribe tu post" formControlName="content">
-        <label for="content">Contenido del Post</label>
-    </div>
+  <input type="hidden" formControlName="id">
+
+  <div class="form-floating mb-3">
+    <textarea class="form-control custom-textarea" id="content" placeholder="Escribe tu post"
+              formControlName="content" maxlength="512" style="height: 200px; overflow-y: scroll;"></textarea>
+    <label for="content">Contenido del Post</label>
+  </div>
     
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="photoUrl"
@@ -28,11 +30,13 @@
       }
     </select>
 
-
-    
-    <div class="text-end">
-      <button class="btn btn-lg btn-outline-secondary ml-auto" type="submit"><i class="bi bi-floppy-fill text-primary"></i></button>
+    <div class="d-flex justify-content-between">
+      <button [routerLink]="['/posts']" class="btn btn-lg btn-outline-secondary"><i class="bi bi-box-arrow-left text-primary"></i></button>
+      <button class="btn btn-lg btn-outline-secondary"><i class="bi bi-floppy-fill text-primary"></i></button>
     </div>
+    
+
+
 
 </form>
 

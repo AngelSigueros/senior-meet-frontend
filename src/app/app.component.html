@@ -2,12 +2,9 @@
   <h1>{{title}}</h1>
 
   <ul class="list-unstyled d-flex mt-3">
-  <!-- @if (isAdmin) {
-    <button class="btn btn-secondary me-2" [routerLink]="['/users/create']">Crear Usuario</button>
-  } -->
 
   @if (userEmail) {
-    <button class="btn btn-outline-success me-2" routerLink="/users/account">
+    <button class="btn btn-outline-success me-2" [routerLink]="['/users/account', userId]" >
       <i class="bi bi-person-circle me-1"></i>
       {{userEmail}}
     </button>

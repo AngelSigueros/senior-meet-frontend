@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../models/user.model';
-import { Group } from '../models/group.model';
-import { Post } from '../models/post.model';
-import { Hobby } from '../models/hobby.model';
+//import { AuthenticationService } from '../user-authentication/authentication.service';
 
 @Component({
   selector: 'app-user-form',
@@ -19,48 +17,49 @@ export class UserFormComponent implements OnInit {
   photoFile: File | undefined;
   photoPreview: string | undefined;
   isUpdate: boolean = false; // por defecto estamos en CREAR no en ACTUALIZAR
-  //groups: Group[] = []; // array de grupos
-  //hobbies: Hobby[] = [];
-  //posts: Post[] = [];
+  //userEmail = '';
+  errorMessage = '';
 
   userForm = new FormGroup({
     id: new FormControl(0),
     firstName: new FormControl<string>('', Validators.required),
     lastName: new FormControl<string>(''),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
-    password: new FormControl<string>(''),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]),
+    passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]),
     phone: new FormControl<string>('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
     codigoPostal: new FormControl<string>('', Validators.pattern('^[0-9]{5}$')),
     ciudad: new FormControl<string>(''),
     sexo: new FormControl<string>(''),
-    fechaNacimiento: new FormControl<Date>(new Date(), Validators.required),
+    fechaNacimiento: new FormControl<Date>(new Date('1960-12-31'), Validators.required),
     available: new FormControl<boolean>(false),
     photoUrl: new FormControl(''),
-    //userRole: new FormControl(),
-    //groups: new FormControl(),
-    //hobbies: new FormControl(),
-    //posts: new FormControl(),
+    role: new FormControl('USER')
+  },
+  {
+    validators: this.passwordConfirmValidator // Validador personalizado que comprueba dos campos al mismo tiempo
   });
 
   constructor(
+    //private authService: AuthenticationService,
     private httpClient: HttpClient,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    //this.authService.userEmail.subscribe(userEmail => this.userEmail = userEmail);
+  }
 
   ngOnInit(): void {
-    // cargar grupos, hobbies, posts de backend para los combos en el formulario
-    //this.httpClient.get<Author[]>('http://localhost:8080/user/posts/' + id)
-    //.subscribe(authors => this.authors = authors);
+
+    //console.log(this.userEmail);
 
     this.activatedRoute.params.subscribe(params => {
       const id = params['id'];
-      if (!id) return;
-
-      console.log(this.user);
+      console.log('id: '+ id);
+      if (id) //return;
 
       this.httpClient.get<User>('http://localhost:8080/user/'+id).subscribe(user => {
-          console.log(user);
+          //console.log(user);
           
           this.isUpdate = true;
           console.log(this.isUpdate)
@@ -69,6 +68,18 @@ export class UserFormComponent implements OnInit {
           
         });
     });
+  }
+
+  passwordConfirmValidator(control: AbstractControl) {
+
+    if (control.get('password')?.value === control.get('passwordConfirm')?.value) {
+      return null; // las password coinciden por tanto no hay error devolvemos null
+    } else {
+      // las password no coinciden devolver un error:
+      return {
+        'confirmError': true
+      }
+    }
   }
 
   onFileChange(event: Event) {
@@ -87,7 +98,6 @@ export class UserFormComponent implements OnInit {
   }
 
   save() {
-
     let formData = new FormData();
     formData.append('id', this.userForm.get('id')?.value?.toString() ?? '0');
     formData.append('firstName', this.userForm.get('firstName')?.value ?? '');
@@ -98,29 +108,43 @@ export class UserFormComponent implements OnInit {
     formData.append('codigoPostal', this.userForm.get('codigoPostal')?.value?.toString() ?? '');
     formData.append('ciudad', this.userForm.get('ciudad')?.value ?? '');
     formData.append('sexo', this.userForm.get('sexo')?.value ?? '');
-    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '');
+    formData.append('fechaNacimiento', this.userForm.get('fechaNacimiento')?.value?.toString() ?? '1960-12-31');
     formData.append('photoUrl', this.userForm.get('photoUrl')?.value ?? '');
     formData.append('available', this.userForm.get('available')?.value?.toString() ?? 'false');
-    formData.append('userRole', 'USER');
-    //formData.append('groups', this.userForm.get('groups')?.value ?? '');
-    //formData.append('hobbies', this.userForm.get('hobbies')?.value ?? '');
-    //formData.append('posts', this.userForm.get('posts')?.value ?? '');
-
+    formData.append('role', this.userForm.get('role')?.value ?? 'USER');
+    
     if(this.photoFile) {
       formData.append("photo", this.photoFile);
     }
 
-    console.log(this.isUpdate)
+    console.log('isUpdated: ' + this.isUpdate);
+    formData.forEach((value, key) => {
+      console.log(key + ': ' + value);
+    });
+    console.log(this.userForm.value);
+    
     if (this.isUpdate) {
       const url = 'http://localhost:8080/user/account'; // + this.user?.id;
-      this.httpClient.put<User>(url, formData).subscribe((user) => {
-        this.router.navigate(['/users', user.id, 'detail']);
-      });
+      this.httpClient.put<User>(url, formData).subscribe({
+        next: user => {
+          this.router.navigate(['/users', user.id, 'detail']);
+      },
+        error: response => {
+          console.log(response);
+          this.errorMessage = response.error;
+        }
+    });
     } else {
       const url = 'http://localhost:8080/user/photo';
-      this.httpClient.post<User>(url, formData).subscribe((user) => {
-        this.router.navigate(['/users', user.id, 'detail']);
-      });
+      this.httpClient.post<User>(url, formData).subscribe({
+        next: user => {
+          this.router.navigate(['/users', user.id, 'detail']);
+      },
+        error: response => {
+          console.log(response);
+          this.errorMessage = response.error;
+        }
+    });
     }
   }
 

@@ -1,19 +1,40 @@
-
 <main class="form-signin w-100 m-auto">
   <form [formGroup]="loginForm" (ngSubmit)="save()">
-    <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
     <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
-
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
       <label for="email">Email address</label>
+      @if (loginForm.controls.email.touched && loginForm.controls.email.errors) {
+      <div>
+        @if (loginForm.controls.email.errors['required']) {
+        <small class="text-danger">Email es obligatorio.</small>
+        }
+        @if (loginForm.controls.email.errors['email']) {
+        <small class="text-danger">El formato del email introducido es incorrecto.</small>
+        }
+      </div>
+      }
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password"
+        minlength="8" maxlength="12">
       <label for="password">Password</label>
+      @if (loginForm.controls.password.touched && loginForm.controls.password.errors) {
+      <div>
+        @if (loginForm.controls.password.errors['required']) {
+        <small class="text-danger">Password es obligatorio y debe tener entre 8 y 12 carácteres.</small>
+        }
+      </div>
+      }
     </div>
 
-    <button class="btn btn-primary w-100 py-2" type="submit">Iniciar sesión</button>
-    <p class="mt-5 mb-3 text-body-secondary text-center">©2024 - Senior Meet</p>
+    <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
+    @if (loginForm.invalid) { <!-- && !errorMessage){ -->
+    <small class="text-danger">Debes completar de forma correcta los campos para iniciar sesión</small>
+    }
+    @if (errorMessage && errorMessage.length > 0) {
+      <small class="text-danger">{{errorMessage}}</small>
+    }
+
   </form>
 </main>

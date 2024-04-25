@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-8 mt-3">
   
         @if (isUpdate) {
-        <h1 class="mt-5 mb-5">Actualizar usuario existente con id {{userForm.get('id')?.value}}</h1>
+        <h1 class="h3 mb-3 fw-normal w-100 m-auto">Actualizar usuario</h1> <!-- existente con id {{userForm.get('id')?.value}}</h1> -->
         } @else {
-        <h1 class="mt-5 mb-5">Crear nuevo usuario</h1>
+        <h1 class="h3 mb-3 fw-normal w-100 m-auto">Crear nuevo usuario</h1>
         }
         <!-- <h1 class="mt-5 mb-5">Actualizar perfil</h1>   -->
   
         <form [formGroup]="userForm" (ngSubmit)="save()">
   
           <input type="hidden" formControlName="id">
-          <input type="hidden" formControlName="userRole">
+          <input type="hidden" formControlName="role" id="role" value="USER">
             
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Nombre de usuario">
@@ -44,6 +44,43 @@
                 }
               </div>
             }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" formControlName="password" 
+            placeholder="Password" min="8" max="12">
+            <label for="password">Password</label>
+            @if (userForm.controls.password.touched && userForm.controls.password.errors) {
+              <div>
+                @if (userForm.controls.password.errors['required']) {
+                  <small class="text-danger">Password es obligatorio.</small>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm"
+            placeholder="Confirmación password" min="8" max="12">
+            <label for="passwordConfirm">Confirmación password</label>
+            @if(userForm.controls.passwordConfirm.touched &&
+                (
+                  userForm.controls.password.errors ||
+                  userForm.controls.passwordConfirm.errors ||
+                  userForm.getError('confirmError')
+                )
+              ) {
+                <small class="text-danger">
+                  La contraseña y confirmación son obligatorias, deben coincidir y estar comprendidas entre 8 y 12 caracteres.
+                </small>
+            }
+            <!--
+            @if (registerForm.controls.passwordConfirm.touched && registerForm.getError('confirmError')) {
+              <div>
+                <small class="text-danger">Las contraseñas no coinciden.</small>
+              </div>
+            }
+            -->
           </div>
 
           <div class="form-floating mb-3">
@@ -85,7 +122,7 @@
             <select class="form-select" id="sexo" formControlName="sexo" placeholder="Sexo">
               <option value="FEMENINO">Femenino</option>
               <option value="MASCULINO">Masculino</option>
-              <option value="OTRO">Otro</option>
+              <option value="NO_BINARIO">No binario</option>
              </select>
             <label for="sexo">Sexo</label>
           </div>
@@ -94,7 +131,7 @@
             <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" 
             placeholder="Fecha de Nacimiento" max="1960-12-31" value="1960-12-31">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
-            @if (userForm.controls.fechaNacimiento.touched && userForm.controls.fechaNacimiento.errors) {
+            @if (userForm.controls.fechaNacimiento.errors) {
               <div>
                 @if (userForm.controls.fechaNacimiento.errors['required']) {
                   <small class="text-danger">Fecha de Nacimiento es obligatorio.</small>
@@ -117,25 +154,32 @@
             <!-- <button class="btn btn-outline-secondary" type="button" id="photoBtn">Button</button> -->
           </div>
 
-  
-  
-
    
           @if (isUpdate) {
-          <button class="btn btn-success" type="submit">Actualizar</button>
+          <button class="btn btn-primary py-2 mb-3" type="submit" [disabled]="userForm.invalid">Actualizar</button>
           } @else {
-          <button class="btn btn-success" type="submit">Crear</button>
+          <button class="btn btn-primary py-2 mb-3 me-3" type="submit" [disabled]="userForm.invalid">Crear</button>
           }
-          </form>
+          
+          @if (userForm.invalid){
+            <p><small class="text-danger">Debes completar de forma correcta los campos para poder guardar.</small></p>
+          }
+          
+          @if (errorMessage && errorMessage.length > 0) {
+            <p><small class="text-danger">{{errorMessage}}</small></p>
+          }
+        
+        </form>
       </div>
   
-      <div class="col-lg-4">
+
+      <div class="col-lg-4 mt-3">
         @if (photoPreview) {
-          <h2 class="my-5">Previsualización foto</h2>
+          <h2 class="h3 mb-3 fw-normal">Avatar</h2>
           <img class="img-fluid" [src]="photoPreview" alt="photoPreview">
         }
         @if (!photoPreview && user?.photoUrl) {
-          <h2 class="my-5">Previsualización foto</h2>
+          <h2 class="h3 mb-3 fw-normal">Avatar</h2>
           <img class="img-fluid" [src]="'http://localhost:8080/files/' + user?.photoUrl" alt="user?.photoUrl">
         }
       </div>

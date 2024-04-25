@@ -1,10 +1,8 @@
-
 <main class="form-signin w-100 m-auto">
   <form [formGroup]="registerForm" (ngSubmit)="save()">
-    <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
     <h1 class="h3 mb-3 fw-normal">Crear nueva cuenta</h1>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
       <label for="email">Email address</label>
       @if (registerForm.controls.email.touched && registerForm.controls.email.errors) {
@@ -19,28 +17,13 @@
       }
     </div>
 
-    <!-- <div class="form-floating">
-      <input type="text" class="form-control" id="phone" placeholder="654987987" formControlName="phone">
-      <label for="phone">Teléfono móvil</label>
-      @if (registerForm.controls.phone.touched && registerForm.controls.phone.errors) {
-        <div>
-          @if (registerForm.controls.phone.errors['required']) {
-            <small class="text-danger">Teléfono es obligatorio.</small>
-          }
-          @if (registerForm.controls.phone.errors['pattern']) {
-            <small class="text-danger">Formato de teléfono incorrecto. Debe tener 9 dígitos.</small>
-          }
-        </div>
-      }
-    </div> -->
-
-    <div class="form-floating">
-      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password" min="8" max="12">
       <label for="password">Password</label>
     </div>
 
-    <div class="form-floating">
-      <input type="password" class="form-control" id="passwordConfirm" placeholder="Password" formControlName="passwordConfirm">
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="passwordConfirm" placeholder="Password" formControlName="passwordConfirm" min="8" max="12">
       <label for="passwordConfirm">Confirmación password</label>
 
       @if(
@@ -52,22 +35,25 @@
           )
         ) {
           <small class="text-danger">
-            La contraseña y confirmación son obligatorias, deben coincidir y estar comprendidas entre 8 y 30 caracteres.
+            La contraseña y confirmación son obligatorias, deben coincidir y estar comprendidas entre 8 y 12 caracteres.
           </small>
       }
-      <!--
-      @if (registerForm.controls.passwordConfirm.touched && registerForm.getError('confirmError')) {
-        <div>
-          <small class="text-danger">Las contraseñas no coinciden.</small>
-        </div>
-      }
-      -->
     </div>
 
     <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="registerForm.invalid">Registrarse</button>
-    @if (registerForm.invalid){
+    @if (registerForm.invalid && !successMessage){
       <small class="text-danger">Debes completar de forma correcta los campos para poder guardar.</small>
     }
-    <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
+    @if (errorMessage && errorMessage.length > 0) {
+      <small class="text-danger">{{errorMessage}}</small>
+    }
+    @if (successMessage) {
+      <small class="text-success">
+        Registro completado con éxito.
+      </small>
+      <small class="text-success">
+        Inicia sesión <a routerLink="/user-login">aquí</a>.
+      </small>
+    }
   </form>
 </main>
