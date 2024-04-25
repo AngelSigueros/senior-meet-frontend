@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Post } from '../models/post.model';
 import { AuthenticationService } from '../user-authentication/authentication.service';
+import { User } from '../models/user.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-post-list',
@@ -13,9 +15,11 @@ import { AuthenticationService } from '../user-authentication/authentication.ser
 })
 export class PostListComponent implements OnInit {
 
-  posts: Post[] = []
+  posts: Post[] = [];
 
   isAdmin: Boolean = false;
+  currentUser: User | undefined;
+  userPosts : Post[] = [];
 
   constructor (private authService: AuthenticationService, private http: HttpClient){
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
@@ -26,8 +30,17 @@ export class PostListComponent implements OnInit {
     
   }
 
-  loadPosts(){
-    this.http.get<Post[]>("http://localhost:8080/post").subscribe(p=>this.posts=p);
+  loadPosts() {
+    forkJoin({
+      posts: this.http.get<Post[]>("http://localhost:8080/post"),
+      currentUser: this.http.get<User>('http://localhost:8080/user/account')
+    }).subscribe(({ posts, currentUser }) => {
+      this.posts = posts;
+      this.currentUser = currentUser;
+      this.http.get<Post[]>("http://localhost:8080/post/user/" + currentUser.id).subscribe(userPosts => {
+        this.userPosts = userPosts;
+      });
+    });
   }
 
   deletePost(postId: number){
@@ -35,6 +48,26 @@ export class PostListComponent implements OnInit {
     this.http.delete<Boolean>(url).subscribe(b => {
       this.loadPosts();
     });
+  }
+
+  formatDateTime (date: string): string {
+    const formattedDate = new Date(date);
+  // Sumar dos horas a la hora registrada
+    formattedDate.setHours(formattedDate.getHours() + 2);
+    // Obtener los componentes de la fecha
+    
+    const day = formattedDate.getDate().toString().padStart(2, '0');
+    const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = formattedDate.getFullYear();
+    const hours = formattedDate.getHours().toString().padStart(2, '0');
+    const minutes = formattedDate.getMinutes().toString().padStart(2, '0');
+  
+    // Combinar los componentes en el formato deseado
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+  }
+
+  isPostfromUser(post: Post):boolean {
+    return post !== undefined && this.userPosts.includes(post);;
   }
 
 }

@@ -18,7 +18,7 @@
                   @if (post.group) {
                     <h5 class="my-3 fw-bold">en {{post.group.title}}</h5>
                   }
-                  <h5 class="my-3 text muted small">{{post.date}}</h5>
+                  <h5 class="my-3 text muted small">{{formatDateTime(post.date.toString())}}</h5>
                   <div class="card-body shadow rounded">
                     <h5 class="my-3">{{ post.content.length > 80 ? post.content.slice(0, 80) + '...' : post.content }}</h5>
                   </div>
@@ -28,10 +28,11 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
-                      <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-pencil"></i></button>
-                      @if (isAdmin){
+                      @if (isAdmin ||isPostfromUser(post)){
+                        <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-pencil"></i></button>
                         <button class="btn btn-sm btn-outline-secondary me-2" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
                       }
+                     
                     </div>
                   </div>
                 </div>
