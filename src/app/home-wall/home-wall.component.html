@@ -15,7 +15,28 @@
         </strong></h3>
   
         <article class="blog-post">
+
+          <div class="col-md-24 mt-3 mb-4">
+
+            <img  src="assets/img/1.png">          
+                   
+          </div>
+
+          <div class="col-md-24 mt-3 mb-4">
+
+            <img  src="assets/img/2.png">          
+                   
+          </div>
+
+          <div class="col-md-24 mt-3 mb-4">
+
+            <img  src="assets/img/3.png">          
+                   
+          </div>
+
+          <!--
           <div class="card-body shadow-rounded">
+            
           @for (post of posts; track post.id) {
             
             <h2 class="link-body-emphasis mb-1">{{post.user.photoUrl}}</h2>
@@ -35,27 +56,69 @@
         
         }
       </div>
-          <!--
-            @for (post of posts; track post.id) {
-        <div class="col">
-          <div class="card shadow-sm">
-           
-            <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="{{post.photoUrl}}">
-
-            
-              <div class="btn-group">
-                <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-primary">Detalle</button>
+          
+          @if (post) {
+    
+        <div class="container">
+         
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="avatar"
+                    class="img-fluid" style="width: 700px;">
+                  <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+                          <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
+                 
+                </div>
               </div>
-              <small class="text-body-secondary"></small>
+              
+            <div class="col-lg-812">
+              <div class="card mb-3">
+                <div class="card-body text-center">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Descripción:
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{group.description}}</p>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            
+
+            <div class="col-lg-812">
+              <div class="card mb-3">
+                <div class="card-body text-center">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Proximos Eventos:
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{group.rules}}</p>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-check text-center mb-3">
+              <input class="form-check-input-center " type="checkbox" id="available" formControlName="available" placeholder="nombre@email.com">
+              <label class="form-check-label-center" for="available" style="cursor:pointer;">
+                Activo 
+              </label>
+
+            </div>
+
           </div>
-        </div>
-   
-      } @empty {
-      <p class="card-text">No hay Posts!</p>
-      }
-          -->
+ 
+          
+
+   }
+-->
         </article>
   
         <nav class="blog-pagination" aria-label="Pagination">
@@ -64,6 +127,7 @@
         </nav>
   
       </div>
+      
       <!--
       <ngb-carousel>
         @for (post of posts; track post.id) {
