@@ -58,7 +58,7 @@
     }@else {
       <button class="btn hidden"></button>
     }
-    @if (numPosts//3>currentPage){
+    @if (numPosts/3>currentPage){
       <button class="btn btn-lg btn-outline-secondary me-2" (click)="onPageChange(currentPage+1)">
         <i class="bi bi-box-arrow-right text-primary"></i>
       </button>
