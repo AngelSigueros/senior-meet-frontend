@@ -11,7 +11,12 @@
                     class="img-fluid" style="width: 700px;">
                   <h5 class="my-3">{{group.title}}</h5>
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-success">Eres miembro</button>
+                    @if (isGroupFromUser(group)){
+                      <button (click)="removeGroupFromUser(group)" class="btn btn-primary">Abandonar</button>
+                    }@else {
+                      <button (click)="addGroupToUser(group)" class="btn btn-primary">Unirse</button>
+                    }
+                    
                   </div>
                 </div>
               </div>
