@@ -7,7 +7,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         @if (posts && posts.length > 0) {
           <!-- Iterar sobre los posts y mostrar las tarjetas -->
-          @for (post of posts; track post.id) {
+          @for (post of posts.slice((currentPage - 1) * 3, currentPage * 3); track post.id) {
             <div class="col">
               <div class="card shadow-sm">
                 <!-- Contenido de la tarjeta de cada post -->
@@ -49,5 +49,22 @@
         }
       </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    @if(currentPage>1){
+      <button class="btn btn-lg btn-outline-secondary me-2" (click)="onPageChange(currentPage+1)">
+        <i class="bi bi-box-arrow-left text-primary"></i>
+      </button>
+    }@else {
+      <button class="btn hidden"></button>
+    }
+    @if (numPosts/3>currentPage){
+      <button class="btn btn-lg btn-outline-secondary me-2" (click)="onPageChange(currentPage-1)">
+        <i class="bi bi-box-arrow-right text-primary"></i>
+      </button>
+    }@else {
+      <button class="btn hidden"></button>
+    }
+    
   </div>
 </main>

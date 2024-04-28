@@ -20,6 +20,8 @@ export class PostListComponent implements OnInit {
   isAdmin: Boolean = false;
   currentUser: User | undefined;
   userPosts : Post[] = [];
+  currentPage: number = 1;
+  numPosts: number = 0;
 
   constructor (private authService: AuthenticationService, private http: HttpClient){
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
@@ -36,6 +38,7 @@ export class PostListComponent implements OnInit {
       currentUser: this.http.get<User>('http://localhost:8080/user/account')
     }).subscribe(({ posts, currentUser }) => {
       this.posts = posts;
+      this.numPosts=posts.length;
       this.currentUser = currentUser;
       this.http.get<Post[]>("http://localhost:8080/post/user/" + currentUser.id).subscribe(userPosts => {
         this.userPosts = userPosts;
@@ -68,6 +71,10 @@ export class PostListComponent implements OnInit {
 
   isPostfromUser(post: Post):boolean {
     return post !== undefined && this.userPosts.includes(post);;
+  }
+
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber; // Actualizar la página actual
   }
 
 }
