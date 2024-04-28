@@ -18,7 +18,8 @@
               <p class="text-center"><strong>{{group.title}}</strong></p>
               <div class="d-flex justify-content-between align-items-center"></div>
               <div class="btn-group">
-                <button [routerLink]="['/groups', group.id, 'detail']" class="btn btn-primary">Unirse</button>
+                <button [routerLink]="['/groups', group.id, 'detail']" class="btn btn-primary">Detalle</button>
+                <button (click)="addGroupToUser(group)" class="btn btn-primary">Unirse</button>
               </div>
               <small class="text-body-secondary"></small>
             </div>
