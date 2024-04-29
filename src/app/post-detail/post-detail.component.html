@@ -54,6 +54,8 @@
                 <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
               }
 
+              
+
               @if(likes.length > 0) {
                 <h5 class="my-3 d-inline-block me-2 small fw-bold">{{likes.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
               } @else {

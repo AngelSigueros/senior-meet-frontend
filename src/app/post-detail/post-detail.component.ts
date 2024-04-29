@@ -26,6 +26,8 @@ export class PostDetailComponent implements OnInit{
   currentUser: User | undefined
   mostrarComments: Boolean = false
   userPosts : Post[] = []
+  userLikes: Interaction[]=[]
+  userSaves: Interaction[]=[]
   isAdmin: Boolean = false;
 
   commentForm = this.fb.group({
@@ -70,6 +72,8 @@ export class PostDetailComponent implements OnInit{
     this.http.get<Post[]>("http://localhost:8080/post/user/"+this.currentUser.id).subscribe(ps => {
       this.userPosts=ps;
     });
+   // this.http.get<Interaction[]>('http:localhost:8080/interactions/likes/user/'+this.currentUser).subscribe(i=>this.userLikes=i);
+   // this.http.get<Interaction[]>('http:localhost:8080/interactions/saves/user/'+this.currentUser).subscribe(i=>this.userSaves=i);
     
     })
 
@@ -174,5 +178,9 @@ export class PostDetailComponent implements OnInit{
   
     // Combinar los componentes en el formato deseado
     return `${day}-${month}-${year} ${hours}:${minutes}`;
+  }
+
+  ExitsLikesFromUser():boolean{
+    return this.likes.some(item=>this.userLikes.includes(item));
   }
 }
