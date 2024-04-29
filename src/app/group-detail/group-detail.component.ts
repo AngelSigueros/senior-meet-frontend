@@ -40,11 +40,14 @@ export class GroupDetailComponent implements OnInit{
   isGroupFromUser(group: Group): boolean {
     if (this.currentUser && this.currentUser.groups) {
       console.log(this.currentUser.groups);
-      return this.currentUser.groups.includes(group);
+      //return this.currentUser.groups.includes(group);
+      return this.currentUser?.groups.some(grupo => grupo.id === group.id);
     } else {
       return false;
     }
   }
+
+  
 
   removeGroupFromUser(group: Group){
 
