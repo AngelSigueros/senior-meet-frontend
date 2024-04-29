@@ -50,8 +50,16 @@ export class GroupDetailComponent implements OnInit{
   
 
   removeGroupFromUser(group: Group){
-
-  }
+    if (this.currentUser) {
+      this.http.delete('http://localhost:8080/user/' + this.currentUser.id + '/groups/' + group.id).subscribe(s => {
+        //this.router.navigate(['/groups']);
+        this.loadGroupDetail();
+      });
+    } else {
+      // Manejar el caso en el que this.currentUser es undefined
+      console.error('Error: currentUser is undefined');
+    }
+   }
 
   addGroupToUser(group: Group) {
     if (this.currentUser) {
