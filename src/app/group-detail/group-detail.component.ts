@@ -14,8 +14,9 @@ import { User } from '../models/user.model';
 export class GroupDetailComponent implements OnInit{
 
   group: Group |undefined
-  groups: any;
+  groups: any
   currentUser: User|undefined
+  numUsersFromGroup: number = 0
 
 
   constructor (private http: HttpClient, private activatedRoute: ActivatedRoute){}
@@ -32,6 +33,7 @@ export class GroupDetailComponent implements OnInit{
     this.activatedRoute.params.subscribe(params=> {
      this.http.get<Group>("http://localhost:8080/groups/" + params['id']).subscribe(g=>{
        this.group=g;
+       this.http.get<User[]>('http://localhohst:8080/groups/'+this.group.id+'/users').subscribe(us=>this.numUsersFromGroup=us.length);
        console.log(this.group);
      })
     });
