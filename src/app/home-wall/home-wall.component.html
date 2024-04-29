@@ -13,38 +13,40 @@
         <h3 class="text-center mt-4 pb-4 mb-4 border-bottom"><strong>
           Últimas publicaciones
         </strong></h3>
+
+
+        
   
         <article class="blog-post">
 
-          <div class="col-md-24 mt-3 mb-4">
-
-            <img  src="assets/img/1.png">          
-                   
-          </div>
-
-          <div class="col-md-24 mt-3 mb-4">
-
-            <img  src="assets/img/2.png">          
-                   
-          </div>
-
-          <div class="col-md-24 mt-3 mb-4">
-
-            <img  src="assets/img/3.png">          
-                   
-          </div>
-
-          <!--
-          <div class="card-body shadow-rounded">
+          
+          @for (post of posts; track $index) {
+            <h2>
+              {{post.content}}
+            </h2>
+            <div class="picsum-img-wrapper">
+              <img class="img-fluid" [src]="'http://localhost:8080/files/' + post.photoUrl" alt="{{post.id}}" />
+            </div>
+            @if (post.user) {
+              <h4>Creado por: {{post.user.firstName}}</h4>
+            }
+            <button [routerLink]="['/posts', post.id, 'detail']">Ver publicación</button>
+            <!-- @if (post.interactions && post.interactions.length > 0){
+              @for (interaction of post.interactions; track interaction.id) {
+                <p>{{interaction.type}}</p>
+              }
+            } -->
             
+          }
+
+          
+<!--             
           @for (post of posts; track post.id) {
             
-            <h2 class="link-body-emphasis mb-1">{{post.user.photoUrl}}</h2>
-          <div class="picsum-img-wrapper">
-            <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + post.photoUrl" alt="{{post.id}}" />
-          </div>
-          <h3>{{post.content}}</h3>
-
+            
+          
+              <h3>{{post.content}}</h3> -->
+<!-- 
           @if (comments) {
             @for(comment of comments; track comment){
               <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
@@ -52,12 +54,12 @@
             <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
           } @else{
            <h5 class="my-3">No hay comentarios</h5>
-          }
+          } -->
         
-        }
-      </div>
+        <!-- } -->
+        <!-- </div> -->
           
-          @if (post) {
+          <!-- @if (post) {
     
         <div class="container">
          
@@ -117,8 +119,8 @@
  
           
 
-   }
--->
+   } -->
+
         </article>
   
         <nav class="blog-pagination" aria-label="Pagination">
@@ -183,7 +185,7 @@
                         <img class="img-fluid" [src]="'http://localhost:8080/files/' + group.photoUrl" alt="{{group.title}}" />
                       </div>
                       <div class="carousel-caption">
-                        <h6 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;">{{group.title}}</h6>
+                        <h5 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;color:chartreuse;background-color:black;font-weight:900;">{{group.title}}</h5>
                       </div>
                     </ng-template>
                     }
