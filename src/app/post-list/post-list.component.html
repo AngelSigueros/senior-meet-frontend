@@ -4,10 +4,10 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{NUM_COLS} g-3">
         @if (posts && posts.length > 0) {
           <!-- Iterar sobre los posts y mostrar las tarjetas -->
-          @for (post of posts; track post.id) {
+          @for (post of posts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE); track post.id) {
             <div class="col">
               <div class="card shadow-sm">
                 <!-- Contenido de la tarjeta de cada post -->
@@ -18,20 +18,37 @@
                   @if (post.group) {
                     <h5 class="my-3 fw-bold">en {{post.group.title}}</h5>
                   }
-                  <h5 class="my-3 text muted small">{{post.date}}</h5>
+                  <h5 class="my-3 text muted small">{{formatDateTime(post.date.toString())}}</h5>
                   <div class="card-body shadow rounded">
                     <h5 class="my-3">{{ post.content.length > 80 ? post.content.slice(0, 80) + '...' : post.content }}</h5>
                   </div>
               </div>
                 <div class="card-body">
                   <!-- Botones de acción para cada post -->
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
-                      <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-pencil"></i></button>
-                      @if (isAdmin){
-                        <button class="btn btn-sm btn-outline-secondary me-2" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
+                  <div class="d-flex justify-content-start">
+                    <div class="btn-group d-inline-block">
+                      <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary me-2 d-inline-block"><i class="bi bi-search"></i></button>
+                      @if (isAdmin ||isPostfromUser(post)){
+                        <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2 d-inline-block"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
                       }
+                      @if(likes[post.id].length > 0) {
+                        <h5 class="my-3 d-inline-block me-2 small fw-bold">{{likes[post.id].length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike(post)"><i class="bi bi-heart-fill"></i></button></h5>
+                      }@else {
+                        <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addlike(post)"><i class="bi bi-heart-fill text-danger"></i></button>
+                      }
+                      @if(saves[post.id].length >0){
+                        <h5 class="my-3 d-inline-block me-2 small fw-bold">{{saves[post.id].length}} <button class="btn btn-sm btn-outline-secondary" (click)="addsave(post)"><i class="bi bi-floppy-fill"></i></button></h5>
+                      }@else {
+                        <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addsave(post)"><i class="bi bi-floppy-fill text-primary"></i></button>
+                      }
+                      @if(post.comments&&post.comments.length>0){
+                        <h5 class="my-3 d-inline-block me-2 small fw-bold">{{post.comments.length}} <i class="bi bi-chat-text-fill"></i></h5>
+                      }@else {
+                        <h5 class="my-3 d-inline-block me-2"><i class="bi bi-chat-text"></i></h5>
+                      }
+                      
+                      
                     </div>
                   </div>
                 </div>
@@ -48,5 +65,22 @@
         }
       </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    @if(currentPage>1){
+      <button class="btn btn-lg btn-outline-secondary me-2" (click)="onPageChange(currentPage-1)">
+        <i class="bi bi-box-arrow-left text-primary"></i>
+      </button>
+    }@else {
+      <button class="btn hidden"></button>
+    }
+    @if (numPosts/ITEMS_PER_PAGE>currentPage){
+      <button class="btn btn-lg btn-outline-secondary me-2" (click)="onPageChange(currentPage+1)">
+        <i class="bi bi-box-arrow-right text-primary"></i>
+      </button>
+    }@else {
+      <button class="btn hidden"></button>
+    }
+    
   </div>
 </main>
