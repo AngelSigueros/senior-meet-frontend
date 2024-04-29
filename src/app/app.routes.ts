@@ -40,7 +40,8 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeWallComponent
+    component: HomeWallComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'blog',
