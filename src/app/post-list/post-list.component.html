@@ -4,10 +4,10 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{NUM_COLS} g-3">
         @if (posts && posts.length > 0) {
           <!-- Iterar sobre los posts y mostrar las tarjetas -->
-          @for (post of posts.slice((currentPage - 1) * 3, currentPage * 3); track post.id) {
+          @for (post of posts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE); track post.id) {
             <div class="col">
               <div class="card shadow-sm">
                 <!-- Contenido de la tarjeta de cada post -->
@@ -26,13 +26,24 @@
                 <div class="card-body">
                   <!-- Botones de acción para cada post -->
                   <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
+                    <div class="btn-group d-inline-block">
+                      <button [routerLink]="['/posts', post.id, 'detail']" class="btn btn-sm btn-outline-secondary me-2 d-inline-block"><i class="bi bi-search"></i></button>
                       @if (isAdmin ||isPostfromUser(post)){
-                        <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-sm btn-outline-secondary me-2" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
+                        <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2 d-inline-block"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
                       }
-                     
+                      @if(likes[post.id].length > 0) {
+                        <h5 class="my-3 d-inline-block me-2 small fw-bold">{{likes[post.id].length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike(post)"><i class="bi bi-heart-fill"></i></button></h5>
+                      }@else {
+                        <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addlike(post)"><i class="bi bi-heart-fill text-danger"></i></button>
+                      }
+                      @if(saves[post.id].length >0){
+                        <h5 class="my-3 d-inline-block me-2 small fw-bold">{{saves[post.id].length}} <button class="btn btn-sm btn-outline-secondary" (click)="addsave(post)"><i class="bi bi-floppy-fill"></i></button></h5>
+                      }@else {
+                        <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addsave(post)"><i class="bi bi-floppy-fill text-primary"></i></button>
+                      }
+                      
+                      
                     </div>
                   </div>
                 </div>
@@ -58,7 +69,7 @@
     }@else {
       <button class="btn hidden"></button>
     }
-    @if (numPosts/3>currentPage){
+    @if (numPosts/ITEMS_PER_PAGE>currentPage){
       <button class="btn btn-lg btn-outline-secondary me-2" (click)="onPageChange(currentPage+1)">
         <i class="bi bi-box-arrow-right text-primary"></i>
       </button>

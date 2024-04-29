@@ -5,6 +5,7 @@ import { Post } from '../models/post.model';
 import { AuthenticationService } from '../user-authentication/authentication.service';
 import { User } from '../models/user.model';
 import { forkJoin } from 'rxjs';
+import { Interaction } from '../models/interaction.model';
 
 @Component({
   selector: 'app-post-list',
@@ -13,6 +14,7 @@ import { forkJoin } from 'rxjs';
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.css'
 })
+
 export class PostListComponent implements OnInit {
 
   posts: Post[] = [];
@@ -21,7 +23,11 @@ export class PostListComponent implements OnInit {
   currentUser: User | undefined;
   userPosts : Post[] = [];
   currentPage: number = 1;
+  ITEMS_PER_PAGE: number = 4;
+  NUM_COLS: number = 2;
   numPosts: number = 0;
+  likes: Interaction[][]=[];
+  saves: Interaction[][]=[];
 
   constructor (private authService: AuthenticationService, private http: HttpClient){
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
@@ -40,6 +46,7 @@ export class PostListComponent implements OnInit {
       this.posts = posts;
       this.numPosts=posts.length;
       this.currentUser = currentUser;
+      this.inicializarLikesAndSaves();
       this.http.get<Post[]>("http://localhost:8080/post/user/" + currentUser.id).subscribe(userPosts => {
         this.userPosts = userPosts;
       });
@@ -75,6 +82,62 @@ export class PostListComponent implements OnInit {
 
   onPageChange(pageNumber: number): void {
     this.currentPage = pageNumber; // Actualizar la página actual
+  }
+
+  addlike(postToLike:Post){
+    if (!this.currentUser||!postToLike) return;
+    const id:number = 0;
+    const type: string ='LIKE';
+    const user: User  = this.currentUser;
+    const post: Post = postToLike;
+    const date: Date = new Date();
+
+    let interactionToSave: Interaction = {
+      id: id,
+      user: user,
+      post: post,
+      type: type,
+      date: date
+    }
+
+    const urlLike = 'http://localhost:8080/post/'+postToLike?.id+'/add-like/'+this.currentUser?.id;
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPosts());
+  }
+
+  addsave(postToSave: Post):void{
+    if(!this.currentUser!||!postToSave) return;
+    const id:number = 0;
+    const type: string ='SAVE';
+    const user: User = this.currentUser;
+    const post: Post = postToSave;
+    const date: Date = new Date();
+
+    let interactionToSave: Interaction = {
+      id: id,
+      user: user,
+      post: post,
+      type: type,
+      date: date
+    }
+
+    const urlLike = 'http://localhost:8080/post/'+postToSave?.id +'/add-save/'+this.currentUser?.id;
+    this.http.post<Boolean>(urlLike,interactionToSave).subscribe(b => this.loadPosts());
+  }
+
+  inicializarLikesAndSaves(): void {
+    const requests = this.posts.map(post => {
+      const likesRequest = this.http.get<Interaction[]>("http://localhost:8080/post/"+post.id+"/interactions/likes");
+      const savesRequest = this.http.get<Interaction[]>("http://localhost:8080/post/"+post.id+"/interactions/saves");
+      return forkJoin([likesRequest, savesRequest]);
+    });
+  
+    forkJoin(requests).subscribe(responses => {
+      responses.forEach((response, index) => {
+        const [likes, saves] = response;
+        this.likes[this.posts[index].id] = likes;
+        this.saves[this.posts[index].id] = saves;
+      });
+    });
   }
 
 }
