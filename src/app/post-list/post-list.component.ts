@@ -28,6 +28,7 @@ export class PostListComponent implements OnInit {
   numPosts: number = 0;
   likes: Interaction[][]=[];
   saves: Interaction[][]=[];
+  comments: Comment[][]=[];
 
   constructor (private authService: AuthenticationService, private http: HttpClient){
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
@@ -139,5 +140,7 @@ export class PostListComponent implements OnInit {
       });
     });
   }
+
+
 
 }
