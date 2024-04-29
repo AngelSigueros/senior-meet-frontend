@@ -67,7 +67,8 @@ export const routes: Routes = [
   },
   {
     path: 'groups',
-    component: GroupListComponent
+    component: GroupListComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'groups/create',
@@ -76,15 +77,18 @@ export const routes: Routes = [
   },
   {
     path: 'groups/:id/detail',
-    component: GroupDetailComponent
+    component: GroupDetailComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'hobbies',
-    component: HobbyListComponent
+    component: HobbyListComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'hobbies/:id/detail',
-    component:HobbyDetailComponent
+    component:HobbyDetailComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'hobbies/create',
@@ -97,51 +101,63 @@ export const routes: Routes = [
   // },
   {
     path: 'posts',
-    component: PostListComponent
+    component: PostListComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'posts/:id/detail',
-    component: PostDetailComponent
+    component: PostDetailComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'posts/:id/update',
-    component: PostFormComponent
+    component: PostFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'posts/create',
-    component: PostFormComponent
+    component: PostFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'comments',
-    component: CommentListComponent
+    component: CommentListComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'comments/:id/detail',
-    component: CommentDetailComponent
+    component: CommentDetailComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'comments/:id/update',
-    component: CommentFormComponent
+    component: CommentFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'comments/create',
-    component: CommentFormComponent
+    component: CommentFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'user-profile/:id/detail',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'saved',
-    component: SavedComponent
+    component: SavedComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'users',
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'users/:id/detail',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'users/create',
@@ -155,8 +171,8 @@ export const routes: Routes = [
   },
   {
     path: 'users/account/:id',
-    component: UserFormComponent //,
-    //canActivate: [userRoleGuard]
+    component: UserFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'user-login',
