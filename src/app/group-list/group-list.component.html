@@ -21,17 +21,17 @@
                 
                 <div class="d-flex justify-content-start">
                 <div class="btn-group d-inline-block">
-                  <button [routerLink]="['/groups', group.id, 'detail']" title='Detalle' class="btn btn-sm btn-outline-secondary text-primary d-inline-block me-2"><i class="bi bi-search"></i></button>
+                  <button [routerLink]="['/groups', group.id, 'detail']" title='Detalle' class="btn btn-lg btn-outline-secondary text-primary d-inline-block me-2"><i class="bi bi-search"></i></button>
                   @if (isAdmin|| isGroupFromUser(group)){
-                    <button [routerLink]="['/groups', group.id, 'update']" title='Editar' class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary"><i class="bi bi-pencil"></i></button>
-                    <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary" title='Borrar' (click)="deleteGroup(group.id)"><i class="bi bi-trash"></i></button> 
+                    <button [routerLink]="['/groups', group.id, 'update']" title='Editar' class="btn btn-lg btn-outline-secondary me-2 d-inline-block text-primary"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-lg btn-outline-secondary me-2 d-inline-block text-primary" title='Borrar' (click)="deleteGroup(group.id)"><i class="bi bi-trash"></i></button> 
                   }
 
                   
                   @if (isMember(group)){
-                    <button (click)="removeGroupFromUser(group)" title='Abandonar' class="btn btn-sm btn-outline-secondary d-inline-block me-2 text-primary"><i class="bi bi-box-arrow-left"></i></button>
+                    <button (click)="removeGroupFromUser(group)" title='Abandonar' class="btn btn-lg btn-outline-secondary d-inline-block me-2 text-primary"><i class="bi bi-box-arrow-left"></i></button>
                   } @else {
-                    <button (click)="addGroupToUser(group)" title='Unirse' class="btn btn-sm btn-outline-secondary d-inline-block me-2 text-primary"><i class="bi bi-box-arrow-in-right"></i></button>
+                    <button (click)="addGroupToUser(group)" title='Unirse' class="btn btn-lg btn-outline-secondary d-inline-block me-2 text-primary"><i class="bi bi-box-arrow-in-right"></i></button>
                   }
                   
                 </div>
