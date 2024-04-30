@@ -18,37 +18,33 @@
         
   
         <article class="blog-post">
-
-           
+          
           <div class="card">
-            <div class="row row-cols-1 row-cols-md-3 g-3">
-  @for (post of posts; track $index) {
-  <div class="col">
-    <div class="card shadow-sm">
-      <h2 class="card-title">
-        {{post.content}}
-      </h2>
-      <div class="card-img">
-        <img class="img-fluid" [src]="'http://localhost:8080/files/' + post.photoUrl" alt="{{post.id}}" />
-      </div>
-           @if (post.user) {
-             <h5>Creado por: {{post.user.firstName}}</h5>
-             }
-        <button [routerLink]="['/posts', post.id, 'detail']">Ver publicación</button>
-  
-  
-      <!-- @if (post.interactions && post.interactions.length > 0){
-                                @for (interaction of post.interactions; track interaction.id) {
-                                  <p>{{interaction.type}}</p>
-                                }
-                              } -->
-      }
-              
-          
-          
-            </div>
-          </div>
+            <div class="row">
 
+          @for (post of posts; track $index) {
+            <div class="card mb-3">
+            <h2>
+              {{post.content}}
+            </h2>
+            <div class="picsum-img-wrapper">
+              <img class="img-fluid" [src]="'http://localhost:8080/files/' + post.photoUrl" alt="{{post.id}}" />
+            </div>
+            @if (post.user) {
+              <h4>Creado por: {{post.user.firstName}}</h4>
+            }
+            <button [routerLink]="['/posts', post.id, 'detail']">Ver publicación</button>
+            <!-- @if (post.interactions && post.interactions.length > 0){
+              @for (interaction of post.interactions; track interaction.id) {
+                <p>{{interaction.type}}</p>
+              }
+            } -->
+          </div> 
+          }
+
+        </div>
+      </div>
+          
  
 
         </article>
