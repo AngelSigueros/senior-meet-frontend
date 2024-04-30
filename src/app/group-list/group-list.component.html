@@ -1,39 +1,58 @@
 
-  <ul class="list-unstyled d-flex mt-3">
-    <button class="btn btn-success" [routerLink]="['/groups/create']">Crear un grupo</button>
-  </ul>
+ 
+  <button class="btn btn-lg btn-outline-secondary text-primary text strong mb-3" title='Crear un grupo' [routerLink]="['/groups/create']"><i class="bi bi-pencil-square bi-lg"></i></button>
+
 
   <div class="album py-5 bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
 
         @for ( group of groups; track group.id) {
         <div class="col">
-          <div class="card shadow-sm">
-            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-            <img src="http://localhost:8080/files/{{group.photoUrl}}" alt="{{group.title}}">
-
-            <div class="card-body">
-              <p class="text-center"><strong>{{group.title}}</strong></p>
-              <div class="d-flex justify-content-between align-items-center"></div>
-              <div class="btn-group">
-                <button [routerLink]="['/groups', group.id, 'detail']" class="btn btn-primary">Detalle</button>
-                @if (isGroupFromUser(group)){
-                  <button (click)="removeGroupFromUser(group)" class="btn btn-primary">Abandonar</button>
-                } @else {
-                  <button (click)="addGroupToUser(group)" class="btn btn-primary">Unirse</button>
-                }
+          
+            <div class="card shadow-sm">
+              <div class="d-flex flex-column align-items-center">
+                  <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <img src="http://localhost:8080/files/{{group.photoUrl}}" alt="{{group.title}}">
+                <h5 class="my-1"><strong><small>{{group.title}}</small></strong></h5>
+                <h5 class="my-1"><small>{{group.users.length}} Miembros</small></h5>
+             
                 
+                <div class="d-flex justify-content-start">
+                <div class="btn-group d-inline-block">
+                  <button [routerLink]="['/groups', group.id, 'detail']" title='Detalle' class="btn btn-lg btn-outline-secondary text-primary d-inline-block me-2"><i class="bi bi-search"></i></button>
+                  @if (isAdmin|| isGroupFromUser(group)){
+                    <button [routerLink]="['/groups', group.id, 'update']" title='Editar' class="btn btn-lg btn-outline-secondary me-2 d-inline-block text-primary"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-lg btn-outline-secondary me-2 d-inline-block text-primary" title='Borrar' (click)="deleteGroup(group.id)"><i class="bi bi-trash"></i></button> 
+                  }
+
+                  
+                  @if (isMember(group)){
+                    <button (click)="removeGroupFromUser(group)" title='Abandonar' class="btn btn-lg btn-outline-secondary d-inline-block me-2 text-primary"><i class="bi bi-box-arrow-left"></i></button>
+                  } @else {
+                    <button (click)="addGroupToUser(group)" title='Unirse' class="btn btn-lg btn-outline-secondary d-inline-block me-2 text-primary"><i class="bi bi-box-arrow-in-right"></i></button>
+                  }
+                  
+                </div>
               </div>
-              <small class="text-body-secondary"></small>
+                
+             
+              
             </div>
-            
           </div>
+
+            
+          
+
         </div>
    
       } @empty {
-      <p class="card-text">No hay usuarios!!</p>
+        <div class="col container-fluid card shadow-sm">
+          <div class="alert alert-primary" role="alert">
+            ¡No hay grupos!!
+          </div>
+        </div>
       }
     </div>
   </div>
