@@ -62,44 +62,59 @@ export class PostFormComponent implements OnInit{
     });
   }
 
+  onFileChange(event: Event) {
+
+    let target = event.target as HTMLInputElement; // este target es el input de tipo file donde se carga el archivo
+
+
+
+    if(target.files === null || target.files.length == 0){
+
+      return; // no se procesa ningún archivo
+
+    }
+
+
+
+    this.photoFile = target.files[0];
+
+  }
+
   save(){
     console.log("Guardando Post");
 
-    // Extraer los valores de cada input escritos por el usuario
-    const id = this.postForm.get('id')?.value ?? 0;
-    const content = this.postForm.get('content')?.value ?? 'Contenido Post';
-    const photoUrl = this.postForm.get('photoUrl')?.value ?? 'Photo url';
-    const videoUrl = this.postForm.get('videoUrl')?.value ?? 'Video url';
-    const group = this.postForm.get('group')?.value  ;
-    const user = this.postForm.get('user')?.value?? this.currentUser ;
-    const interactions = this.postForm.get('interactions')?.value ?? [];
-    const comments = this.postForm.get('comments')?.value ?? [];
-    const date = this.postForm.get('date')?.value?? new Date();
-    // Crear un objeto utilizando los valores extraídos
+    let formData = new FormData();
 
-    const postToSave: Post = {
-      id: id,
-      content: content,
-      photoUrl: photoUrl,
-      videoUrl: videoUrl,
-      group: group,
-      user: user,
-      interactions: interactions,
-      comments: comments,
-      date: date
+    formData.append('id', this.postForm.get('id')?.value?.toString() ?? '0');
+    formData.append('content',this.postForm.get('content')?.value ?? '');
+    formData.append('photoUrl',this.postForm.get('photoUrl')?.value ?? '');
+    formData.append('videoUrl',this.postForm.get('videoUrl')?.value ?? '');
+    formData.append('group',this.postForm.get('group')?.value);
+    formData.append('user',this.postForm.get('user')?.value?? this.currentUser )
+    formData.append('interactions',this.postForm.get('interactions')?.value ?? []);
+    formData.append('comments',this.postForm.get('comments')?.value ?? []);
+    const dateValue = this.postForm.get('date')?.value;
+    const dateToAppend = dateValue ? new Date(dateValue) : new Date();
+    formData.append('date', dateToAppend.toString());
+
+  
+
+    if (this.photoFile){
+      formData.append('photo',this.photoFile);
     }
-    console.log(postToSave);
 
+    
+    
     const url = 'http://localhost:8080/post';
 
     if(this.isUpdate){
-      this.httpClient.put<Post>(url+"/"+this.post?.id, postToSave).subscribe(post => 
+      this.httpClient.put<Post>(url+"/"+this.post?.id, formData).subscribe(post => 
         {console.log(post);
           //this.postForm.reset();
           this.route.navigate(['/posts']);
         });
     }else{
-      this.httpClient.post<Post>(url, postToSave).subscribe(post => 
+      this.httpClient.post<Post>(url, formData).subscribe(post => 
         {console.log(post);
           //this.postForm.reset();
           this.route.navigate(['/posts']);
