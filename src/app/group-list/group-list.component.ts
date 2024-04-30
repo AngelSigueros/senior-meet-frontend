@@ -3,6 +3,7 @@ import { Group } from '../models/group.model';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../models/user.model';
+import { AuthenticationService } from '../user-authentication/authentication.service';
 
 @Component({
   selector: 'app-group-list',
@@ -16,8 +17,11 @@ export class GroupListComponent implements OnInit{
 
   groups: Group[] = []
   currentUser: User|undefined
+  isAdmin: Boolean = false;
 
-  constructor (private http: HttpClient, private router: Router){}
+  constructor (private http: HttpClient, private router: Router, private authService:AuthenticationService){
+    this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
+  }
   
   loadGroups(){
     this.http.get<User>("http://localhost:8080/user/account").subscribe(u => this.currentUser=u);
@@ -54,18 +58,29 @@ export class GroupListComponent implements OnInit{
     }
    }
 
-   isGroupFromUser(group: Group): boolean {
-    console.log("GRUPOS DEl current user");
-    console.log(this.currentUser?.groups);
+   isGroupFromUser(group:Group):boolean{
+    if (this.currentUser){
+      return group.users.includes(this.currentUser);
+    }
+    return false;
+   }
 
+   isMember(group: Group): boolean {
     if (this.currentUser && this.currentUser.groups) {
    
       //return this.currentUser.groups.includes(group);
 
-      return this.currentUser?.groups.some(grupo => grupo.id === group.id);
+      return this.currentUser.groups.some(grupo => grupo.id === group.id);
     } else {
       return false;
     }
+  }
+
+  deleteGroup(groupId: number){
+    const url = "http://localhost:8080/groups/"+groupId;
+    this.http.delete<Boolean>(url).subscribe(b => {
+      this.loadGroups();
+    });
   }
 
 }

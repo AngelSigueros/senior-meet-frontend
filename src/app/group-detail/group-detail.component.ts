@@ -14,7 +14,7 @@ import { User } from '../models/user.model';
 export class GroupDetailComponent implements OnInit{
 
   group: Group |undefined
-  groups: any;
+  groups: any
   currentUser: User|undefined
 
 

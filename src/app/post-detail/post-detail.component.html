@@ -2,7 +2,7 @@
   <section class = "card-body container-fluid" style="background-color: #eee;">
 
     <div>
-      <button [routerLink]="['/posts']" class="btn btn-lg btn-outline-secondary d-inline-block mb-2"><i class="bi bi-box-arrow-left text-primary"></i></button>
+      <button [routerLink]="['/posts']" title='Volver' class="btn btn-lg btn-outline-secondary d-inline-block mb-2"><i class="bi bi-box-arrow-left text-primary"></i></button>
     </div>
 
     <div class="row justify-content-center">
@@ -50,28 +50,28 @@
             
             <div class="d-inline-block">
               @if (isAdmin ||isPostfromUser()){
-                <button [routerLink]="['/posts', post.id, 'update']" class="btn btn-sm btn-outline-secondary me-2 d-inline-block"><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block" (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
+                <button [routerLink]="['/posts', post.id, 'update']" title='Editar' class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary" title='Borrar' (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
               }
 
               
 
               @if(likes.length > 0) {
-                <h5 class="my-3 d-inline-block me-2 small fw-bold">{{likes.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addlike()"><i class="bi bi-heart-fill"></i></button></h5>
+                <h5 class="my-3 d-inline-block me-2 small fw-bold">{{likes.length}} <button title='Me Gusta' class="btn btn-sm btn-outline-secondary tex-primary" (click)="addlike()"><i class="bi bi-heart-fill text-primary"></i></button></h5>
               } @else {
-                <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addlike()"><i class="bi bi-heart-fill text-danger"></i></button>
+                <button title='Me Gusta' class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addlike()"><i class="bi bi-heart-fill text-danger"></i></button>
               }
               
               @if(saves.length > 0) {
-                <h5 class="my-3 d-inline-block me-2 small fw-bold">{{saves.length}} <button class="btn btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill"></i></button></h5>
+                <h5 class="my-3 d-inline-block me-2 small fw-bold">{{saves.length}} <button title='Guardar' class="btn btn-sm btn-outline-secondary" (click)="addsave()"><i class="bi bi-floppy-fill text-primary"></i></button></h5>
               } @else {
-                <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addsave()"><i class="bi bi-floppy-fill text-primary"></i></button>
+                <button title='Guardar' class="btn btn-sm btn-outline-secondary d-inline-block me-2" (click)="addsave()"><i class="bi bi-floppy text-primary"></i></button>
               }
 
 
             
               @if (comments.length >0) {
-                <h5 class="my-3 d-inline-block me-2 small fw-bold">{{comments.length}} <button class="btn btn-sm btn-outline-secondary text-success" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
+                <h5 class="my-3 d-inline-block me-2 small fw-bold">{{comments.length}} <button title='Ver/Ocultar Comentarios' class="btn btn-sm btn-outline-secondary text-primary" (click)="toggleComments()"><i class="bi bi-chat-text-fill"></i></button></h5>
                 
                 <div [style.display]="mostrarComments ? 'block' : 'none'" class="mb-3">
                   @for(comment of comments; track comment){
@@ -99,7 +99,7 @@
                     <input type="text" class="form-control" id="content" placeholder="Escribe tu comentario" formControlName="content">
                     <label for="content">Añade un comentario</label>
                   </div>
-                  <button class="btn btn-success" type="submit"><i class="bi bi-save"></i> Guardar</button>
+                  <button class="btn btn-outline-secondary text-primary" title='Guardar Comentario' type="submit"><i class="bi bi-save"></i></button>
                 </form>
               </div>
             </div>
