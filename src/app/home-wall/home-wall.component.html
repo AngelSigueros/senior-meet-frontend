@@ -23,7 +23,10 @@
               <img class="img-fluid" [src]="'http://localhost:8080/files/' + post.photoUrl" alt="{{post.id}}" />
             </div>
             @if (post.user) {
-              <h4>Creado por: {{post.user.firstName}}</h4>
+              
+              <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 45px;">
+                              <h5>Publicado por: {{post.user.firstName}}</h5>
             }
             <button [routerLink]="['/posts', post.id, 'detail']">Ver publicación</button>
             <!-- @if (post.interactions && post.interactions.length > 0){
