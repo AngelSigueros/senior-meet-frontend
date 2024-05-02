@@ -40,7 +40,11 @@
               <h5 class="my-3">{{post.content}}</h5>
             </div>
             
-            <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
+            @if(post.photoUrl!='avatar.png'){
+              <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 150px;">
+            }
+
             <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
             
             <h5 class="my-3 text muted small">{{formatDateTime(post.date.toString())}}</h5>

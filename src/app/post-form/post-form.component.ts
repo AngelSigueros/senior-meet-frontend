@@ -7,6 +7,8 @@ import { Group} from '../models/group.model';
 import { User } from '../models/user.model';
 import { Interaction } from '../models/interaction.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { formatDate } from '@angular/common';
+import {format} from 'date-fns';
 
 
 @Component({
@@ -89,13 +91,18 @@ export class PostFormComponent implements OnInit{
     formData.append('content',this.postForm.get('content')?.value ?? '');
     formData.append('photoUrl',this.postForm.get('photoUrl')?.value ?? '');
     formData.append('videoUrl',this.postForm.get('videoUrl')?.value ?? '');
-    formData.append('group',this.postForm.get('group')?.value);
-    formData.append('user',this.postForm.get('user')?.value?? this.currentUser )
+    const groupId = this.postForm.get('group')?.value?.id;
+    if (groupId !== undefined) {
+      formData.append('group', groupId);
+    }
+    formData.append('user',this.postForm.get('user')?.value?? this.currentUser?.id.toString() )
     formData.append('interactions',this.postForm.get('interactions')?.value ?? []);
     formData.append('comments',this.postForm.get('comments')?.value ?? []);
     const dateValue = this.postForm.get('date')?.value;
     const dateToAppend = dateValue ? new Date(dateValue) : new Date();
-    formData.append('date', dateToAppend.toString());
+    //const formattedDate = formatDate(dateToAppend, 'yyyy-MM-dd HH:mm:ss');
+    const formattedDate = formatDate(dateToAppend, 'yyyy-MM-ddTHH:mm:ss', 'en-US'); 
+    formData.append('date', formattedDate.toString());
 
   
 
