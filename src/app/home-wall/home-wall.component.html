@@ -1,22 +1,21 @@
-
-
-
-
 <div class="container-fluid">
   <div class="row mb-5">
 
     <div class="col-lg-8">
-      <!-- <img src="../../assets/img/4cf7c196-2fe5-4264-8543-d9a67ead932a.jpg"> -->
-
+      
      
-      <div class="col-md-10">
+      <div class="col-md-14">
         <h3 class="text-center mt-4 pb-4 mb-4 border-bottom"><strong>
           Últimas publicaciones
         </strong></h3>
-  
-        
+       
         <article class="blog-post">
+          
+          <div class="card">
+            <div class="row">
+
           @for (post of posts; track $index) {
+            <div class="card mb-3">
             <h2>
               {{post.content}}
             </h2>
@@ -24,7 +23,10 @@
               <img class="img-fluid" [src]="'http://localhost:8080/files/' + post.photoUrl" alt="{{post.id}}" />
             </div>
             @if (post.user) {
-              <h4>Creado por: {{post.user.firstName}}</h4>
+              
+              <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid" style="width: 45px;">
+                              <h5>Publicado por: {{post.user.firstName}}</h5>
             }
             <button [routerLink]="['/posts', post.id, 'detail']">Ver publicación</button>
             <!-- @if (post.interactions && post.interactions.length > 0){
@@ -32,147 +34,35 @@
                 <p>{{interaction.type}}</p>
               }
             } -->
-            
+          </div> 
           }
 
-          
-
-          <!--
-          <div class="card-body shadow-rounded">
-            
-          @for (post of posts; track post.id) {
-            
-            <h2 class="link-body-emphasis mb-1">{{post.user.photoUrl}}</h2>
-          <div class="picsum-img-wrapper">
-            <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + post.photoUrl" alt="{{post.id}}" />
-          </div>
-          <h3>{{post.content}}</h3>
-
-          @if (comments) {
-            @for(comment of comments; track comment){
-              <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
-            }
-            <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
-          } @else{
-           <h5 class="my-3">No hay comentarios</h5>
-          }
-        
-        }
+        </div>
       </div>
           
-          @if (post) {
-    
-        <div class="container">
-         
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="avatar"
-                    class="img-fluid" style="width: 700px;">
-                  <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
-                              class="rounded-circle img-fluid" style="width: 150px;">
-                          <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
-                 
-                </div>
-              </div>
-              
-            <div class="col-lg-812">
-              <div class="card mb-3">
-                <div class="card-body text-center">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Descripción:
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{group.description}}</p>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-812">
-              <div class="card mb-3">
-                <div class="card-body text-center">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Proximos Eventos:
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{group.rules}}</p>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-check text-center mb-3">
-              <input class="form-check-input-center " type="checkbox" id="available" formControlName="available" placeholder="nombre@email.com">
-              <label class="form-check-label-center" for="available" style="cursor:pointer;">
-                Activo 
-              </label>
-
-            </div>
-
-          </div>
  
-          
 
-   }
--->
         </article>
-  
         <nav class="blog-pagination" aria-label="Pagination">
           <a class="btn btn-outline-primary rounded-pill" routerLink="/posts">Ver más</a>
-          
         </nav>
   
       </div>
       
-      <!--
-      <ngb-carousel>
-        @for (post of posts; track post.id) {
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + post.photoUrl" alt="{{post.id}}" />
-          </div>
-          <div class="carousel-caption">
-
-          </div>
-          <h3>{{post.content}}</h3>
-
-          @if (comments) {
-            @for(comment of comments; track comment){
-              <h5 class="my-3">{{comment.user.firstName}} - {{comment.content}}</h5>
-            }
-            <h5 class="my-3">Total: {{comments.length}} comentarios</h5>
-          } @else{
-           <h5 class="my-3">No hay comentarios</h5>
-          }
-
-        </ng-template>
-
-        }
-      </ngb-carousel>
-      -->
+      
     </div>
-    <div class="col-lg-4 rounded" style="background-color:#A4E1AC;">
+    <div class="col-lg-4 rounded" style="background-color:#FF7D00;">
       <div class="text-center mb-2">
         
       </div>
 
       <div class="position-sticky" style="top: 2rem;" >
-
         
         <div class="p-4 mb-3 text-center bg-body-tertiary rounded">
           <h4 class="text-center"><strong>CREA TU PUBLICACIÓN</strong></h4>
-          <button class="btn btn-primary" justify conter [routerLink]="['/posts/create']">CREAR</button>
+          <button id="button" class="btn btn-primary" justify conter [routerLink]="['/posts/create']">CREAR</button>
         </div>
-
        
-
         <div>
           <h4 class="fst-italic text-center"><strong>GRUPOS</strong></h4>
           <ul class="list-unstyled">
@@ -186,7 +76,7 @@
                         <img class="img-fluid" [src]="'http://localhost:8080/files/' + group.photoUrl" alt="{{group.title}}" />
                       </div>
                       <div class="carousel-caption">
-                        <h5 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;color:chartreuse;background-color:black;font-weight:900;">{{group.title}}</h5>
+                        <h5 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;color:#15616D;background-color:white;font-weight:900;">{{group.title}}</h5>
                       </div>
                     </ng-template>
                     }
@@ -211,7 +101,7 @@
                         <img class="" [src]="'http://localhost:8080/files/' + hobby.photoUrl" alt="{{hobby.name}}" />
                       </div>
                       <div class="carousel-caption">
-                        <h6 [routerLink]="['/hobbies', hobby.id, 'detail']" style="cursor:pointer;">{{hobby.name}}</h6>
+                        <h5 [routerLink]="['/hobbies', hobby.id, 'detail']" style="cursor:pointer;color:#15616D;background-color:white;font-weight:900;">{{hobby.name}}</h5>
                       </div>
                     </ng-template>
                     }
@@ -220,46 +110,7 @@
 
             </li>
 
-            <!--
-            <li>
-              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-
-                <div class="col-lg-12">
-                  <ngb-carousel>
-                    @for (hobby of hobbies; track hobby.id) {
-                    <ng-template ngbSlide>
-                      <div class="picsum-img-wrapper">
-                        <img class="img-fluid" [src]="'http://localhost:8080/files/' + hobby.photoUrl" alt="{{hobby.name}}" />
-                      </div>
-                      <div class="carousel-caption">
-                        <h6>{{hobby.name}}</h6>
-                      </div>
-                    </ng-template>
-                    }
-                  </ngb-carousel>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-
-                <div class="col-lg-12">
-                  <ngb-carousel>
-                    @for (hobby of hobbies; track hobby.id) {
-                    <ng-template ngbSlide>
-                      <div class="picsum-img-wrapper">
-                        <img class="img-fluid" [src]="'http://localhost:4200/assets/img/' + hobby.photoUrl" alt="{{hobby.name}}" />
-                      </div>
-                      <div class="carousel-caption">
-                        <h6>{{hobby.name}}</h6>
-                      </div>
-                    </ng-template>
-                    }
-                  </ngb-carousel>
-                </div>
-              </a>
-            </li>
-            -->
+            
 
             </ul>
 
@@ -270,104 +121,9 @@
           <span>Aviso Importante</span>
         </button>
 
-       <!-- <div class="position-sticky" style="top: 2rem;">
-          <div class="p-4 mb-3 text-center bg-body-tertiary rounded">
-            <h4 class="fst-italic">Deje aquí su sugerencia</h4>
-            <button class="btn btn-primary" justify conter [routerLink]="['/suggestions']">Sugerencias</button>
-          </div>
-      </div>
-      -->
+       
+      
     </div>
   </div>
 </div>
-
-<!--
-<div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card" style="">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted mi-fuente">Card subtitle</h6>
-                    <p class="card-text mi-fuente">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                        content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                        content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-</div>
-
-<hr>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-      <div class="card h-100">
-        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Skyscrapers"/>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in to
-            additional content. This content is a little bit longer.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top" alt="Los Angeles Skyscrapers"/>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road"/>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in to
-            additional content. This card has even longer content than the first to show
-            that equal height action.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr> -->
 
