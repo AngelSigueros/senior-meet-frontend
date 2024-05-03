@@ -40,9 +40,20 @@
               <h5 class="my-3">{{post.content}}</h5>
             </div>
             
-            @if(post.photoUrl!='avatar.png'){
+            @if(post.photoUrl!=''){
               <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="avatar"
                               class="rounded-circle img-fluid" style="width: 150px;">
+            }
+
+            @if(post.videoUrl != ''){
+               <!--<iframe [width]="315" [height]="150" [src]="getSafeUrl(post.videoUrl)" frameborder="0" allowfullscreen></iframe> -->
+             <youtube-player>
+                videoId={{post.videoUrl}}
+                suggestedQuality="highres"
+                width="315"
+                height="150"
+                showBeforeIframeApiLoads="true"
+              </youtube-player>
             }
 
             <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Post } from '../models/post.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Interaction } from '../models/interaction.model';
@@ -8,11 +8,14 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../user-authentication/authentication.service';
 import { Location } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {  YouTubePlayer, YouTubePlayerModule } from '@angular/youtube-player';
+
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule,YouTubePlayerModule ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.css'
 })
@@ -29,6 +32,7 @@ export class PostDetailComponent implements OnInit{
   userLikes: Interaction[]=[]
   userSaves: Interaction[]=[]
   isAdmin: Boolean = false;
+ 
 
   commentForm = this.fb.group({
     id: [0],
@@ -42,13 +46,15 @@ export class PostDetailComponent implements OnInit{
     private http: HttpClient, 
     private activatedRoute: ActivatedRoute, 
     private router:Router,
-    private location:Location){
+    private location:Location,
+    private sanitizer:DomSanitizer){
     this.authService.isAdmin.subscribe(isAdmin=>this.isAdmin=isAdmin);
   }
 
   ngOnInit(): void {
     console.log('PostDetailComponent');
-    
+
+       
     this.loadPost();
 
   }
@@ -59,6 +65,7 @@ export class PostDetailComponent implements OnInit{
   }
 
   loadPost() {
+    
     this.activatedRoute.params.subscribe(params => {
       this.http.get<Post>("http://localhost:8080/post/" +
       params['id']).subscribe(p => {this.post=p;
@@ -183,4 +190,15 @@ export class PostDetailComponent implements OnInit{
   ExitsLikesFromUser():boolean{
     return this.likes.some(item=>this.userLikes.includes(item));
   }
+
+  getSafeUrl(videoUrl: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + videoUrl);
+  }
+
+  playVideo(videoId:string):void {
+  //  const player = new YouTubePlayer();
+ //   player.videoId = videoId;
+   // player.playVideo();
+  }
+  
 }

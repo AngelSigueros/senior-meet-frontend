@@ -76,11 +76,14 @@ export class PostFormComponent implements OnInit{
 
     }
 
-
-
     this.photoFile = target.files[0];
-
   }
+
+  obtenerIdVideoYoutube(url: string): string | null {
+    const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})$/;
+    const match = url.match(regExp);
+    return match ? match[1] : null;
+}
 
   save(){
     console.log("Guardando Post");
@@ -90,7 +93,15 @@ export class PostFormComponent implements OnInit{
     formData.append('id', this.postForm.get('id')?.value?.toString() ?? '0');
     formData.append('content',this.postForm.get('content')?.value ?? '');
     formData.append('photoUrl',this.postForm.get('photoUrl')?.value ?? '');
-    formData.append('videoUrl',this.postForm.get('videoUrl')?.value ?? '');
+
+    //formData.append('videoUrl',this.postForm.get('videoUrl')?.value ?? '');
+    const videoUrl = this.postForm.get('videoUrl')?.value ?? '';
+    const videoId = this.obtenerIdVideoYoutube(videoUrl);
+    if (videoId !== null){
+      formData.append('videoUrl',videoId);
+    }
+    console.log(videoId);
+
     const groupId = this.postForm.get('group')?.value?.id;
     if (groupId !== undefined) {
       formData.append('group', groupId);
