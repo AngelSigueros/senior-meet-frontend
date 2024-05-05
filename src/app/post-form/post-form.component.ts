@@ -108,11 +108,17 @@ export class PostFormComponent implements OnInit{
     }
     console.log(videoId);
 
-    const groupId = this.postForm.get('group')?.value?.id;
-    if (groupId !== undefined) {
-      formData.append('group', groupId);
+    const groupControl = this.postForm.get('group');
+    if (groupControl && groupControl.value && groupControl.value.id) {
+      const groupId = groupControl.value.id;
+      formData.append('group', groupId.toString());
     }
-    formData.append('user',this.postForm.get('user')?.value?? this.currentUser?.id.toString() )
+
+    const userId = this.postForm.get('user')?.value?.id ?? this.currentUser?.id;
+    if (userId !== undefined && userId !== null) {
+      formData.append('user', userId.toString());
+    }
+    //formData.append('user',this.postForm.get('user')?.value.id.toString()?? this.currentUser?.id.toString() );
     formData.append('interactions',this.postForm.get('interactions')?.value ?? []);
     formData.append('comments',this.postForm.get('comments')?.value ?? []);
     const dateValue = this.postForm.get('date')?.value;
@@ -134,14 +140,14 @@ export class PostFormComponent implements OnInit{
     if(this.isUpdate){
       this.httpClient.put<Post>(url+"/"+this.post?.id, formData).subscribe(post => 
         {console.log(post);
-          //this.postForm.reset();
-          this.route.navigate(['/posts']);
+            this.goBack();
+          //this.route.navigate(['/posts']);
         });
     }else{
       this.httpClient.post<Post>(url, formData).subscribe(post => 
         {console.log(post);
-          //this.postForm.reset();
-          this.route.navigate(['/posts']);
+          this.goBack();
+          //this.route.navigate(['/posts']);
         });
     }
 
