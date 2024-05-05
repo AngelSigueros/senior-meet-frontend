@@ -40,6 +40,7 @@ export class PostFormComponent implements OnInit{
   photoPreview: string | undefined;
   post: Post | undefined;
   isUpdate: boolean = false;
+  groupId: number = 0;
 
 
   constructor(private fb: FormBuilder, 
@@ -109,9 +110,11 @@ export class PostFormComponent implements OnInit{
     console.log(videoId);
 
     const groupControl = this.postForm.get('group');
+   
     if (groupControl && groupControl.value && groupControl.value.id) {
-      const groupId = groupControl.value.id;
-      formData.append('group', groupId.toString());
+      console.log(groupControl);
+      this.groupId = groupControl.value.id;
+      formData.append('group',groupControl.value.id.toString());
     }
 
     const userId = this.postForm.get('user')?.value?.id ?? this.currentUser?.id;

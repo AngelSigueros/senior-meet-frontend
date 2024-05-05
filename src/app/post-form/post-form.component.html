@@ -23,14 +23,26 @@
       <label for="content">Video Url (Sólo se aceptan youtube)</label>
     </div>
 
-    <!-- Selector simple -->
-    <select class="form-select form-select-lg mb-3" formControlName="group">
-      <option value="" selected disabled hidden>Grupo</option>
-      <option value="" selected>Elija grupo:</option>
-      @for (group of groups;track group.id){
-        <option [ngValue]="group"> {{group.title}} </option>
-      }
-    </select>
+    @if(!isUpdate){
+      <select class="form-select form-select-lg mb-3" formControlName="group">
+        <option value="" selected disabled hidden>Grupo</option>
+        <option value="" selected>Elija grupo:</option>
+        @for (group of groups;track group.id){
+          <option [ngValue]="group"> {{group.title}} </option>
+        }
+      </select>
+    }@else{
+      
+      <select class="form-select form-select-lg mb-3" formControlName="group">
+        
+
+        @for (group of groups;track group.id){
+          
+          <option [ngValue]="group" [selected]='groupId && group.id==groupId'> {{group.title}} </option>
+        }
+      </select>
+    }    
+    
 
     <div class="col-lg-4">
 
