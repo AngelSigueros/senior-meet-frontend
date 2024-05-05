@@ -79,8 +79,8 @@ export class PostDetailComponent implements OnInit{
     this.http.get<Post[]>("http://localhost:8080/post/user/"+this.currentUser.id).subscribe(ps => {
       this.userPosts=ps;
     });
-   // this.http.get<Interaction[]>('http:localhost:8080/interactions/likes/user/'+this.currentUser).subscribe(i=>this.userLikes=i);
-   // this.http.get<Interaction[]>('http:localhost:8080/interactions/saves/user/'+this.currentUser).subscribe(i=>this.userSaves=i);
+   // this.http.get<Interaction[]>('http:localhost:8080/interactions/likes/user/'+this.currentUser.id).subscribe(i=>this.userLikes=i);
+   // this.http.get<Interaction[]>('http:localhost:8080/interactions/saves/user/'+this.currentUser.id).subscribe(i=>this.userSaves=i);
     
     })
 

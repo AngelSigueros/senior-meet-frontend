@@ -9,6 +9,7 @@ import { Interaction } from '../models/interaction.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { formatDate } from '@angular/common';
 import {format} from 'date-fns';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -44,7 +45,8 @@ export class PostFormComponent implements OnInit{
   constructor(private fb: FormBuilder, 
     private httpClient: HttpClient, 
     private route: Router,
-    private activatedRoute: ActivatedRoute,){}
+    private activatedRoute: ActivatedRoute,
+    private location:Location){}
 
   ngOnInit(): void {
     //this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
@@ -84,6 +86,10 @@ export class PostFormComponent implements OnInit{
     const match = url.match(regExp);
     return match ? match[1] : null;
 }
+
+  goBack(): void {
+    this.location.back();
+  }
 
   save(){
     console.log("Guardando Post");
