@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
 import { AuthenticationService } from '../user-authentication/authentication.service';
 import { Location } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import {  YouTubePlayer, YouTubePlayerModule } from '@angular/youtube-player';
+import {  YouTubePlayerModule } from '@angular/youtube-player';
 
 
 @Component({
@@ -29,8 +29,6 @@ export class PostDetailComponent implements OnInit{
   currentUser: User | undefined
   mostrarComments: Boolean = false
   userPosts : Post[] = []
-  userLikes: Interaction[]=[]
-  userSaves: Interaction[]=[]
   isAdmin: Boolean = false;
  
 
@@ -79,9 +77,7 @@ export class PostDetailComponent implements OnInit{
     this.http.get<Post[]>("http://localhost:8080/post/user/"+this.currentUser.id).subscribe(ps => {
       this.userPosts=ps;
     });
-   // this.http.get<Interaction[]>('http:localhost:8080/interactions/likes/user/'+this.currentUser.id).subscribe(i=>this.userLikes=i);
-   // this.http.get<Interaction[]>('http:localhost:8080/interactions/saves/user/'+this.currentUser.id).subscribe(i=>this.userSaves=i);
-    
+       
     })
 
   });
@@ -187,18 +183,20 @@ export class PostDetailComponent implements OnInit{
     return `${day}-${month}-${year} ${hours}:${minutes}`;
   }
 
-  ExitsLikesFromUser():boolean{
-    return this.likes.some(item=>this.userLikes.includes(item));
+
+  ExistsLikeFromUser(): boolean{
+    for (const item of this.likes) {
+      if (item.user.id === this.currentUser?.id && item.type === 'LIKE' )
+        return true;
+    }
+    return false;
+    // return this.likes.some(item => item.user.id === this.currentUser.id && item.type === 'LIKE');
   }
 
   getSafeUrl(videoUrl: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + videoUrl);
   }
 
-  playVideo(videoId:string):void {
-  //  const player = new YouTubePlayer();
- //   player.videoId = videoId;
-   // player.playVideo();
-  }
+
   
 }
