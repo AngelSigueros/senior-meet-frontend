@@ -8,30 +8,59 @@
     <label for="content">Contenido del Post</label>
   </div>
     
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="photoUrl"
-      placeholder="Foto Url del  Post" formControlName="photoUrl">
-      <label for="content">Foto Url</label>
+
+
+    <input type="hidden" formControlName="photoUrl">
+
+
+    <div class="input-group mb-3">
+      <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
     </div>
 
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="photoUrl"
+      <input type="text" class="form-control" id="videoUrl"
       placeholder="Video Url del  Post" formControlName="videoUrl">
-      <label for="content">Video Url</label>
+      <label for="content">Video Url (Sólo se aceptan youtube)</label>
     </div>
 
-    <!-- Selector simple -->
-    <select class="form-select form-select-lg mb-3" formControlName="group">
-      <option value="" selected disabled hidden>Grupo</option>
-      <option value="" selected>Elija grupo:</option>
-      @for (group of groups;track group.id){
-        <option [ngValue]="group"> {{group.title}} </option>
+    @if(!isUpdate){
+      <select class="form-select form-select-lg mb-3" formControlName="group">
+        <option value="" selected disabled hidden>Grupo</option>
+        <option value="" selected>Elija grupo:</option>
+        @for (group of groups;track group.id){
+          <option [ngValue]="group"> {{group.title}} </option>
+        }
+      </select>
+    }@else{
+      
+      <select class="form-select form-select-lg mb-3" formControlName="group">
+        
+
+        @for (group of groups;track group.id){
+          
+          <option [ngValue]="group" [selected]='groupId && group.id==groupId'> {{group.title}} </option>
+        }
+      </select>
+    }    
+    
+
+    <div class="col-lg-4">
+
+      @if (photoPreview) {
+        <h2 class="my-5">Previsualización foto</h2>
+        <img class="img-fluid" [src]="photoPreview">
       }
-    </select>
+      @if (!photoPreview && post?.photoUrl) {
+        <h2 class="my-5">Previsualización foto</h2>
+        <img class="img-fluid" [src]="'http://localhost:8080/files/' + post?.photoUrl">
+      }
+
+    </div>
 
     <div class="d-flex justify-content-between">
-      <button [routerLink]="['/posts']" class="btn btn-lg btn-outline-secondary"><i class="bi bi-box-arrow-left text-primary"></i></button>
-      <button class="btn btn-lg btn-outline-secondary"><i class="bi bi-floppy-fill text-primary"></i></button>
+      <button title='Volver' (click)='goBack();' class="btn btn-lg btn-outline-secondary  d-inline-block mb-2" ><i class="bi bi-box-arrow-left text-primary"></i></button>
+      <!--<button title='Volver' [routerLink]="['/posts']" class="btn btn-lg btn-outline-secondary"><i class="bi bi-box-arrow-left text-primary"></i></button> -->
+      <button title='Guardar' class="btn btn-lg btn-outline-secondary "><i class="bi bi-floppy-fill text-primary"></i></button>
     </div>
     
 

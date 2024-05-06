@@ -7,6 +7,9 @@ import { Group} from '../models/group.model';
 import { User } from '../models/user.model';
 import { Interaction } from '../models/interaction.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { formatDate } from '@angular/common';
+import {format} from 'date-fns';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -37,12 +40,14 @@ export class PostFormComponent implements OnInit{
   photoPreview: string | undefined;
   post: Post | undefined;
   isUpdate: boolean = false;
+  groupId: number = 0;
 
 
   constructor(private fb: FormBuilder, 
     private httpClient: HttpClient, 
     private route: Router,
-    private activatedRoute: ActivatedRoute,){}
+    private activatedRoute: ActivatedRoute,
+    private location:Location){}
 
   ngOnInit(): void {
     //this.httpClient.get<Group[]>("http://localhost:8080/groups").subscribe(g=>this.groups=g);
@@ -62,47 +67,90 @@ export class PostFormComponent implements OnInit{
     });
   }
 
+  onFileChange(event: Event) {
+
+    let target = event.target as HTMLInputElement; // este target es el input de tipo file donde se carga el archivo
+
+
+
+    if(target.files === null || target.files.length == 0){
+
+      return; // no se procesa ningún archivo
+
+    }
+
+    this.photoFile = target.files[0];
+  }
+
+  obtenerIdVideoYoutube(url: string): string | null {
+    const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})$/;
+    const match = url.match(regExp);
+    return match ? match[1] : null;
+}
+
+  goBack(): void {
+    this.location.back();
+  }
+
   save(){
     console.log("Guardando Post");
 
-    // Extraer los valores de cada input escritos por el usuario
-    const id = this.postForm.get('id')?.value ?? 0;
-    const content = this.postForm.get('content')?.value ?? 'Contenido Post';
-    const photoUrl = this.postForm.get('photoUrl')?.value ?? 'Photo url';
-    const videoUrl = this.postForm.get('videoUrl')?.value ?? 'Video url';
-    const group = this.postForm.get('group')?.value  ;
-    const user = this.postForm.get('user')?.value?? this.currentUser ;
-    const interactions = this.postForm.get('interactions')?.value ?? [];
-    const comments = this.postForm.get('comments')?.value ?? [];
-    const date = this.postForm.get('date')?.value?? new Date();
-    // Crear un objeto utilizando los valores extraídos
+    let formData = new FormData();
 
-    const postToSave: Post = {
-      id: id,
-      content: content,
-      photoUrl: photoUrl,
-      videoUrl: videoUrl,
-      group: group,
-      user: user,
-      interactions: interactions,
-      comments: comments,
-      date: date
+    formData.append('id', this.postForm.get('id')?.value?.toString() ?? '0');
+    formData.append('content',this.postForm.get('content')?.value ?? '');
+    formData.append('photoUrl',this.postForm.get('photoUrl')?.value ?? '');
+
+    //formData.append('videoUrl',this.postForm.get('videoUrl')?.value ?? '');
+    const videoUrl = this.postForm.get('videoUrl')?.value ?? '';
+    const videoId = this.obtenerIdVideoYoutube(videoUrl);
+    if (videoId !== null){
+      formData.append('videoUrl',videoId);
     }
-    console.log(postToSave);
+    console.log(videoId);
 
+    const groupControl = this.postForm.get('group');
+   
+    if (groupControl && groupControl.value && groupControl.value.id) {
+      console.log(groupControl);
+      this.groupId = groupControl.value.id;
+      formData.append('group',groupControl.value.id.toString());
+    }
+
+    const userId = this.postForm.get('user')?.value?.id ?? this.currentUser?.id;
+    if (userId !== undefined && userId !== null) {
+      formData.append('user', userId.toString());
+    }
+    //formData.append('user',this.postForm.get('user')?.value.id.toString()?? this.currentUser?.id.toString() );
+    formData.append('interactions',this.postForm.get('interactions')?.value ?? []);
+    formData.append('comments',this.postForm.get('comments')?.value ?? []);
+    const dateValue = this.postForm.get('date')?.value;
+    const dateToAppend = dateValue ? new Date(dateValue) : new Date();
+    //const formattedDate = formatDate(dateToAppend, 'yyyy-MM-dd HH:mm:ss');
+    const formattedDate = formatDate(dateToAppend, 'yyyy-MM-ddTHH:mm:ss', 'en-US'); 
+    formData.append('date', formattedDate.toString());
+
+  
+
+    if (this.photoFile){
+      formData.append('photo',this.photoFile);
+    }
+
+    
+    
     const url = 'http://localhost:8080/post';
 
     if(this.isUpdate){
-      this.httpClient.put<Post>(url+"/"+this.post?.id, postToSave).subscribe(post => 
+      this.httpClient.put<Post>(url+"/"+this.post?.id, formData).subscribe(post => 
         {console.log(post);
-          //this.postForm.reset();
-          this.route.navigate(['/posts']);
+            this.goBack();
+          //this.route.navigate(['/posts']);
         });
     }else{
-      this.httpClient.post<Post>(url, postToSave).subscribe(post => 
+      this.httpClient.post<Post>(url, formData).subscribe(post => 
         {console.log(post);
-          //this.postForm.reset();
-          this.route.navigate(['/posts']);
+          this.goBack();
+          //this.route.navigate(['/posts']);
         });
     }
 
