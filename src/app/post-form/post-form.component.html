@@ -24,23 +24,31 @@
     </div>
 
     @if(!isUpdate){
-      <select class="form-select form-select-lg mb-3" formControlName="group">
-        <option value="" selected disabled hidden>Grupo</option>
-        <option value="" selected>Elija grupo:</option>
-        @for (group of groups;track group.id){
-          <option [ngValue]="group"> {{group.title}} </option>
-        }
-      </select>
+      <div class="form-floating mb-3">
+        <select class="form-select form-select-lg mb-3" formControlName="group"  [compareWith]="compareObjects">
+          <option value="" selected disabled hidden>Grupo</option>
+          <option value="" selected>Elija grupo:</option>
+          @for (group of groups;track group.id){
+            <option [ngValue]="group"> {{group.title}} </option>
+          }
+        </select>
+        <label for="group">Elija Grupo:</label>
+      </div>
+      
     }@else{
       
-      <select class="form-select form-select-lg mb-3" formControlName="group">
+      <div class="form-floating mb-3">
+        <select class="form-select form-select-lg mb-3" formControlName="group"  [compareWith]="compareObjects">
         
 
-        @for (group of groups;track group.id){
-          
-          <option [ngValue]="group" [selected]='groupId && group.id==groupId'> {{group.title}} </option>
-        }
-      </select>
+          @for (group of groups;track group.id){
+            
+            <option [ngValue]="group" [selected]='groupId && group.id==groupId'> {{group.title}} </option>
+          }
+        </select>
+        <label for="group">Elija Grupo:</label>
+      </div>
+      
     }    
     
 
