@@ -2,7 +2,8 @@
   <section class = "card-body container-fluid" style="background-color: #eee;">
 
     <div>
-      <button [routerLink]="['/posts']" title='Volver' class="btn btn-lg btn-outline-secondary d-inline-block mb-2"><i class="bi bi-box-arrow-left text-primary"></i></button>
+      <button title='Volver' (click)='goBack();' class="btn btn-lg btn-outline-secondary d-inline-block mb-2"><i class="bi bi-box-arrow-left text-primary"></i></button>
+      <!-- <button [routerLink]="['/posts']" title='Volver' class="btn btn-lg btn-outline-secondary d-inline-block mb-2"><i class="bi bi-box-arrow-left text-primary"></i></button> -->
     </div>
 
     <div class="row justify-content-center">
@@ -40,7 +41,24 @@
               <h5 class="my-3">{{post.content}}</h5>
             </div>
             
-            <h5 class="my-3">FOTO URL: {{post.photoUrl}}</h5>
+            @if(post.photoUrl && post.photoUrl!=''){
+              <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="avatar"
+                              class="rounded-circle img-fluid mt-3" style="width: 150px;">
+            }
+
+            @if(post.videoUrl && post.videoUrl != ''){
+              <!-- <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item mt-3" [width]="315" [height]="150" [src]="getSafeUrl(post.videoUrl)" frameborder="0" allowfullscreen></iframe>
+              </div> -->
+                 <youtube-player
+                videoId={{post.videoUrl}}
+                suggestedQuality="highres"
+                width="315"
+                height="150"
+                showBeforeIframeApiLoads="true"></youtube-player>
+           
+            }
+
             <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
             
             <h5 class="my-3 text muted small">{{formatDateTime(post.date.toString())}}</h5>
