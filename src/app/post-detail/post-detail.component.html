@@ -47,9 +47,9 @@
             }
 
             @if(post.videoUrl && post.videoUrl != ''){
-              <div class="embed-responsive embed-responsive-16by9">
+              <!-- <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item mt-3" [width]="315" [height]="150" [src]="getSafeUrl(post.videoUrl)" frameborder="0" allowfullscreen></iframe>
-              </div>
+              </div> -->
                  <youtube-player
                 videoId={{post.videoUrl}}
                 suggestedQuality="highres"
