@@ -1,25 +1,25 @@
 <div class="container-fluid">
   <div class="row mb-5">
 
-    <div class="col-lg-8">
+    <div class="col-lg-8" >
       
      
-      <div class="col-md-14">
-        <h3 class="text-center mt-4 pb-4 mb-4 border-bottom"><strong>
-          Últimas publicaciones
-        </strong></h3>
-       
+      <div class="col-md-16" style="top: 2rem;" style="background-color:white;">
+               
         <article class="blog-post">
+          <h2 class="text-center mt-2 pb-10 mb-4" style="background-color:white;" ><strong>
+            Últimas publicaciones
+          </strong></h2>
           
-          <div class="card">
+          <div class="card-body" style="background-color:white;">
             <div class="row">
 
           @for (post of posts; track $index) {
-            <div class="card mb-3">
+            <div class="card mb-3 text-center">
             <h2>
               {{post.content}}
             </h2>
-            <div class="picsum-img-wrapper">
+            <div class="picsum-img-wrapper-center">
               <img class="img-fluid" [src]="'http://localhost:8080/files/' + post.photoUrl" alt="{{post.id}}" />
             </div>
             @if (post.user) {
@@ -28,7 +28,7 @@
                               class="rounded-circle img-fluid" style="width: 45px;">
                               <h5>Publicado por: {{post.user.firstName}}</h5>
             }
-            <button [routerLink]="['/posts', post.id, 'detail']">Ver publicación</button>
+            <button [routerLink]="['/posts', post.id, 'detail']" >Ver publicación</button>
             <!-- @if (post.interactions && post.interactions.length > 0){
               @for (interaction of post.interactions; track interaction.id) {
                 <p>{{interaction.type}}</p>
@@ -76,7 +76,7 @@
                         <img class="img-fluid" [src]="'http://localhost:8080/files/' + group.photoUrl" alt="{{group.title}}" />
                       </div>
                       <div class="carousel-caption">
-                        <h5 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;color:#15616D;background-color:white;font-weight:900;">{{group.title}}</h5>
+                        <h5 [routerLink]="['/groups', group.id, 'detail']" style="cursor:pointer;color:#15616D;background-color:#f1f5c2;font-weight:900;">{{group.title}}</h5>
                       </div>
                     </ng-template>
                     }
