@@ -1,0 +1,29 @@
+/* Estilos para el contenedor de la cuadrícula */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+
+
+  }
+  
+  /* Estilo para cada tarjeta */
+  .card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 400px; /* Altura ajustada a 300px */
+    
+  }
+  
+  /* Ajustes para la imagen dentro de la tarjeta para que se mantenga la proporción */
+  /* Estilos para las imágenes dentro de las tarjetas */
+.card img {
+    width: 100%; /* Asegura que la imagen siempre ocupe todo el ancho de la tarjeta */
+    height: 150px; /* Establece una altura fija para todas las imágenes */
+    object-fit: cover; /* Hace que la imagen cubra el área asignada sin perder su proporción */
+  }
