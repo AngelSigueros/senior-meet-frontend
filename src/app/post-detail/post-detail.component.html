@@ -6,7 +6,7 @@
       <!-- <button [routerLink]="['/posts']" title='Volver' class="btn btn-lg btn-outline-secondary d-inline-block mb-2"><i class="bi bi-box-arrow-left text-primary"></i></button> -->
     </div>
 
-    <div class="row justify-content-center">
+    <div class="text-center">
       <div class="col-lg-12 ">
         <div class="card mb-4">
           <div class="card-body">
@@ -15,35 +15,11 @@
 
 
 
-            <div class="container">
-              <div class="row">
-                  <div class="col-md-6">
-                      <div class="d-flex flex-column align-items-center">
-                          <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
-                              class="rounded-circle img-fluid" style="width: 150px;">
-                          <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="d-flex flex-column align-items-center">
-                          @if(post.group){
-                            <img src="http://localhost:8080/files/{{post.group.photoUrl}}" alt="avatar"
-                              class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3 fw-bold">{{post.group.title}}</h5>
-                          }
-                          
-                      </div>
-                  </div>
-              </div>
-          </div>
-                    
-            <div class="card-body shadow rounded">
-              <h5 class="my-3">{{post.content}}</h5>
-            </div>
+           
             
             @if(post.photoUrl && post.photoUrl!=''){
               <img src="http://localhost:8080/files/{{post.photoUrl}}" alt="avatar"
-                              class="rounded-circle img-fluid mt-3" style="width: 150px;">
+                              class="img-fluid mt-3" style="width: 650px;">
             }
 
             @if(post.videoUrl && post.videoUrl != ''){
@@ -59,14 +35,24 @@
               </youtube-player> -->
             }
 
-            <h5 class="my-3">VIDEO URL: {{post.videoUrl}}</h5>
+            <h5 class="my-3">{{post.videoUrl}}</h5>
             
             <h5 class="my-3 text muted small">{{formatDateTime(post.date.toString())}}</h5>
             
             
-
+                    
+          <div class="card-body shadow rounded">
+              <h5 class="my-3">{{post.content}}</h5>
             
-            <div class="d-inline-block">
+            <div class="text-center">
+              <div class="card-body text-center">
+                  <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
+                      class="img-fluid text" style="width: 150px;">
+                  <h5 class="my-1 fw-bold">Publicado por: {{post.user.firstName}} {{post.user.lastName}}</h5>
+              </div>
+            </div>
+
+            <div class="my-1 d-inline-block">
               @if (isAdmin ||isPostfromUser()){
                 <button [routerLink]="['/posts', post.id, 'update']" title='Editar' class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary"><i class="bi bi-pencil"></i></button>
                 <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary" title='Borrar' (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
@@ -104,9 +90,25 @@
               } @else{
                <h5 class="my-3 d-inline-block me-2"><i class="bi bi-chat-text"></i></h5>
               }
-
-              
             </div>
+            <div class="text-center my-3">
+              <div class="d-flex flex-column align-items-center">
+                  @if(post.group){
+                    <img src="http://localhost:8080/files/{{post.group.photoUrl}}" alt="avatar"
+                      class="img-fluid" style="width: 300px;">
+                    <h5 class="my-3 fw-bold">Publicado en: {{post.group.title}}</h5>
+                  }
+                  
+              </div>
+
+          </div>
+          
+          
+        </div>
+
+            
+            
+            
             
 
             
@@ -115,7 +117,7 @@
                 <form [formGroup]="commentForm" (ngSubmit)="saveComments()">
                   <div class="form-floating mb-1">
                     <input type="text" class="form-control" id="content" placeholder="Escribe tu comentario" formControlName="content">
-                    <label for="content">Añade un comentario</label>
+                    <label for="content center">Añade un comentario</label>
                   </div>
                   <button class="btn btn-outline-secondary text-primary" title='Guardar Comentario' type="submit"><i class="bi bi-save"></i></button>
                 </form>
