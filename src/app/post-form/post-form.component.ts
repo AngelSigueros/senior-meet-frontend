@@ -156,4 +156,15 @@ export class PostFormComponent implements OnInit{
 
     
   }
+
+  compareObjects(o1: any, o2: any): boolean {
+    // console.log("Comparando objetos: ", o1, o2);
+
+    if(o1 && o2) {
+      return o1.id === o2.id;
+    }
+    return o1 === o2;
+  }
+
+
 }
