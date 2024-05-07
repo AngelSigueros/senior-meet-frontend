@@ -48,7 +48,7 @@ export class GroupDetailComponent implements OnInit{
     this.activatedRoute.params.subscribe(params=> {
      this.http.get<Group>("http://localhost:8080/groups/" + params['id']).subscribe(g=>{
        this.group=g;
-       this.http.get<Post[]>('http://localhost:8080/post/group' + this.group).subscribe(ps => this.posts=ps)
+       this.http.get<Post[]>('http://localhost:8080/post/group/' + this.group.id).subscribe(ps => this.posts=ps)
        console.log(this.group);
      })
     });
