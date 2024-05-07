@@ -7,19 +7,37 @@
             }
         </div>
     </div>
-    
+
     <div class="row row-cols-1 row-cols-md-3 g-3 mb-5">
         @for (user of users; track user.id) {
         <div class="col">
             <div class="card">
                 <div class="card-body text-center">
-                    <img class="img-fluid" src="http://localhost:8080/files/{{user.photoUrl}}" style="object-fit: scale-down;">
+                    <img class="img-fluid" src="http://localhost:8080/files/{{user.photoUrl}}"
+                        style="object-fit: scale-down;">
                     <h5 class="card-title">{{user.firstName}}</h5>
                     <h6 class="card-subtitle mb-2 text-center">{{user.lastName}}</h6>
-                    <p class="card-subtitle mb-2 text-center">{{user.email}} {{user.phone}}</p>
-                   
-                    <!-- <a href="#" class="card-link">Another link</a> -->
+
+                    <p class="card-subtitle mb-2 text-center">{{user.email}} {{user.phone}} </p>
+                    <!-- <div class="d-flex justify-content-start "> -->
+                        <div class="btn-group">
+                            <button [routerLink]="['/users', user.id, 'detail']" title='Detalle'
+                                class="btn btn-sm btn-outline-secondary text-primary me-2 d-inline-block">
+                                <i class="bi bi-search"></i>
+                            </button>
+
+                            <button [routerLink]="['/users', user.id, 'update']" title='Editar'
+                                class="btn btn-sm btn-outline-secondary me-2 text-primary d-inline-block">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <!-- <button class="btn btn-sm btn-outline-secondary me-2 text-primary d-inline-block" title='Borrar'
+                                (click)="deleteUser(user.id)">
+                                <i class="bi bi-trash"></i>
+                            </button> -->
+                        </div>
+                    <!-- </div> -->
                 </div>
+
             </div>
         </div>
         } @empty {

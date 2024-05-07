@@ -26,10 +26,19 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('UserListComponent - ' + this.isAdmin);
+    this.loadUsers();
+    
+  }
 
+  loadUsers(){
     this.http.get<User[]>("http://localhost:8080/user").subscribe(u=>this.users=u);
   }
 
-
+  deleteUser(userId: number){
+    const url = "http://localhost:8080/user/" + userId;
+    // this.http.delete<boolean>(url).subscribe(b => {
+    //   this.loadUsers();
+    // });
+  }
 
 }
