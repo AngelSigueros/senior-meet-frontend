@@ -41,7 +41,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeWallComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'blog',
@@ -64,32 +64,32 @@ export const routes: Routes = [
   {
     path: 'edite-profile',
     component: EditeProfileComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'groups',
     component: GroupListComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'groups/create',
     component: GroupFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'groups/:id/detail',
     component: GroupDetailComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'hobbies',
     component: HobbyListComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'hobbies/:id/detail',
     component:HobbyDetailComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'hobbies/create',
@@ -103,47 +103,47 @@ export const routes: Routes = [
   {
     path: 'posts',
     component: PostListComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'posts/:id/detail',
     component: PostDetailComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'posts/:id/update',
     component: PostFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'posts/create',
     component: PostFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'comments',
     component: CommentListComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'comments/:id/detail',
     component: CommentDetailComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'comments/:id/update',
     component: CommentFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'comments/create',
     component: CommentFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'user-profile/:id/detail',
     component: UserProfileComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'saved',
@@ -153,7 +153,7 @@ export const routes: Routes = [
   {
     path: 'users',
     component: UserListComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'users/:id/detail',
@@ -168,7 +168,7 @@ export const routes: Routes = [
   {
     path: 'users/:id/update',
     component: UserFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'users/account/:id',

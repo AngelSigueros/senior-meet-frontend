@@ -4,7 +4,7 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{NUM_COLS} g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
         @if (posts && posts.length > 0) {
           <!-- Iterar sobre los posts y mostrar las tarjetas -->
           @for (post of posts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE); track post.id) {
@@ -13,12 +13,12 @@
                 <!-- Contenido de la tarjeta de cada post -->
                 <div class="d-flex flex-column align-items-center">
                   <img src="http://localhost:8080/files/{{post.user.photoUrl}}" alt="avatar"
-                      class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
+                      class="img-fluid my-3 text"style="width: 150px;">
+                  <h5 class="my-1 fw-bold">{{post.user.firstName}} {{post.user.lastName}}</h5>
                   @if (post.group) {
-                    <h5 class="my-3 fw-bold">en {{post.group.title}}</h5>
+                    <h5 class="my-1"><small>Publicado en: {{post.group.title}}</small></h5>
                   }
-                  <h5 class="my-3 text muted small">{{formatDateTime(post.date.toString())}}</h5>
+                  <h5 class="my-3 text muted small"><small>{{formatDateTime(post.date.toString())}}</small></h5>
                   <div class="card-body shadow rounded">
                     <h5 class="my-3">{{ post.content.length > 80 ? post.content.slice(0, 80) + '...' : post.content }}</h5>
                   </div>
@@ -32,12 +32,12 @@
                         <button [routerLink]="['/posts', post.id, 'update']" title='Editar' class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary"><i class="bi bi-pencil"></i></button>
                         <button class="btn btn-sm btn-outline-secondary me-2 d-inline-block text-primary" title='Borrar' (click)="deletePost(post.id)"><i class="bi bi-trash"></i></button>
                       }
-                      @if(likes[post.id].length > 0) {
+                      @if( likes[post.id]&&likes[post.id].length > 0) {
                         <h5 class="my-3 d-inline-block me-2 small fw-bold">{{likes[post.id].length}} <button class="btn btn-sm btn-outline-secondary text-primary" tittle='Me gusta' (click)="addlike(post)"><i class="bi bi-heart-fill text-primary"></i></button></h5>
                       }@else {
                         <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" title='Me gusta' (click)="addlike(post)"><i class="bi bi-heart-fill text-danger"></i></button>
                       }
-                      @if(saves[post.id].length >0){
+                      @if( saves[post.id] && saves[post.id].length >0){
                         <h5 class="my-3 d-inline-block me-2 small fw-bold">{{saves[post.id].length}} <button class="btn btn-sm btn-outline-secondary" tittle='Guardar' (click)="addsave(post)"><i class="bi bi-floppy-fill text-primary"></i></button></h5>
                       }@else {
                         <button class="btn btn-sm btn-outline-secondary d-inline-block me-2" title='Guardar' (click)="addsave(post)"><i class="bi bi-floppy text-primary"></i></button>
